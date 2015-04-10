@@ -153,12 +153,17 @@ namespace projectRun
                 list_dialog.ShowDialog();
                 if (list_dialog.DialogResult == true)
                 {
+
                     Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
 
                     if ((bool)dlg.ShowDialog(this))
                     {
                         // uložení otevřeného souboru
                         opened_file = dlg.FileName;
+
+                        List<String> lists = new List<String>();
+                        xlsDB.read_excel_lists(opened_file, lists);
+
                         // zobrazit vyčkávací kurzor (operace načítání z Excelu je zdlouhavá)
                         using (new WaitCursor())
                         {

@@ -13,10 +13,24 @@ using System.Text.RegularExpressions;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Xml;
 
+
 namespace projectModel
 {
     public class EXCEL_Database
     {
+        public void read_excel_lists(string sourcefile, List<String> listy)
+        {
+            Excel.Application excelApp = new Excel.Application();
+            Excel.Workbook workbook;
+
+            workbook = excelApp.Workbooks.Open(sourcefile);
+
+            for (int i = 1; i < workbook.Sheets.Count + 1; i++)
+            {
+                listy.Add(((Excel.Worksheet)workbook.Sheets.get_Item(i)).Name);
+            }
+        }
+
         public void read_excel_table_temp(Majitele dataM, Psi dataP, string sourceFile, Int32 list)
         {
 
@@ -35,6 +49,7 @@ namespace projectModel
             {
                 listy.Add(((Excel.Worksheet)workbook.Sheets.get_Item(i)).Name);
             }
+
             //TODO: jak tady zavolat moje vytvořené okno ? vytvořit nové v projectModel ?!?
             //projectRun.Window1 list_dialog = new projectRun.Window1("Který list tabulky si přeješ načíst?");
 
