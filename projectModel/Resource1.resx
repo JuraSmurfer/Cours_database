@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="String1" xml:space="preserve">
+    <value>Afgánský chrt
+Aidi
+Airedale terier
+Akita-Inu
+Aljašský malamut
+Alpský jezevčíkovitý brakýř
+Americká akita
+Americký bezsrstý terier
+Americký buldok
+Americký foxhound
+Americký kokršpaněl
+Americký stafordširský terier
+Americký vodní španěl
+Anatolský pastevecký pes
+Angl.-franc.honič de Petite Venerie
+Anglický buldok
+Anglický chrt
+Anglický kokršpaněl
+Anglický mastif
+Anglický setr
+Anglický špringr španěl
+Anglický toy terier
+Appenzellský salašnický pes
+Ardenský bouvier
+Argentinská doga
+Ariégois
+Ariegský ohař krátkosrstý
+Artésko-normandský basset
+Artoisský honič
+Australská kelpie
+Australský honácký pes
+Australský honácký pes s krátkým ocasem
+Australský ovčák
+Australský Silky terier
+Australský terier
+Auvergneský ohař krátkosrstý
+Azavak
+Barbet
+Barzoj - ruský chrt
+Basenji
+Basset Hound
+Bavorský barvář
+Beagle
+Beagle Harrier
+Bearded kolie
+Beauceron
+Bedlington terier
+Belgický grifonek
+Belgický ovčák
+Belgický ovčák - Groenendael
+Belgický ovčák - Laekenois
+Belgický ovčák - Malinois
+Belgický ovčák - Tervueren
+Bergamský ovčák
+Bernský salašnický pes
+Billy
+Bílý švýcarský ovčák
+Bišonek
+Black and Tan Coonhound
+Bloodhound
+Bobtail
+Boloňský psík
+Bordeauxská doga
+Border kolie
+Border terier
+Bosensko - hercegovinský - chorvatský ovčák
+Bosenský hrubosrstý honič
+Bostonský terier
+Bourbonský ohař krátkosrstý
+Brabantík
+Brazilská fila
+Brazilský terier
+Bretaňský ohař dlouhosrstý
+Briard
+Briquet Griffon Vendéen
+Bruselský grifonek
+Bullmastif
+Bulteriér
+Burgoský perdiquero
+Búrský buldok
+Cairn Terier
+Cao de Castro Laboreiro
+Cao de Serra de Aires
+Československý vlčák
+Český fousek
+Český horský pes
+Český strakatý pes
+Český terier
+Chesapeake Bay Retriever
+Chien Fila de Saint Miguel
+Chodský pes
+Chortaja Borzaja
+Chorvatský ovčák
+Chow chow
+Čínský chocholatý pes
+Čivava
+Čivava dlouhosrstá
+Čivava krátkosrstá
+Clumber španěl
+Coton de Tuléar
+Curly Coated Retriever
+Dalmatin
+Dandie Dinmont terier
+Danish-Swedish Farmdog
+Dánská doga
+Dánský ohař krátkosrstý
+Deerhound
+Dlouhosrstý ohař z Pont-Audemer
+Dlouhosrstý vipet
+Dobrman
+Drentsche Patrisijshond
+Drever
+Dunker
+Entlebuchský salašnický pes
+Estrelský pastevecký pes
+Eurasier
+Faraónský pes
+Field španěl
+Finský honič
+Finský špic
+Flanderský bouvier
+Flat Coated Retriever
+Foxhound
+Foxterier hladkosrstý
+Foxterier hrubosrstý
+Francouzský bílo-černý honič
+Francouzský bílo-oranžový honič
+Francouzský buldoček
+Francouzský ohař dlouhosrstý
+Francouzský ohař krátkosrstý gaskoň.typu
+Francouzský ohař krátkosrstý pyren.typu
+Francouzský trikolorní honič
+Frízský ohař
+Gaskoňsko-saintgeoiský honič
+Gordonsetr
+Grónský pes
+Haldenův honič
+Hamiltonův honič
+Hannoverský barvář
+Harrier
+Havanský psík
+Hokkaido-Ken
+Holandský ovčácký pudl
+Holandský ovčák
+Holandský ovčák dlouhosrstý
+Holandský ovčák hrubosrstý
+Holandský ovčák krátkosrstý
+Holandský pinč
+Hovawart
+Hrubosrstý modrý gaskoňský honič
+Hygenův honič
+Ibizský podenco
+Irish Glen of Imaal terier
+Irish Soft Coated Wheaten Terrier
+Irský červenobílý setr
+Irský setr
+Irský terier
+Irský vlkodav
+Irský vodní španěl
+Islandský pes
+Istrijský hrubosrstý honič
+Istrijský krátkosrstý honič
+Italský chrtík
+Italský chrtík sprinter
+Italský corso pes
+Italský ohař
+Italský Segugio
+Italský Segugio krátkosrstý
+Italský spinone
+Italský volpino
+Jack Russell Teriér
+Jaemthund
+Japan-chin
+Japonský špic
+Japonský terier
+Jezevčík
+Jezevčík standard dlouhosrstý
+Jezevčík standard drsnosrstý
+Jezevčík standard hladkosrstý
+Jezevčík trpasličí/králičí dlouhosrstý
+Jezevčík trpasličí/králičí drsnosrstý
+Jezevčík trpasličí/králičí hladkosrstý
+Jihoruský ovčák
+Jihovýchodoevropský ovčák - Bucovina
+Jugoslávský planinský honič
+Jugoslávský trikolorní honič
+Kai-Inu
+Kanaánský pes
+Kanárská doga
+Kanárský podenco
+Karelský medvědí pes
+Katalánský ovčák
+Kavalír King Charles španěl
+Kavkazský pastevecký pes
+Kerry blue terier
+King Charles španěl
+Kishu-Inu
+Knírač malý
+Knírač malý bílý
+Knírač malý černostříbřitý
+Knírač malý černý
+Knírač malý pepř a sůl
+Knírač střední
+Knírač střední černý
+Knírač střední pepř a sůl
+Knírač velký
+Knírač velký černý
+Knírač velký pepř a sůl
+Kolie dlouhosrstá
+Kolie krátkosrstá
+Komondor
+Kontinentální buldok
+Kooikerhondje
+Korejský Jindo Dog
+Korthalsův Griffon
+Krašský ovčák
+Kromforländer
+Kuvasz
+Labradorský retriever
+Lagotto romagnolo
+Lakeland terier
+Landseer
+Lapinkoira
+Lapinporokoira
+Laponský pes
+Leonberger
+Lhasa Apso
+Louisianský leopardí pes
+Lvíček
+Maďarský chrt
+Maďarský ohař drátosrstý
+Maďarský ohař krátkosrstý
+Malorský ovčák
+Maltézský psík
+Malý hrubosrstý vendéeský basset
+Malý kontinentální španěl
+Malý modrý gaskoňský honič
+Malý münsterlandský ohař
+Manchester terier
+Maremmansko-abruzský pastevecký pes
+Mexický naháč
+Miniaturní bulteriér
+Modrý gaskoňský basset
+Modrý pikardský ohař dlouhosrstý
+Mops
+Moskevský strážní pes
+Mudi
+Neapolský mastin
+Německá doga
+Německý boxer
+Německý brakýř
+Německý křepelák
+Německý lovecký terier
+Německý ohař dlouhosrstý
+Německý ohař drátosrstý
+Německý ohař krátkosrstý
+Německý ohař ostnosrstý
+Německý ovčák
+Německý pinč
+Německý špic
+Německý špic malý
+Německý špic střední
+Německý špic trpasličí
+Německý špic velký
+Německý špic vlčí
+Nivernaisský hrubosrstý honič
+Norbotenský špic
+Norfolk terier
+Norský buhund
+Norský losí pes černý
+Norský losí pes šedý
+Norský lundehund
+Norwich terier
+Nova Scotia Duck Tolling Retriever
+Novofundlandský pes
+Odis
+Opičí pinč
+Otterhound
+Papillon
+Parson Russell Teriér
+Patterdale terier
+Pekingský palácový psík
+Perro de Presa Mallorquin
+Peruánský naháč
+Pes/fena do 45 cm
+Pes/fena nad 45 cm
+Phaléne
+Pikardský ohař dlouhosrstý
+Pikardský ovčák
+Plavý bretaňský basset
+Plavý bretaňský honič
+Podhalaňský ovčák
+Pointer
+Poitevin
+Polský chrt
+Polský honič
+Polský ogar
+Polský ovčák nížinný
+Porcelán
+Portugalský ohař
+Portugalský podengo
+Portugalský vodní pes
+Posávský honič
+Pražský krysařík
+Pudl
+Pudl střední aprikot
+Pudl střední bílý
+Pudl střední černý
+Pudl střední hnědý
+Pudl střední stříbrný
+Pudl toy aprikot
+Pudl toy bílý
+Pudl toy černý
+Pudl toy hnědý
+Pudl toy stříbrný
+Pudl trpasličí aprikot
+Pudl trpasličí bílý
+Pudl trpasličí černý
+Pudl trpasličí hnědý
+Pudl trpasličí stříbrný
+Pudl velký aprikot
+Pudl velký bílý
+Pudl velký černý
+Pudl velký hnědý
+Pudl velký stříbrný
+Pudl vícebarevný
+Pudlpointr
+Puli
+Pumi
+Pyrenejský horský pes
+Pyrenejský mastin
+Pyrenejský ovčák s dl. srstí v obličeji
+Pyrenejský ovčák s kr.srstí v obličeji
+Rafeiro do Alentejo
+Rakouský krátkosrstý honič
+Rakouský krátkosrstý pinč
+Řecký honič
+Redbone Coonhound
+Rhodéský ridgeback
+Rotvajler
+Rumunský karpatský ovčák
+Rumunský mioritský ovčák
+Ruská barevná bolonka
+Ruskoevropská lajka
+Ruský černý terier
+Ruský toy
+Saarloosův vlčák
+Saint-Germainský ohař krátkosrstý
+Saluki - Perský chrt
+Samojed
+Šarplaninský pastevecký pes
+Schillerův honič
+Sealyham terier
+Sedmihradský honič
+Shar-Pei
+Sheltie
+Shiba-Inu
+Shih-tzu
+Shikoku-Inu
+Sibiřský husky
+Sicilský chrt
+Šiperka
+Skotský teriér
+Skye terier
+Sloughi
+Slovenský čuvač
+Slovenský kopov
+Slovenský ohař hrubosrstý
+Smalandský honič
+Španělský galgo
+Španělský mastin
+Španělský sabueso
+Španělský vodní pes
+Srbský honič
+Stafordšírský bullterier
+Středoasijský pastevecký pes
+Štýrský brakýř
+Sussex španěl
+Svatobernardský pes
+Svatobernardský pes dlouhosrstý
+Svatobernardský pes krátkosrstý
+Švédský vallhund
+Švýcarský honič
+Švýcarský honič - Bernský honič
+Švýcarský honič - Jurský honič
+Švýcarský honič - Lucernský honič
+Švýcarský honič - Švycký honič
+Švýcarský nízkonohý honič
+Taiwanský pes
+Thai Bangkaew dog
+Thajský ridgeback
+Tibetská doga
+Tibetský španěl
+Tibetský terier
+Tosa-Inu
+Toy foxteriér
+Trpasličí pinč
+Tyrolský honič
+Uruguajský cimarron
+Vel.franc.-anglický bílo-oranžový honič
+Vel.francouzsko-anglický trikolor.honič
+Velký franc.-anglický bílo-černý honič
+Velký hrubosrstý vendéeský basset
+Velký modrý gaskoňský honič
+Velký münsterlandský ohař
+Velký švýcarský salašnický pes
+Velký vendéeský hrubosrstý honič
+Východoevropský ovčák
+Východosibiřská lajka
+Výmarský ohař
+Výmarský ohař dlouhosrstý
+Výmarský ohař krátkosrstý
+Welsh Corgi Cardigan
+Welsh Corgi Pembroke
+Welsh terier
+Welššpringršpaněl
+West Highland White Terrier
+Westfálský jezevčíkovitý honič
+Wetterhound
+Whippet
+Whippet sprinter
+Yorkšírský terier
+Západosibiřská lajka
+Zlatý retriever</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>I
+II
+III
+IV
+V
+VI
+VII
+VIII
+X
+N
+BPP M
+BPP V</value>
+  </data>
+</root>

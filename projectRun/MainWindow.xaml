@@ -1,0 +1,571 @@
+﻿<Window x:Class="projectRun.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Name="mainWindow"
+        Title="Český pes - Coursingová závodní databáze" Height="520" Width="1000" WindowStartupLocation="CenterScreen" WindowState="Maximized" MinHeight="520" MinWidth="1000" Icon="ikona.ico" Background="#FFEEE4C1">
+    <!--hlavní grid-->
+    <Window.Resources>
+        <Style x:Key="bigtextbox" TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="70" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="FontSize" Value="14pt"/>
+        </Style>
+        <Style x:Key="smalltextbox" TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="FontSize" Value="12pt"/>
+        </Style>
+        <Style x:Key="CZlabel" TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="FontSize" Value="11pt"/>
+        </Style>
+        <Style x:Key="ENlabel" TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="FontSize" Value="8pt"/>
+        </Style>
+    </Window.Resources>
+    <Grid Visibility="Visible">
+        <Grid.RowDefinitions>
+            <!--řádek pro menu-->
+            <RowDefinition Height="25"/>
+            <!--řádek pro tabulku majitelů-->
+            <RowDefinition x:Name="row1" Height="*" MinHeight="50"/>
+            <!--řádek pro posuvný gridsplitter-->
+            <RowDefinition Height="15"/>
+            <!--řádek pro tabulku psů-->
+            <RowDefinition x:Name="row2" Height="*" MinHeight="50"/>
+            <!--řádek pso stavovou lištu-->
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <!--popisek tabulky majitelů-->
+        <Label x:Name="DGV_label" Visibility="Collapsed" Content="Hlavní databáze - MAJITELÉ" Grid.Row="1" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-3,0,0"/>
+        <!--tabulka majitelů-->
+        <DataGrid x:Name="DGV" MouseDoubleClick="editMajitel_click" Visibility="Collapsed" FontSize="12" IsReadOnly="True" Grid.Row="1" HeadersVisibility="Column" AutoGenerateColumns="False" Margin="0,20,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=id}" Header="ID" MinWidth="30"/>
+                <DataGridTextColumn Binding="{Binding Path=firstName}" Header="Jméno" MinWidth="100"/>
+                <!--<DataGridTextColumn Binding="{Binding Path=lastName}" Header="Příjmení" MinWidth="150"/>-->
+                <DataGridTextColumn Binding="{Binding Path=narodnost}" Header="Národnost" MinWidth="50"/>
+                <DataGridTextColumn Binding="{Binding Path=clen}" Header="Člen" MinWidth="50"/>
+                <DataGridTextColumn Binding="{Binding Path=pocet_psu}" Header="Psi">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Background" Value="LightBlue"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="1">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=penize}" Header="Kč" MinWidth="80"/>
+                <DataGridTextColumn Binding="{Binding Path=potvrzeni}" Header="Platba" MinWidth="50"/>
+                <DataGridTextColumn Binding="{Binding Path=telefon}" Header="Telefon" MinWidth="90"/>
+                <DataGridTextColumn Binding="{Binding Path=email}" Header="Email" MinWidth="200"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Nový majitel" Click="newMajite_click"/>
+                    <MenuItem Header="Upravit majitele" Click="editMajitel_click"/>
+                    <Separator/>
+                    <MenuItem Header="Přidat psa" Click="add_pes_majitele"/>
+                    <Separator/>
+                    <MenuItem Header="Smazat majitele" Click="deleteMajitel_OnClick"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <!--canvas pro statistiku psů v horní části, překrývá tabulku majitelů-->
+        <Canvas x:Name="stat_p" Visibility="Collapsed" Background="#FFACACAC" Grid.Column="1" Grid.Row="1" Grid.RowSpan="1">
+            <Label Content="Statistika psů" FontSize="12pt" FontWeight="Bold" Canvas.Top="10" Canvas.Left="10"/>
+            <Label Content="Počet psů" Canvas.Top="40" Canvas.Left="10"/>
+            <Label Content="Psi do osmi let věku" Canvas.Top="63" Canvas.Left="10"/>
+            <Label Content="Psi nad osm let věku" Canvas.Top="86" Canvas.Left="10"/>
+            <Label Content="Osmiletí psi" Canvas.Top="109" Canvas.Left="10"/>
+            <Label Content="Psi zapsaní pro licenční běh" Canvas.Top="132" Canvas.Left="10"/>
+            <Button x:Name="hide_stat_p" Content="OK" Canvas.Top="170" Canvas.Left="10" Height="23" Width="80" Click="hide_statp"/>
+        </Canvas>
+        <!--posuvník pro změnu velikostí tabulek-->
+        <GridSplitter x:Name="splitter" Visibility="Collapsed" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2" OpacityMask="Black" Background="#FFEEE4C1"/>
+        <!--popisek tabulky psů-->
+        <Label x:Name="DGV_P_label" Visibility="Collapsed" Content="Hlavní databáze - PSI" Grid.Row="3" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-3,0,0"/>
+        <!--tabulka psů-->
+        <DataGrid MouseDoubleClick="editPes_OnClick" x:Name="DGV_P" Visibility="Collapsed" FontSize="12" IsReadOnly="True" Grid.Row="3" HeadersVisibility="Column" AutoGenerateColumns="False" Margin="0,20,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=start_beh1}" Header="Číslo psa"/>
+                <DataGridTextColumn Binding="{Binding Path=jmeno}" Header="Jméno" MinWidth="200"/>
+                <DataGridTextColumn Binding="{Binding Path=plemeno}" Header="Plemeno" MinWidth="150"/>
+                <DataGridTextColumn Binding="{Binding Path=pohlavi}" Header="Pohlaví"/>
+                <!--<DataGridTextColumn Binding="{Binding Path=fci}" Header="FCI" MinWidth="70"/>-->
+                <DataGridTextColumn Binding="{Binding Path=datum, StringFormat=d.M.yyyy}" Header="Narození"/>
+                <DataGridTextColumn Binding="{Binding Path=zavod_licence}" Header="Z-L" MinWidth="50">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="Licence">
+                                    <Setter Property="Background" Value="PeachPuff"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="Závod">
+                                    <Setter Property="Background" Value="LightGreen"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="Tréning">
+                                    <Setter Property="Background" Value="LightBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=licence}" Header="Licence"/>
+                <DataGridTextColumn Binding="{Binding Path=majitel}" Header="Majitel"/>
+                <DataGridTextColumn Binding="{Binding Path=platba}" Header="Platba"/>
+                <DataGridTextColumn Binding="{Binding Path=doplatit}" Header="Doplatit"/>
+                <DataGridTextColumn Binding="{Binding Path=poznamka}" Header="Skupina"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <!--<MenuItem Header="Nový pes" Click="newPes_OnClick"/>-->
+                    <MenuItem Header="Upravit psa" Click="editPes_OnClick"/>
+                    <Separator/>
+                    <!--<MenuItem Header="Zařadit psa do závodu" Click="zaradit_psa"/>-->
+                    <Separator/>
+                    <!--<MenuItem Header="Seřadit k prvnímu běhu" Click="serad_psy"/>-->
+                    <MenuItem Header="Seřadit k prvnímu běhu" Foreground="LightGray"/>
+                    <MenuItem Header="Seřadit k druhému běhu" Click="serad_psy_2"/>
+                    <Separator/>
+                    <MenuItem Header="Smazat psa" Click="deletePes_OnClick"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <!--canvas pro statistiku majitelů v dolní části, překrývá tabulku psů-->
+        <Canvas x:Name="stat_m" Visibility="Collapsed" Background="#FFACACAC" Grid.Column="1" Grid.Row="3" Grid.RowSpan="1">
+            <Label Content="Statistika majitelů" FontSize="12pt" FontWeight="Bold" Canvas.Top="10" Canvas.Left="10"/>
+            <Label Content="Počet členů" Canvas.Top="40" Canvas.Left="10"/>
+            <Label Content="Počet nečlenů" Canvas.Top="63" Canvas.Left="10"/>
+            <Label Content="Již zaplatili" Canvas.Top="86" Canvas.Left="10"/>
+            <Label Content="Ještě nezaplatili" Canvas.Top="109" Canvas.Left="10"/>
+            <Button x:Name="hide_stat_m" Content="OK" Canvas.Top="170" Canvas.Left="10" Height="23" Width="80" Click="hide_statm"/>
+        </Canvas>
+        <!--popisek přehledové tabulky psů-->
+        <Label x:Name="skupGrid_label" Visibility="Collapsed" Content="Přehled psů" Grid.Row="1" FontSize="13" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,-3,0,0"/>
+        <!--přehledová tabulka psů-->
+        <DataGrid MouseDoubleClick="editPesprehled" x:Name="skupinGrid" Visibility="Collapsed" HeadersVisibility="Column" FontSize="12" Canvas.Left="5" Canvas.Top="5" Grid.Row="1" Grid.RowSpan="3" ItemsSource="{Binding}" IsReadOnly="True" AutoGenerateColumns="False" Margin="0,20,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=start_beh1}" Header="Beh1" Width="30"/>
+                <DataGridTextColumn Binding="{Binding Path=dvojice0}" Header="Dvojice1" Width="30"/>
+                <DataGridTextColumn Binding="{Binding Path=barva0}" Header="Barva1"/>
+                <DataGridTextColumn Binding="{Binding Path=start_beh2}" Header="Beh2" Width="30"/>
+                <DataGridTextColumn Binding="{Binding Path=dvojice1}" Header="Dvojice2" Width="30"/>
+                <DataGridTextColumn Binding="{Binding Path=barva1}" Header="Barva2"/>
+                <DataGridTextColumn Binding="{Binding Path=skupina}" Header="Umístění" Width="30"/>
+                <DataGridTextColumn Binding="{Binding Path=jmeno}" Header="Jméno" MinWidth="200"/>
+                <DataGridTextColumn Binding="{Binding Path=plemeno}" Header="Plemeno" MinWidth="150"/>
+                <DataGridTextColumn Binding="{Binding Path=zavod_licence}" Header="Z-L" MinWidth="50">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="Licence">
+                                    <Setter Property="Background" Value="PeachPuff"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="Závod">
+                                    <Setter Property="Background" Value="LightGreen"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="Tréning">
+                                    <Setter Property="Background" Value="LightBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=majitel}" Header="Majitel" Width="25">
+                    <!--<DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="2">
+                                    <Setter Property="Background" Value="Orange"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="3">
+                                    <Setter Property="Background" Value="Orange"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>-->
+                </DataGridTextColumn>
+                <!--<DataGridTextColumn Binding="{Binding Path=skupina}" Header="Sk."/>-->
+
+                <!--body první rozhodčí první běh-->
+                <DataGridTextColumn Binding="{Binding Path=agility_A0}" Header="Obratnost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=speed_A0}" Header="Rychlost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=endurance_A0}" Header="Vytrvalost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=enthusiasm_A0}" Header="Nadšení" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=intelligence_A0}" Header="Inteligence" Width="25"/>
+
+                <DataGridTextColumn/>
+
+                <!--body druhý rozhodčí první běh-->
+                <DataGridTextColumn Binding="{Binding Path=agility_A1}" Header="Obratnost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=speed_A1}" Header="Rychlost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=endurance_A1}" Header="Vytrvalost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=enthusiasm_A1}" Header="Nadšení" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=intelligence_A1}" Header="Inteligence" Width="25"/>
+
+                <DataGridTextColumn/>
+
+                <!-- součet bodů za první běh-->
+                <DataGridTextColumn Binding="{Binding Path=body1}" Header="Body1"/>
+
+                <DataGridTextColumn/>
+
+                <!--body první rozhodčí druhý běh-->
+                <DataGridTextColumn Binding="{Binding Path=agility_B0}" Header="Obratnost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=speed_B0}" Header="Rychlost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=endurance_B0}" Header="Vytrvalost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=enthusiasm_B0}" Header="Nadšení" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=intelligence_B0}" Header="Inteligence" Width="25"/>
+
+                <DataGridTextColumn/>
+
+                <!--body druhý rozhodčí druhý běh-->
+                <DataGridTextColumn Binding="{Binding Path=agility_B1}" Header="Obratnost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=speed_B1}" Header="Rychlost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=endurance_B1}" Header="Vytrvalost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=enthusiasm_B1}" Header="Nadšení" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=intelligence_B1}" Header="Inteligence" Width="25"/>
+
+                <DataGridTextColumn/>
+
+                <!-- součet bodů za druhý běh-->
+                <DataGridTextColumn Binding="{Binding Path=body2}" Header="Body2"/>
+
+                <DataGridTextColumn Binding="{Binding Path=diskval}" Header="Diskvalifikace" Width="50">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="DNS">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="DNF">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="N">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Upravit psa" Click="editPesprehled"/>
+                    <Separator/>
+                    <MenuItem Header="Prohodit dva psy">
+                        <MenuItem Header="První běh" Click="prohodit_dvojice_beh1"/>
+                        <MenuItem Header="Druhý běh" Click="prohodit_dvojice_beh2"/>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Hodnotit první kolo psa" Click="HodnoceniVybranehoPsa"/>
+                    <MenuItem Header="Hodnotit druhé kolo psa" Click="HodnoceniVybranehoPsa2"/>
+                    <MenuItem Header="Finish" Click="serad_psy_finish"/>
+                    <!--
+                    <Separator/>
+                    <MenuItem Header="Náhodné body kolo 1 (TEST)" Click="RandomNumbers_TEST"/>
+                    <MenuItem Header="Náhodné body kolo 2 (TEST)" Click="RandomNumbers_TEST_2"/>-->
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+
+        <!--okno hodnocení psů-->
+        <Grid x:Name="hodnoceniGrid" Grid.Row="1" Grid.RowSpan="4" Margin="0,20,0,0" Visibility="Visible">
+            <Rectangle x:Name="hodnoceni_rect" HorizontalAlignment="Center" Margin="0,0,0,20" Height="353" Stroke="#FF515151" StrokeThickness="4" VerticalAlignment="Center" Width="811">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="#FF78A0C8"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <ComboBox x:Name="hod_kolo" FontSize="16" Height="40" Width="100" Margin="0,0,350,280" SelectedIndex="0" IsReadOnly="True" SelectionChanged="bodovani_changed">
+                <ComboBoxItem Content="1. kolo"/>
+                <ComboBoxItem Content="2. kolo"/>
+            </ComboBox>
+
+            <Label Content="Diskvalifikace" Height="30" FontSize="11pt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,120,450,0" Width="100" HorizontalContentAlignment="Center"/>
+            <Label Content="Disqualification" Height="30" FontSize="8pt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,160,450,0" Width="80" HorizontalContentAlignment="Center"/>
+            <ComboBox x:Name="hod_dis" FontSize="14" Height="30" Width="100" Margin="0,210,440,0" SelectedIndex="0" IsReadOnly="True">
+                <ComboBoxItem Content="---"/>
+                <ComboBoxItem Content="DNF"/>
+                <ComboBoxItem Content="DNS"/>
+                <ComboBoxItem Content="N"/>
+            </ComboBox>
+
+            <!--POPISKY polí-->
+            <Label Content="Bodování" FontSize="16pt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,600,280"/>
+            <Label Content="Č. psa" Style="{StaticResource CZlabel}" Margin="0,0,600,140"/>
+            <Label Content="Dog No." Style="{StaticResource ENlabel}" Margin="0,0,600,90"/>
+            <Label Content="Obratnost" Style="{StaticResource CZlabel}" Margin="0,0,200,140"/>
+            <Label Content="Agility" Style="{StaticResource ENlabel}" Margin="0,0,200,90"/>
+            <Label Content="Rychlost" Style="{StaticResource CZlabel}" Margin="0,0,0,140"/>
+            <Label Content="Speed" Style="{StaticResource ENlabel}" Margin="0,0,0,90"/>
+            <Label Content="Vytrvalost" Style="{StaticResource CZlabel}" Margin="200,0,0,140"/>
+            <Label Content="Endurance" Style="{StaticResource ENlabel}" Margin="200,0,0,90"/>
+            <Label Content="Nadšení" Style="{StaticResource CZlabel}" Margin="400,0,0,140"/>
+            <Label Content="Enthusiasm" Style="{StaticResource ENlabel}"  Margin="400,0,0,90"/>
+            <Label Content="Inteligence" Style="{StaticResource CZlabel}" Margin="600,0,0,140"/>
+            <Label Content="Intelligence" Style="{StaticResource ENlabel}" Margin="600,0,0,90"/>
+            <Label Content="Součet" Height="30" FontSize="12pt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="500,0,0,140" Width="80" HorizontalContentAlignment="Center" Visibility="Hidden"/>
+            <Label Content="Sum" Height="30" FontSize="8pt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="500,0,0,90" Width="80" HorizontalContentAlignment="Center" Visibility="Hidden"/>
+            <Label Content="Celkový součet" Height="30" FontSize="12pt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="700,0,0,140" Width="120" HorizontalContentAlignment="Center" Visibility="Hidden"/>
+            <Label Content="Total sum" Height="30" FontSize="8pt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="700,0,0,90" Width="80" HorizontalContentAlignment="Center" Visibility="Hidden"/>
+            <!--POLE pro vkládání bodů-->
+            <TextBox x:Name="hod_id" Style="{StaticResource bigtextbox}" Margin="156,186,756,192" PreviewTextInput="NumberValidationTextBox" SelectionChanged="Refresh_bodovani"/>
+            <TextBox x:Name="hod_agil_A" Style="{StaticResource smalltextbox}" Margin="0,0,200,40" TextChanged="sumsum" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="hod_speed_A" Style="{StaticResource smalltextbox}" Margin="0,0,0,40" TextChanged="sumsum" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="hod_endur_A" Style="{StaticResource smalltextbox}" Margin="200,0,0,40" TextChanged="sumsum" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="hod_enthu_A" Style="{StaticResource smalltextbox}" Margin="400,0,0,40" TextChanged="sumsum" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="hod_intel_A" Style="{StaticResource smalltextbox}" Margin="600,0,0,40" TextChanged="sumsum" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="hod_agil_B" Style="{StaticResource smalltextbox}" Margin="0,40,200,0" TextChanged="sumsum" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="hod_speed_B" Style="{StaticResource smalltextbox}" Margin="0,40,0,0" TextChanged="sumsum" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="hod_endur_B" Style="{StaticResource smalltextbox}" Margin="200,40,0,0" TextChanged="sumsum" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="hod_enthu_B" Style="{StaticResource smalltextbox}" Margin="400,40,0,0" TextChanged="sumsum" PreviewTextInput="NumberValidationTextBox"/>
+            <TextBox x:Name="hod_intel_B" Style="{StaticResource smalltextbox}" Margin="600,40,0,0" TextChanged="sumsum" PreviewTextInput="NumberValidationTextBox"/>
+
+            <Label Content="Rozhodčí č. 1" Height="30" FontSize="8pt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,400,40" Width="80" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Line Stroke="#FF515151" Margin="110,0,0,0" StrokeThickness="4" X1="0" X2="700" Y1="0" Y2="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="585"/>
+            <Label Content="Rozhodčí č. 2" Height="30" FontSize="8pt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40,400,0" Width="80" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+            <Button Content="OK" FontSize="14pt" Height="40" Width="100" Margin="0,200,0,0" Click="uloz_hodnoceni" ToolTip="Uloží body do databáze." />
+            <Button Content="storno" FontSize="11pt" Height="28" Width="90" Margin="650,250,0,0" Click="edit_skup" ToolTip="Uloží body do databáze." />
+
+
+            <TextBox x:Name="hod_sum_A" Height="30" FontSize="12pt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="500,0,0,40" Width="80" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" Visibility="Hidden"/>
+            <TextBox x:Name="hod_sum_B" Height="30" FontSize="12pt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="500,40,0,0" Width="80" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" Visibility="Hidden"/>
+            <TextBox x:Name="hod_sum_TOTAL" Height="70" FontSize="14pt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="700,0,0,0" Width="80" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" Visibility="Hidden"/>
+        </Grid>
+
+        <!--formulář pro vložení/úpravu majitele-->
+        <Canvas x:Name="divNewMajitel" Grid.Row="1" Background="#FF919191" Visibility="Collapsed" Height="173" VerticalAlignment="Top" HorizontalAlignment="Right" Width="850">
+            <TextBox x:Name="boxId" Visibility="Collapsed"/>
+            <Label x:Name="jmenoLBL" Content="Jméno" Canvas.Top="10" Height="23" Canvas.Left="10"/>
+            <TextBox x:Name="boxFirstName" Height="23" Canvas.Left="113" TextWrapping="Wrap" Canvas.Top="10" Width="300"/>
+            <Label x:Name="prijmeniLBL" Content= "Příjmení" Canvas.Top="38" Canvas.Left="10"/>
+            <TextBox x:Name="boxLastName" Height="23" Canvas.Left="113" TextWrapping="Wrap" Canvas.Top="38" Width="300"/>
+            <Label x:Name="clenLBL" Content="Členství" Canvas.Top="66" Canvas.Left="10"/>
+            <CheckBox x:Name="clenCB" Canvas.Left="113" Canvas.Top="71"/>
+            <Label x:Name="platbaLBL" Content="Platba" Canvas.Top="66" Canvas.Left="206"/>
+            <TextBox x:Name="platbaTB" Height="23" Canvas.Left="251" TextWrapping="Wrap" Canvas.Top="66" Width="99" Text="0"/>
+            <Label x:Name="psiLBL" Content="Počet psů" Canvas.Top="66" Canvas.Left="506"/>
+            <TextBox x:Name="psiTB" Height="23" Canvas.Left="581" TextWrapping="Wrap" Canvas.Top="66" Width="25"/>
+            <Label x:Name="plat_OK_LBL" Content="Zaplaceno" Canvas.Top="66" Canvas.Left="387"/>
+            <CheckBox x:Name="platba_OK_CB" Canvas.Left="451" Canvas.Top="71"/>
+            <Label x:Name="telefonLBL" Content="Telefon" Canvas.Top="38" Canvas.Left="449"/>
+            <TextBox x:Name="telefonBox" Height="23" Canvas.Left="540" Canvas.Top="38" Width="300"/>
+            <Label x:Name="emailLBL" Content="Email" Canvas.Top="17" Canvas.Left="449"/>
+            <TextBox x:Name="emailBox" Height="23" Canvas.Left="540" Canvas.Top="10" Width="300"/>
+            <Label Content="Národnost" Canvas.Top="66" Canvas.Left="650"/>
+            <TextBox x:Name="boxNarod" Height="23" Canvas.Left="740" TextWrapping="Wrap" Canvas.Top="66" Width="100"/>
+
+            <Button Click="buttonSave_OnClick" Content="Uložit" Canvas.Left="10" Canvas.Bottom="10" Width="75"/>
+            <Button Click="buttonCancel_OnClick" Content="Zrušit" Canvas.Left="90" Canvas.Bottom="10" Width="75"/>
+        </Canvas>
+
+        <!--formulář pro vložení/úpravu psa-->
+        <Canvas x:Name="divNewPes" Background="#FF919191" Grid.Row="2" Visibility="Collapsed"  Grid.Column="1" Height="170" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="850" Grid.RowSpan="2">
+            <Label x:Name="cisloLBL_P" Content="Č. psa" Canvas.Top="10" Height="23" Canvas.Left="10"/>
+            <TextBox x:Name="boxId_P" Height="23" Canvas.Left="80" TextWrapping="Wrap" Canvas.Top="10" Width="50" Visibility="Collapsed"/>
+            <TextBox x:Name="boxstart_P" Height="23" Canvas.Left="80" TextWrapping="Wrap" Canvas.Top="10" Width="50"/>
+            <Label x:Name="cislobehuLBL_P" Content= "Č. běhu" Canvas.Top="10" Canvas.Left="150"/>
+            <TextBox x:Name="boxBeh" Height="23" Canvas.Left="210" TextWrapping="Wrap" Canvas.Top="10" Width="50"/>
+            <Label x:Name="jmenoLBL_P" Content="Jméno" Canvas.Top="38" Height="23" Canvas.Left="10"/>
+            <TextBox x:Name="boxFirstName_P" Height="23" Canvas.Left="80" TextWrapping="Wrap" Canvas.Top="38" Width="180"/>
+            <Label x:Name="plemenoLBL_P" Content= "Plemeno" Canvas.Top="38" Canvas.Left="293"/>
+            <ComboBox x:Name="comboPlemeno" Height="23" Canvas.Left="392" Canvas.Top="38" Width="150" Loaded="comboPlemeno_Loaded"/>
+            <Label x:Name="pohlaviLBL_P" Content="Pohlaví" Canvas.Top="66" Canvas.Left="10"/>
+            <Label x:Name="fciLBL" Content="FCI" Canvas.Top="10" Canvas.Left="598"/>
+            <ComboBox x:Name="fciCombo" Height="23" Width="150" Canvas.Left="690" Canvas.Top="10" Loaded="fciCombo_Loaded"/>
+            <Label x:Name="datumLBL" Content="Datum narození" Canvas.Top="38" Canvas.Left="598"/>
+            <!--<TextBox x:Name="boxDatum" Height="23" Canvas.Left="113" TextWrapping="Wrap" Canvas.Top="66" Width="150" Visibility="Visible"/>-->
+            <Label Content="Licence" Canvas.Top="66" Canvas.Left="293"/>
+            <TextBox x:Name="boxLicence" Height="23" Canvas.Left="392" TextWrapping="Wrap" Canvas.Top="66" Width="150"/>
+            <DatePicker x:Name="datumPicker" Canvas.Left="690" Canvas.Top="38" Width="150" FirstDayOfWeek="Monday"/>
+            <ComboBox x:Name="pohlaviCB" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Canvas.Left="80" Canvas.Top="66" SelectedIndex="0" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Height="23">
+                <ComboBoxItem Content="pes" Background="#FF00B9FF"/>
+                <ComboBoxItem Content="fena" Background="#FFFF6A6A"/>
+            </ComboBox>
+            <Label Content="Z/L/T" Canvas.Top="94" Canvas.Left="10"/>
+            <ComboBox x:Name="zavodCB" SelectedIndex="0" Canvas.Left="80" Canvas.Top="94" Width="85" Height="23">
+                <ComboBoxItem Content="Závod"/>
+                <ComboBoxItem Content="Licence"/>
+                <ComboBoxItem Content="Tréning"/>
+            </ComboBox>
+            <Label Content="Majitel (ID)" Canvas.Top="94" Canvas.Left="293"/>
+            <TextBox x:Name="boxMajitel" Height="23" Canvas.Left="392" TextWrapping="Wrap" Canvas.Top="94" Width="150"/>
+            <Label Content="Platba/doplatek" Canvas.Top="66" Canvas.Left="598"/>
+            <TextBox x:Name="boxPlat" Height="23" Canvas.Left="690" TextWrapping="Wrap" Canvas.Top="66" Width="70" Text="0"/>
+            <TextBox x:Name="boxDoplat" Height="23" Canvas.Left="770" TextWrapping="Wrap" Canvas.Top="66" Width="70" Text="0"/>
+            <Label Content="Skupina" Canvas.Top="10" Canvas.Left="293"/>
+            <TextBox x:Name="boxPozn" Height="23" Canvas.Left="392" TextWrapping="Wrap" Canvas.Top="10" Width="50"/>
+            <Button Click="buttonSave_P_OnClick" Content="Uložit" Canvas.Left="10" Canvas.Bottom="10" Width="75" IsDefault="True"/>
+            <Button Click="buttonCancel_P_OnClick" Content="Zrušit" Canvas.Left="90" Canvas.Bottom="10" Width="75"/>
+        </Canvas>
+
+        <!--formulář pro úpravu psa z přehledu psů-->
+        <Canvas x:Name="diveditprehled" Background="#FF919191" Grid.Row="3" Visibility="Collapsed" Height="100" VerticalAlignment="Bottom">
+            <Label x:Name="start1LBL" Content= "Č. psa" Canvas.Top="10" Canvas.Left="10"/>
+            <TextBox x:Name="boxstart1" Height="23" Canvas.Left="60" TextWrapping="Wrap" Canvas.Top="10" Width="50"/>
+            <Label x:Name="beh1LBL" Content="Č. běhu" Canvas.Top="10" Height="23" Canvas.Left="130"/>
+            <TextBox x:Name="boxbeh1" Height="23" Canvas.Left="180" TextWrapping="Wrap" Canvas.Top="10" Width="50"/>
+            <Label Content="Dečka" Canvas.Top="10" Canvas.Left="250"/>
+            <ComboBox x:Name="decka1CB" SelectedIndex="0" Canvas.Left="290" Canvas.Top="10" Width="85" Height="23">
+                <ComboBoxItem Content="červená"/>
+                <ComboBoxItem Content="bílá"/>
+            </ComboBox>
+            
+            <Label x:Name="start2LBL" Content= "Č. psa" Canvas.Top="10" Canvas.Left="400"/>
+            <TextBox x:Name="boxstart2" Height="23" Canvas.Left="450" TextWrapping="Wrap" Canvas.Top="10" Width="50"/>
+            <Label x:Name="beh2LBL" Content="Č. běhu" Canvas.Top="10" Height="23" Canvas.Left="520"/>
+            <TextBox x:Name="boxbeh2" Height="23" Canvas.Left="570" TextWrapping="Wrap" Canvas.Top="10" Width="50"/>
+            <Label Content="Dečka" Canvas.Top="10" Canvas.Left="650"/>
+            <ComboBox x:Name="decka2CB" SelectedIndex="0" Canvas.Left="690" Canvas.Top="10" Width="85" Height="23">
+                <ComboBoxItem Content="červená"/>
+                <ComboBoxItem Content="bílá"/>
+            </ComboBox>
+
+            <Button Click="buttonSaveprehled" Content="Uložit" Canvas.Left="10" Canvas.Bottom="10" Width="75" IsDefault="True"/>
+            <Button Click="buttonCanceleditprehled" Content="Zrušit" Canvas.Left="90" Canvas.Bottom="10" Width="75"/>
+        </Canvas>
+
+        <!--horní lišta s menu-->
+        <Menu  Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="Menu" FontSize="15" ToolTip="Hlavní nabídka, načítání a ukládání databáze.">
+                <!-- momentálně bez funkce <MenuItem Header="Nový" Click="loadNewDatabase" ToolTip="Vytvoří novou prázdnou databázi."/>-->
+                <MenuItem Header="Nový" ToolTip="Mimo provoz!" Foreground="LightGray"/>
+                <Separator/>
+                <!--<MenuItem Header="Načíst z Excelu"/>
+                <MenuItem Header="Načíst z Excelu (nechrti)"/>
+                <Separator/>-->
+                <MenuItem Header="Načíst">
+                    <MenuItem Header="Načíst EXCEL" Click="loadExcel_OnClick" ToolTip="Načte novou databázi z Excel tabulek.">
+                        <!--<MenuItem Header="Chrti" Click="loadExcelChr_OnClick"/>
+                        <MenuItem Header="Nechrti" Click="loadExcel_OnClick"/>-->
+                    </MenuItem>
+                    <MenuItem Header="Načíst XML" Click="loadButton_OnClick" ToolTip="Načte databázi uloženou v XML souboru."/>
+                </MenuItem>
+                <!--
+                <MenuItem Header="Načíst z CSV (nechrti)" Click="nahraj_csv" />
+                <MenuItem Header="Načíst z CSV (chrti)*" Click="nahraj_csv" />-->
+                <MenuItem Header="Uložit" Click="saveButton_OnClick" ToolTip="Uloží aktuální databázi do XML souboru."/>
+                <Separator/>
+                <MenuItem Header="Ukončit" Click="exit_OnClick" ToolTip="Bezpečně ukončí aplikaci."/>
+            </MenuItem>
+            <MenuItem Header="Funkce" FontSize="15" ToolTip="Funkce pro práci s databází.">
+                <MenuItem Header="Hlavní databáze" Click="hlavniGrid" ToolTip="Zobrazí hlavní databázi majitelů a psů."/>
+                <Separator/>
+                <!--<MenuItem Header="Statistiky - majitelé" Click="stat_majitele"/>
+                <MenuItem Header="Statistiky - psi" Click="stat_psi"/>
+                <Separator/>-->
+                <MenuItem Header="Přehled psů" Click="edit_skup" ToolTip="Zobrazí přehled psů a stav jejich bodů."/>
+                <Separator/>
+                <!--<MenuItem Header="Chrti a FCI V*"/>
+                <MenuItem Header="Nechrti*"/>
+                <Separator/>
+                <MenuItem Header="Sestavení rozpisu*"/>
+                <Separator/>-->
+                <MenuItem Header="Hodnocení" ToolTip="Spustí modul bodování." Click="hodnoceni">
+                    <!--<MenuItem Header="Zadávání bodů"/>
+                    <MenuItem Header="Testovací data" Click="RandomNumbers_TEST"/>-->
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Uložit rozpis do Excelu" ToolTip="Zapíše rozpis prvního běhu do tabulky Excel. Pokud neni tabulka načtena, dotáže se na cílový soubor.">
+                    <MenuItem Header="Běh č. 1" Click="save_to_Excel"/>
+                    <MenuItem Header="Běh č. 2" Click="save_to_Excel_2"/>
+                </MenuItem>
+                <MenuItem Header="Uložit tabulky pro rozhodčí do Excelu">
+                    <MenuItem Header="Běh č. 1" Click="save_tab_to_Excel"/>
+                    <MenuItem Header="Běh č. 2" Click="save_tab_to_Excel_2"/>
+                </MenuItem>
+                <MenuItem Header="Uložit výsledky do Excelu">
+                    <MenuItem Header="Běh č. 1 (průběžné výsledky)" Click="save_to_Excel_vysledky"/>
+                    <MenuItem Header="Běh č. 2 (celkové výsledky)" Click="save_to_Excel_vysledky_2"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help" FontSize="15" ToolTip="Nápověda a informace o programu.">
+                <!--<MenuItem Header="Nápověda*"/>-->
+                <MenuItem Header="Testovací funkce" ToolTip="Povolí funkce pro testování, např. náhodné generování výsledků." Visibility="Collapsed">
+                    <MenuItem Header="Náhodné body kolo 1 (TEST)" Click="RandomNumbers_TEST"/>
+                    <MenuItem Header="Náhodné body kolo 2 (TEST)" Click="RandomNumbers_TEST_2"/>
+                </MenuItem>
+                <MenuItem Header="O programu" Click="show_about" ToolTip="Informace o programu a jeho autorovi."/>
+            </MenuItem>
+        </Menu>
+
+        <!--okno s popisem programu-->
+        <Canvas x:Name="help_about" Background="#FF347299" Visibility="Collapsed" Height="240" VerticalAlignment="Center" HorizontalAlignment="Center" Width="420" Margin="0,0,0,0" Grid.Row="0" Grid.RowSpan="6">
+
+            <Image Source="D:\CPP_projekty\Coursing_database\projectRun\Images\logo_w.png" HorizontalAlignment="Center" Canvas.Top="10" Margin="60,0,0,0"/>
+            <!--Canvas.Left="140" Canvas.Top="10"/>-->
+            <TextBlock FontSize="14" Foreground="White" Height="18" Width="420" Canvas.Top="127" TextWrapping="WrapWithOverflow" TextAlignment="Center" HorizontalAlignment="Center">
+                Databázový systém pro správu a řízení coursingových závodů.
+            </TextBlock>
+            <TextBlock Foreground="White" HorizontalAlignment="Center" Height="15" Width="420" Canvas.Top="150" TextWrapping="WrapWithOverflow" TextAlignment="Center">
+                Bc. Jiří Růžička
+            </TextBlock>
+            <TextBlock Foreground="White" HorizontalAlignment="Center" Height="20" Width="420" Canvas.Top="170" TextWrapping="WrapWithOverflow" TextAlignment="Center">
+                FEKT VUT v Brně 2015
+            </TextBlock>
+            <Button HorizontalAlignment="Center" Click="button_hide_about" Content="OK" Canvas.Bottom="10" Width="80" Canvas.Top="210" Canvas.Left="170"/>
+        </Canvas>
+
+        <!--spodní stavová lišta-->
+        <DockPanel Grid.Row="6">
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBar.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </StatusBar.ItemsPanel>
+                <StatusBarItem Grid.Column="0">
+                    <TextBlock x:Name="statusBlock" Text="Počet ohodnocených psů: 0, počet zbývajících psů:  0."/>
+                </StatusBarItem>
+                <StatusBarItem Grid.Column="1">
+                    <TextBlock x:Name="statusHodnoceniBlock" Text="Počet majitelů v databázi: 0, počet psů v databázi:  0."/>
+                </StatusBarItem>
+                <!--
+                <StatusBarItem Grid.Column="1">
+                    <ProgressBar Minimum="0" Maximum="100" Value="{Binding progress}" Name="pbStatus" Width="80" Height="18"/>
+                </StatusBarItem>
+                <StatusBarItem Grid.Column="2">
+                    <TextBlock>Loading</TextBlock>
+                </StatusBarItem>-->
+            </StatusBar>
+
+            <Label>Main Content</Label>
+        </DockPanel>
+    </Grid>
+</Window>
