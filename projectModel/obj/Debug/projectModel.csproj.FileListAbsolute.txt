@@ -18,3 +18,12 @@ D:\CPP_projekty\Coursing_database_2\projectModel\obj\Debug\projectModel.Resource
 D:\CPP_projekty\Coursing_database_2\projectModel\obj\Debug\projectModel.csproj.GenerateResource.Cache
 D:\CPP_projekty\Coursing_database_2\projectModel\obj\Debug\projectModel.dll
 D:\CPP_projekty\Coursing_database_2\projectModel\obj\Debug\projectModel.pdb
+D:\CPP_projekty\Cours_database\projectModel\bin\Debug\projectModel.dll
+D:\CPP_projekty\Cours_database\projectModel\bin\Debug\projectModel.pdb
+D:\CPP_projekty\Cours_database\projectModel\obj\Debug\projectModel.csprojResolveAssemblyReference.cache
+D:\CPP_projekty\Cours_database\projectModel\obj\Debug\Interop.MSComDlg.dll
+D:\CPP_projekty\Cours_database\projectModel\obj\Debug\projectModel.csproj.ResolveComReference.cache
+D:\CPP_projekty\Cours_database\projectModel\obj\Debug\projectModel.Resource1.resources
+D:\CPP_projekty\Cours_database\projectModel\obj\Debug\projectModel.csproj.GenerateResource.Cache
+D:\CPP_projekty\Cours_database\projectModel\obj\Debug\projectModel.dll
+D:\CPP_projekty\Cours_database\projectModel\obj\Debug\projectModel.pdb

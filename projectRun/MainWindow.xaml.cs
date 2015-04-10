@@ -24,7 +24,7 @@ using projectModel;
 // TODO: rozdělit chrty a nechrty (volba na startu programu!?) parametr v hlavičce XML souboru !!!
 
 
-
+//test gitu
 
 namespace projectRun
 {
