@@ -28,6 +28,16 @@ namespace projectModel
             string databasePath = sourceFile;
             workbook = excelApp.Workbooks.Open(databasePath);
 
+            //TODO: načíst listy a vytvořit nabídku pro výběr (otevření existujícího, vytvoření nového)
+            List<String> listy = new List<String>();
+
+            for (int i = 1; i < workbook.Sheets.Count + 1; i++)
+            {
+                listy.Add(((Excel.Worksheet)workbook.Sheets.get_Item(i)).Name);
+            }
+            //TODO: jak tady zavolat moje vytvořené okno ? vytvořit nové v projectModel ?!?
+            //projectRun.Window1 list_dialog = new projectRun.Window1("Který list tabulky si přeješ načíst?");
+
             worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(list);
 
             Majitel temp_majitel = new Majitel();
