@@ -23,9 +23,6 @@ using projectModel;
         // určit rozdělení do dvojic a/nebo trojic (lichý/sudý počet závodníků!!! pravidla-závod/licence/trening?!?)
 // TODO: rozdělit chrty a nechrty (volba na startu programu!?) parametr v hlavičce XML souboru !!!
 
-
-//test gitu
-
 namespace projectRun
 {
     /// <summary>
@@ -2846,31 +2843,6 @@ namespace projectRun
                 comboBox.Items.Add(str.Remove(str.Length - 1));
             }
         }
-
-        ////#######################TEST ENTER PRO TEXTBOX####################################################
-        //// event handler for KeyDown event
-        //private void TextBox_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    // if user didn't press Enter, do nothing
-        //    if (!e.Key.Equals(Key.Enter)) return;
-
-        //    // execute the command, if it exists
-        //    var cmd = GetTextBoxPressEnterCommand((TextBox)sender);
-        //    if (cmd != null) cmd.Execute(null);
-        //}
-
-        //// declare an attached dependency property
-        //public static ICommand GetTextBoxPressEnterCommand(TextBox obj)
-        //{
-        //    return (ICommand)obj.GetValue(TextBoxPressEnterCommandProperty);
-        //}
-        //public static void SetTextBoxPressEnterCommand(TextBox obj, ICommand value)
-        //{
-        //    obj.SetValue(TextBoxPressEnterCommandProperty, value);
-        //}
-        //public static readonly DependencyProperty TextBoxPressEnterCommandProperty =
-        //    DependencyProperty.RegisterAttached("TextBoxPressEnterCommand", typeof(ICommand), typeof(Window1));
-
 
     }
 
