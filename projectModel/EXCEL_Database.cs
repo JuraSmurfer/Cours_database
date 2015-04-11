@@ -187,7 +187,7 @@ namespace projectModel
 
                 temp_pes.id = dataP.GetNewId();
                 temp_pes.majitel = temp_majitel.id;
-
+                temp_pes.majitel_jmeno = temp_majitel.firstName;
                 temp_pes.skupina = 0;
                 temp_pes.start_beh1 = 0;
                 temp_pes.start_beh1 = 0;

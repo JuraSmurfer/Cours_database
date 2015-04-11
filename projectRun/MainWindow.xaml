@@ -134,7 +134,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=licence}" Header="Licence"/>
-                <DataGridTextColumn Binding="{Binding Path=majitel}" Header="Majitel"/>
+                <DataGridTextColumn Binding="{Binding Path=majitel_jmeno}" Header="Majitel"/>
                 <DataGridTextColumn Binding="{Binding Path=platba}" Header="Platba"/>
                 <DataGridTextColumn Binding="{Binding Path=doplatit}" Header="Doplatit"/>
                 <DataGridTextColumn Binding="{Binding Path=poznamka}" Header="Skupina"/>
@@ -195,7 +195,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=majitel}" Header="Majitel" Width="25">
+                <DataGridTextColumn Binding="{Binding Path=majitel_jmeno}" Header="Majitel" Width="150">
                     <!--<DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Style.Triggers>

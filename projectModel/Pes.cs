@@ -49,6 +49,7 @@ namespace projectModel
             this.datum = DateTime.ParseExact("1. 1. 1993", "d. M. yyyy", null);
             this.licence = "";
             this.majitel = 0;
+            this.majitel_jmeno = "";
             this.skupina = 0;
             this.start_beh1 = 0;
             this.start_beh2 = 0;
@@ -106,51 +107,51 @@ namespace projectModel
             this.fci = data[4];
             this.datum = DateTime.ParseExact(data[5], "d. M. yyyy", null);
             this.licence = data[6];
-            this.majitel =  Int32.Parse(data[7]);
-            this.skupina =  Int32.Parse(data[8]);
-            this.start_beh1 =  Int32.Parse(data[9]);
-            this.start_beh2 =  Int32.Parse(data[10]);
+            this.majitel = Int32.Parse(data[7]);
+            this.majitel_jmeno = data[8];
+            this.skupina =  Int32.Parse(data[9]);
+            this.start_beh1 =  Int32.Parse(data[10]);
+            this.start_beh2 =  Int32.Parse(data[11]);
 
-            this.zavod_licence = data[11];
-            this.platba =  Int32.Parse(data[12]);
-            this.doplatit =  Int32.Parse(data[13]);
-            this.poznamka = data[14];
-            this.diskval = data[15];
+            this.zavod_licence = data[12];
+            this.platba =  Int32.Parse(data[13]);
+            this.doplatit =  Int32.Parse(data[14]);
+            this.poznamka = data[15];
+            this.diskval = data[16];
 
             //body prvni kolo, oba rozhodci (A0,A1)
-            this.agility_A0 = Int32.Parse(data[16]); 
-            this.agility_A1 = Int32.Parse(data[21]);
-            this.speed_A0 = Int32.Parse(data[17]);
-            this.speed_A1 = Int32.Parse(data[22]);
-            this.endurance_A0 = Int32.Parse(data[18]);
-            this.endurance_A1 = Int32.Parse(data[23]);
-            this.enthusiasm_A0 = Int32.Parse(data[19]);
-            this.enthusiasm_A1 = Int32.Parse(data[24]);
-            this.intelligence_A0 = Int32.Parse(data[20]);
-            this.intelligence_A1 = Int32.Parse(data[25]);
+            this.agility_A0 = Int32.Parse(data[17]);
+            this.agility_A1 = Int32.Parse(data[22]);
+            this.speed_A0 = Int32.Parse(data[18]);
+            this.speed_A1 = Int32.Parse(data[23]);
+            this.endurance_A0 = Int32.Parse(data[19]);
+            this.endurance_A1 = Int32.Parse(data[24]);
+            this.enthusiasm_A0 = Int32.Parse(data[20]);
+            this.enthusiasm_A1 = Int32.Parse(data[25]);
+            this.intelligence_A0 = Int32.Parse(data[21]);
+            this.intelligence_A1 = Int32.Parse(data[26]);
             //body celkem kolo 1
-            this.body1 =  Int32.Parse(data[26]);
+            this.body1 =  Int32.Parse(data[27]);
 
             //body prvni kolo, oba rozhodci (B0,B1)
-            this.agility_B0 = Int32.Parse(data[27]);
-            this.agility_B1 = Int32.Parse(data[32]);
-            this.speed_B0 = Int32.Parse(data[28]);
-            this.speed_B1 = Int32.Parse(data[33]);
-            this.endurance_B0 = Int32.Parse(data[29]);
-            this.endurance_B1 = Int32.Parse(data[34]);
-            this.enthusiasm_B0 = Int32.Parse(data[30]);
-            this.enthusiasm_B1 = Int32.Parse(data[35]);
-            this.intelligence_B0 = Int32.Parse(data[31]);
-            this.intelligence_B1 = Int32.Parse(data[36]);
+            this.agility_B0 = Int32.Parse(data[28]);
+            this.agility_B1 = Int32.Parse(data[33]);
+            this.speed_B0 = Int32.Parse(data[29]);
+            this.speed_B1 = Int32.Parse(data[34]);
+            this.endurance_B0 = Int32.Parse(data[30]);
+            this.endurance_B1 = Int32.Parse(data[35]);
+            this.enthusiasm_B0 = Int32.Parse(data[31]);
+            this.enthusiasm_B1 = Int32.Parse(data[36]);
+            this.intelligence_B0 = Int32.Parse(data[32]);
+            this.intelligence_B1 = Int32.Parse(data[37]);
             //body celkem kolo 2
-            this.body2 =  Int32.Parse(data[37]);
+            this.body2 =  Int32.Parse(data[38]);
 
-            this.dvojice0 = Int32.Parse(data[38]);
-            this.dvojice1 = Int32.Parse(data[39]);
+            this.dvojice0 = Int32.Parse(data[39]);
+            this.dvojice1 = Int32.Parse(data[40]);
 
-            //this.barva = new String[2] { data[40], data[41] };
-            this.barva0 = data[40];
-            this.barva1 = data[41];
+            this.barva0 = data[41];
+            this.barva1 = data[42];
         }
 
         public Pes(Pes aPes)
@@ -163,6 +164,7 @@ namespace projectModel
             this.datum = aPes.datum;
             this.licence = aPes.licence;
             this.majitel = aPes.majitel;
+            this.majitel_jmeno = aPes.majitel_jmeno;
             this.skupina = aPes.skupina;
             this.start_beh1 = aPes.start_beh1;
             this.start_beh2 = aPes.start_beh2;
@@ -218,7 +220,7 @@ namespace projectModel
         public DateTime datum { get; set; }
         public String licence { get; set; }
         public Int32 majitel { get; set; } // ID majitele psa
-        //public String majitel_list { get; set; } // ID majitele psa
+        public String majitel_jmeno { get; set; } // jméno majitele psa
         public Int32 skupina { get; set; } // ID závodní skupiny
         public Int32 start_beh1 { get; set; } // pořadové číslo v prvním běhu
         public Int32 start_beh2 { get; set; } // pořadové číslo v druhém běhu
