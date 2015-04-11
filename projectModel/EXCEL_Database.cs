@@ -29,6 +29,8 @@ namespace projectModel
             {
                 listy.Add(((Excel.Worksheet)workbook.Sheets.get_Item(i)).Name);
             }
+            workbook.Close(true, Missing.Value, Missing.Value);
+            excelApp.Quit();
         }
 
         public void read_excel_table_temp(Majitele dataM, Psi dataP, string sourceFile, Int32 list)
