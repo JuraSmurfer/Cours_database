@@ -64,3 +64,5 @@ D:\CPP_projekty\Cours_database\projectRun\obj\Debug\projectRun_MarkupCompile.cac
 D:\CPP_projekty\Cours_database\projectRun\obj\Debug\projectRun.g.resources
 D:\CPP_projekty\Cours_database\projectRun\obj\Debug\projectRun.Properties.Resources.resources
 D:\CPP_projekty\Cours_database\projectRun\obj\Debug\projectRun.csproj.GenerateResource.Cache
+D:\CPP_projekty\Cours_database\projectRun\obj\Debug\dialog_excel_list.baml
+D:\CPP_projekty\Cours_database\projectRun\obj\Debug\dialog_excel_list.g.cs

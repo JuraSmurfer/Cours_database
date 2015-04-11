@@ -155,7 +155,7 @@ namespace projectRun
                     List<String> lists = new List<String>();
                     xlsDB.read_excel_lists(opened_file, lists);
                     //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                    projectRun.Window1 list_dialog = new projectRun.Window1("Který list tabulky si přeješ načíst?", lists);
+                    projectRun.dialog_excel_list list_dialog = new projectRun.dialog_excel_list("Který list tabulky si přeješ načíst?", lists);
                     list_dialog.ShowDialog();
 
                     if (list_dialog.DialogResult == true)

@@ -146,7 +146,7 @@
                     <Separator/>
                     <!--<MenuItem Header="Zařadit psa do závodu" Click="zaradit_psa"/>-->
                     <Separator/>
-                    <!--<MenuItem Header="Seřadit k prvnímu běhu" Click="serad_psy"/>-->
+                    <MenuItem Header="Seřadit k prvnímu běhu" Click="serad_psy"/>
                     <MenuItem Header="Seřadit k prvnímu běhu" Foreground="LightGray"/>
                     <MenuItem Header="Seřadit k druhému běhu" Click="serad_psy_2"/>
                     <Separator/>
@@ -507,7 +507,7 @@
             </MenuItem>
             <MenuItem Header="Help" FontSize="15" ToolTip="Nápověda a informace o programu.">
                 <!--<MenuItem Header="Nápověda*"/>-->
-                <MenuItem Header="Testovací funkce" ToolTip="Povolí funkce pro testování, např. náhodné generování výsledků." Visibility="Collapsed">
+                <MenuItem Header="Testovací funkce" ToolTip="Povolí funkce pro testování, např. náhodné generování výsledků." Visibility="Visible">
                     <MenuItem Header="Náhodné body kolo 1 (TEST)" Click="RandomNumbers_TEST"/>
                     <MenuItem Header="Náhodné body kolo 2 (TEST)" Click="RandomNumbers_TEST_2"/>
                 </MenuItem>
