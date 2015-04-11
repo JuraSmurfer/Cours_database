@@ -138,43 +138,40 @@ namespace projectRun
         {
             try
             {
-                this.database = new Majitele();
-                this.database_P = new Psi();
-                this.XmlDatabase = new XML_Database();
-                this.xlsDB = new EXCEL_Database();
 
                 // inicializace dialogového okna pro otevření souboru
                 Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
                 // aplikace globálního filtru pro EXCEL soubory
                 dlg.Filter = Konstanty.fileFilterXLS;
 
-                //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                projectRun.Window1 list_dialog = new projectRun.Window1("Který list tabulky si přeješ načíst?");
-                list_dialog.ShowDialog();
-                if (list_dialog.DialogResult == true)
+
+                if ((bool)dlg.ShowDialog(this))
                 {
+                    // uložení otevřeného souboru
+                    opened_file = dlg.FileName;
 
-                    Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
+                    this.xlsDB = new EXCEL_Database();
 
-                    if ((bool)dlg.ShowDialog(this))
+                    List<String> lists = new List<String>();
+                    xlsDB.read_excel_lists(opened_file, lists);
+                    //zobrazí dialogové okno pro vybrání listu tabulky Excel
+                    projectRun.Window1 list_dialog = new projectRun.Window1("Který list tabulky si přeješ načíst?", lists);
+                    list_dialog.ShowDialog();
+
+                    if (list_dialog.DialogResult == true)
                     {
-                        // uložení otevřeného souboru
-                        opened_file = dlg.FileName;
 
-                        List<String> lists = new List<String>();
-                        xlsDB.read_excel_lists(opened_file, lists);
+                        Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
+
 
                         // zobrazit vyčkávací kurzor (operace načítání z Excelu je zdlouhavá)
                         using (new WaitCursor())
                         {
+                            this.database = new Majitele();
+                            this.database_P = new Psi();
+                            this.XmlDatabase = new XML_Database();
                             // načtení Excel dat do databáze
-                            //xlsDB.GetDataView(database, database_P, opened_file, 1);
-                            /*try { */ xlsDB.read_excel_table_temp(database, database_P, opened_file, cislo_listu); //}
-                            //catch (Exception ex)
-                            //{
-                            //    // TODO řešit výjimky !!!
-                            //    MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
-                            //}
+                            xlsDB.read_excel_table_temp(database, database_P, opened_file, cislo_listu);
                         }
                     }
                     // obnovení zobrazených dat
@@ -228,7 +225,7 @@ namespace projectRun
                             opened_file = dlg.FileName;
 
                             //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                             list_dialog.ShowDialog();
                             if (list_dialog.DialogResult == true)
                             {
@@ -250,7 +247,7 @@ namespace projectRun
                         if (res == MessageBoxResult.Yes)
                         {
                             //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                             list_dialog.ShowDialog();
                             if (list_dialog.DialogResult == true)
                             {
@@ -274,7 +271,7 @@ namespace projectRun
                             if ((bool)dlg.ShowDialog(this))
                             {
                                 //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                                 list_dialog.ShowDialog();
                                 if (list_dialog.DialogResult == true)
                                 {
@@ -328,7 +325,7 @@ namespace projectRun
                             opened_file = dlg.FileName;
 
                             //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                             list_dialog.ShowDialog();
                             if (list_dialog.DialogResult == true)
                             {
@@ -350,7 +347,7 @@ namespace projectRun
                         if (res == MessageBoxResult.Yes)
                         {
                             //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                             list_dialog.ShowDialog();
                             if (list_dialog.DialogResult == true)
                             {
@@ -374,7 +371,7 @@ namespace projectRun
                             if ((bool)dlg.ShowDialog(this))
                             {
                                 //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                                 list_dialog.ShowDialog();
                                 if (list_dialog.DialogResult == true)
                                 {
@@ -428,7 +425,7 @@ namespace projectRun
                             opened_file = dlg.FileName;
 
                             //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                             list_dialog.ShowDialog();
                             if (list_dialog.DialogResult == true)
                             {
@@ -450,7 +447,7 @@ namespace projectRun
                         if (res == MessageBoxResult.Yes)
                         {
                             //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                             list_dialog.ShowDialog();
                             if (list_dialog.DialogResult == true)
                             {
@@ -474,7 +471,7 @@ namespace projectRun
                             if ((bool)dlg.ShowDialog(this))
                             {
                                 //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                                 list_dialog.ShowDialog();
                                 if (list_dialog.DialogResult == true)
                                 {
@@ -528,7 +525,7 @@ namespace projectRun
                             opened_file = dlg.FileName;
 
                             //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                             list_dialog.ShowDialog();
                             if (list_dialog.DialogResult == true)
                             {
@@ -550,7 +547,7 @@ namespace projectRun
                         if (res == MessageBoxResult.Yes)
                         {
                             //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                             list_dialog.ShowDialog();
                             if (list_dialog.DialogResult == true)
                             {
@@ -574,7 +571,7 @@ namespace projectRun
                             if ((bool)dlg.ShowDialog(this))
                             {
                                 //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                                 list_dialog.ShowDialog();
                                 if (list_dialog.DialogResult == true)
                                 {
@@ -628,7 +625,7 @@ namespace projectRun
                             opened_file = dlg.FileName;
 
                             //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                             list_dialog.ShowDialog();
                             if (list_dialog.DialogResult == true)
                             {
@@ -650,7 +647,7 @@ namespace projectRun
                         if (res == MessageBoxResult.Yes)
                         {
                             //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                             list_dialog.ShowDialog();
                             if (list_dialog.DialogResult == true)
                             {
@@ -674,7 +671,7 @@ namespace projectRun
                             if ((bool)dlg.ShowDialog(this))
                             {
                                 //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                                 list_dialog.ShowDialog();
                                 if (list_dialog.DialogResult == true)
                                 {
@@ -728,7 +725,7 @@ namespace projectRun
                             opened_file = dlg.FileName;
 
                             //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                             list_dialog.ShowDialog();
                             if (list_dialog.DialogResult == true)
                             {
@@ -750,7 +747,7 @@ namespace projectRun
                         if (res == MessageBoxResult.Yes)
                         {
                             //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                             list_dialog.ShowDialog();
                             if (list_dialog.DialogResult == true)
                             {
@@ -774,7 +771,7 @@ namespace projectRun
                             if ((bool)dlg.ShowDialog(this))
                             {
                                 //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?");
+                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
                                 list_dialog.ShowDialog();
                                 if (list_dialog.DialogResult == true)
                                 {

@@ -19,10 +19,11 @@ namespace projectRun
     /// </summary>
     public partial class Window1 : Window
     {
-        public Window1(string ktery_list)
+        public Window1(string ktery_list, List<String> listy)
         {
             InitializeComponent();
             lblQuestion.Content = ktery_list;
+            list_no.ItemsSource = listy;
         }
 
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)

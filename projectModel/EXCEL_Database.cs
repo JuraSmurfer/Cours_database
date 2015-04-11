@@ -41,18 +41,7 @@ namespace projectModel
             Excel.Range range;
             string databasePath = sourceFile;
             workbook = excelApp.Workbooks.Open(databasePath);
-
-            //TODO: načíst listy a vytvořit nabídku pro výběr (otevření existujícího, vytvoření nového)
-            List<String> listy = new List<String>();
-
-            for (int i = 1; i < workbook.Sheets.Count + 1; i++)
-            {
-                listy.Add(((Excel.Worksheet)workbook.Sheets.get_Item(i)).Name);
-            }
-
-            //TODO: jak tady zavolat moje vytvořené okno ? vytvořit nové v projectModel ?!?
-            //projectRun.Window1 list_dialog = new projectRun.Window1("Který list tabulky si přeješ načíst?");
-
+            
             worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(list);
 
             Majitel temp_majitel = new Majitel();
@@ -130,9 +119,9 @@ namespace projectModel
                 temp = (range.Cells[row, 8] as Excel.Range).Value2;
                 if (temp != null) // excel sloupec platba
                 {
-                    
                     int platba;
-                    if (Int32.TryParse(temp, out platba))
+                    //ERROR !!!!! debilní TryParse !!!!!
+                    if (int.TryParse(temp, out platba))
                         temp_pes.platba = platba;
                     else
                         temp_pes.platba = 0;
