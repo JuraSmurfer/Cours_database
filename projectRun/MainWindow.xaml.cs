@@ -220,7 +220,7 @@ namespace projectRun
                             {
                                 // zapiš data do excelu, na pozici opened_file, do zvoleného listu
                                 //xlsDB.AddData2Excel(database_P, opened_file, 1);
-                                xlsDB.write_to_excel(database_P, opened_file, cislo_listu);
+                                xlsDB.Write_to_excel(database_P, opened_file, cislo_listu,"ROZPIS");
                             }
                         }
                     }
