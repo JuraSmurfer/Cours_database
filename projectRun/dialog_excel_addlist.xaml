@@ -1,4 +1,12 @@
-﻿<Window x:Class="projectRun.dialog_excel_list"
+﻿<!--<Window x:Class="projectRun.dialog_excel_addlist"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="dialog_excel_addlist" Height="300" Width="300">
+    <Grid>
+        
+    </Grid>
+</Window>-->
+<Window x:Class="projectRun.dialog_excel_addlist"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="List tabulky Excel" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"

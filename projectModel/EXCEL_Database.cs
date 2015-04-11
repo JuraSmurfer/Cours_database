@@ -243,10 +243,7 @@ namespace projectModel
 
         }
 
-        /// <summary>
-        /// Zapíše rozpis prvního kola do tabulky excel.
-        /// </summary>
-        public void write_to_excel(Psi dataP, string sourceFile,  Int32 list)
+        public void Write_to_excel(Psi dataP, string sourceFile, Int32 list, String type) // type "ROZPIS"/"ROZPIS_2"/...atd
         {
             Excel.Application excelApp = new Excel.Application();
             Excel.Workbook workbook;
@@ -275,7 +272,119 @@ namespace projectModel
 
                 workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
                 worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                worksheet.Name = "ROZPIS";
+                worksheet.Name = "ROZPIS" + Convert.ToString(list);
+            }
+
+            range = worksheet.UsedRange;
+
+            Pes temp;
+            //Pes temp2;
+            Int32 pocet_psu = dataP.Length();
+            String pomoc_cislo;
+
+            (range.Cells[1, 1] as Excel.Range).Value2 = "Č.běhu";
+            (range.Cells[1, 1] as Excel.Range).BorderAround2();
+            (range.Cells[1, 2] as Excel.Range).Value2 = "Plemeno";
+            (range.Cells[1, 2] as Excel.Range).BorderAround2();
+            (range.Cells[1, 3] as Excel.Range).Value2 = "Dečka";
+            (range.Cells[1, 3] as Excel.Range).BorderAround2();
+            (range.Cells[1, 4] as Excel.Range).Value2 = "Číslo psa";
+            (range.Cells[1, 4] as Excel.Range).BorderAround2();
+            (range.Cells[1, 5] as Excel.Range).Value2 = "Jméno psa";
+            (range.Cells[1, 5] as Excel.Range).BorderAround2();
+
+            List<int> dvojice = dataP.GetAllDvojice();
+            int j = 1;
+            foreach (int x in dvojice)
+            {
+                temp = dataP.GetPesByDvojice(x, "červená");
+                if (temp == null)
+                    continue;
+                (range.Cells[j + 1, 1] as Excel.Range).Value2 = temp.dvojice0;
+                (range.Cells[j + 1, 1] as Excel.Range).BorderAround2();
+                (range.Cells[j + 1, 2] as Excel.Range).Value2 = temp.plemeno;
+                (range.Cells[j + 1, 2] as Excel.Range).BorderAround2();
+                (range.Cells[j + 1, 3] as Excel.Range).Value2 = temp.barva0;
+                (range.Cells[j + 1, 3] as Excel.Range).BorderAround2();
+                if (temp.zavod_licence == "Licence")
+                {
+                    pomoc_cislo = "L " + Convert.ToString(temp.start_beh1);
+                }
+                else
+                {
+                    pomoc_cislo = Convert.ToString(temp.start_beh1);
+                }
+                (range.Cells[j + 1, 4] as Excel.Range).Value2 = pomoc_cislo;
+                (range.Cells[j + 1, 4] as Excel.Range).BorderAround2();
+                (range.Cells[j + 1, 5] as Excel.Range).Value2 = temp.jmeno;
+                (range.Cells[j + 1, 5] as Excel.Range).BorderAround2();
+
+                ++j;
+
+                temp = dataP.GetPesByDvojice(x, "bílá");
+                if (temp == null)
+                    continue;
+                (range.Cells[j + 1, 1] as Excel.Range).Value2 = temp.dvojice0;
+                (range.Cells[j + 1, 1] as Excel.Range).BorderAround2();
+                (range.Cells[j + 1, 2] as Excel.Range).Value2 = temp.plemeno;
+                (range.Cells[j + 1, 2] as Excel.Range).BorderAround2();
+                (range.Cells[j + 1, 3] as Excel.Range).Value2 = temp.barva0;
+                (range.Cells[j + 1, 3] as Excel.Range).BorderAround2();
+                if (temp.zavod_licence == "Licence")
+                {
+                    pomoc_cislo = "L " + Convert.ToString(temp.start_beh1);
+                }
+                else
+                {
+                    pomoc_cislo = Convert.ToString(temp.start_beh1);
+                }
+                (range.Cells[j + 1, 4] as Excel.Range).Value2 = pomoc_cislo;
+                (range.Cells[j + 1, 4] as Excel.Range).BorderAround2();
+                (range.Cells[j + 1, 5] as Excel.Range).Value2 = temp.jmeno;
+                (range.Cells[j + 1, 5] as Excel.Range).BorderAround2();
+
+                ++j;
+            }
+
+            worksheet.Columns.AutoFit();
+            workbook.Close(true, Missing.Value, Missing.Value);
+            excelApp.Quit();
+        }
+
+
+        /// <summary>
+        /// Zapíše rozpis prvního kola do tabulky excel.
+        /// </summary>
+        public void write_to_excel(Psi dataP, string sourceFile,  Int32 list)
+        {
+            Excel.Application excelApp = new Excel.Application();
+            Excel.Workbook workbook;
+            Excel.Worksheet worksheet;
+            Excel.Range range;
+            workbook = excelApp.Workbooks.Open(sourceFile);
+            if (list <= workbook.Sheets.Count)
+            {
+                worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(list);
+
+                if (worksheet.Name != "ROZPIS")
+                {
+                    workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
+                    worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
+                    worksheet.Name = "ROZPIS" + Convert.ToString(list);
+                    //TODO vyřešit názvy listů a zápis do správných listů (zobrazení názvů při výběru který list se má použít)!
+                }
+                else
+                {
+                    worksheet.Cells.Clear();
+                }
+            }
+            else
+            {
+                // MessageBox.Show("Nepodařilo se načíst databázový soubor!", "Chyba!", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
+                worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
+                worksheet.Name = "ROZPIS" + Convert.ToString(list);
             }
 
             range = worksheet.UsedRange;

@@ -209,7 +209,7 @@ namespace projectRun
                         xlsDB.read_excel_lists(opened_file, lists);
 
                         //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                        projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", lists);
+                        projectRun.dialog_excel_addlist list_dialog = new projectRun.dialog_excel_addlist("Do kterého listu si přeješ zapsat data?", lists);
                         list_dialog.ShowDialog();
                         if (list_dialog.DialogResult == true)
                         {
