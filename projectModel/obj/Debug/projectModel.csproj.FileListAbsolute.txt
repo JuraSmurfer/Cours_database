@@ -26,3 +26,4 @@ D:\CPP_projekty\Cours_database\projectModel\obj\Debug\projectModel.Resource1.res
 D:\CPP_projekty\Cours_database\projectModel\obj\Debug\projectModel.csproj.GenerateResource.Cache
 D:\CPP_projekty\Cours_database\projectModel\obj\Debug\projectModel.dll
 D:\CPP_projekty\Cours_database\projectModel\obj\Debug\projectModel.pdb
+D:\CPP_projekty\Cours_database\projectModel\obj\Debug\projectModel.csprojResolveAssemblyReference.cache
