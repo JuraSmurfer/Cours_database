@@ -147,7 +147,7 @@
                     <!--<MenuItem Header="Zařadit psa do závodu" Click="zaradit_psa"/>-->
                     <Separator/>
                     <MenuItem Header="Seřadit k prvnímu běhu" Click="serad_psy"/>
-                    <MenuItem Header="Seřadit k prvnímu běhu" Foreground="LightGray"/>
+                    <!--<MenuItem Header="Seřadit k prvnímu běhu" Foreground="LightGray"/>-->
                     <MenuItem Header="Seřadit k druhému běhu" Click="serad_psy_2"/>
                     <Separator/>
                     <MenuItem Header="Smazat psa" Click="deletePes_OnClick"/>

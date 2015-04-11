@@ -116,19 +116,19 @@ namespace projectModel
                 else
                     temp_pes.pohlavi = "";
 
-                temp = (range.Cells[row, 8] as Excel.Range).Value2;
-                if (temp != null) // excel sloupec platba
-                {
-                    //int platba = 0;
-                    temp_pes.platba = Convert.ToInt32(temp);
-                    //ERROR !!!!! debilní TryParse !!!!!
-                    /*if (int.TryParse(temp, out platba))
-                        temp_pes.platba = platba;
-                    else
-                        temp_pes.platba = 0;*/
-                }
-                else
-                    temp_pes.platba = 0;
+                //temp = (range.Cells[row, 8] as Excel.Range).Value2;
+                //if (temp != null) // excel sloupec platba
+                //{
+                //    //int platba;
+                //    temp_pes.platba = Convert.ToInt32(temp);
+                //    //ERROR !!!!! debilní TryParse !!!!!
+                //    /*if (int.TryParse(temp, out platba))
+                //        temp_pes.platba = platba;
+                //    else
+                //        temp_pes.platba = 0;*/
+                //}
+                //else
+                //    temp_pes.platba = 0;
 
                 temp = (range.Cells[row, 11] as Excel.Range).Value2;
                 if (temp != null) // excel sloupec licence
