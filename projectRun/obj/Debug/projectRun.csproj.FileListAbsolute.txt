@@ -56,9 +56,7 @@ D:\CPP_projekty\Cours_database\projectRun\bin\Debug\projectModel.dll
 D:\CPP_projekty\Cours_database\projectRun\bin\Debug\projectModel.pdb
 D:\CPP_projekty\Cours_database\projectRun\obj\Debug\projectRun.csprojResolveAssemblyReference.cache
 D:\CPP_projekty\Cours_database\projectRun\obj\Debug\MainWindow.baml
-D:\CPP_projekty\Cours_database\projectRun\obj\Debug\Window1.baml
 D:\CPP_projekty\Cours_database\projectRun\obj\Debug\MainWindow.g.cs
-D:\CPP_projekty\Cours_database\projectRun\obj\Debug\Window1.g.cs
 D:\CPP_projekty\Cours_database\projectRun\obj\Debug\App.g.cs
 D:\CPP_projekty\Cours_database\projectRun\obj\Debug\projectRun_MarkupCompile.cache
 D:\CPP_projekty\Cours_database\projectRun\obj\Debug\projectRun.g.resources
