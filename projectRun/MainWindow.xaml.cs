@@ -219,8 +219,7 @@ namespace projectRun
                             using (new WaitCursor())
                             {
                                 // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                //xlsDB.AddData2Excel(database_P, opened_file, 1);
-                                xlsDB.Write_to_excel(database_P, opened_file, cislo_listu,"ROZPIS");
+                                xlsDB.Write_to_excel(database_P, opened_file, cislo_listu, "ROZPIS");
                             }
                         }
                     }
@@ -228,7 +227,6 @@ namespace projectRun
             }
             catch (Exception ex)
             {
-                // TODO řešit výjimky !!!
                 MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -242,85 +240,36 @@ namespace projectRun
         {
             try
             {
-                // instance Excel databáze
-                this.xlsDB = new EXCEL_Database();
-
                 // pokud databáze existuje
                 if (database_P != null)
                 {
-                    // pokud nebyl otevřen ještě žádný Excel, vytvoř dialogové okno a načti soubor
-                    if (opened_file == null)
+                    // inicializace dialogového okna pro otevření souboru
+                    Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                    // aplikace globálního filtru pro Excel soubory
+                    dlg.Filter = Konstanty.fileFilterXLS;
+                    // pokud je načteno
+                    if ((bool)dlg.ShowDialog(this))
                     {
-                        // inicializace dialogového okna pro otevření souboru
-                        Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-                        // aplikace globálního filtru pro Excel soubory
-                        dlg.Filter = Konstanty.fileFilterXLS;
-                        // pokud je načteno
-                        if ((bool)dlg.ShowDialog(this))
+                        // instance Excel databáze
+                        this.xlsDB = new EXCEL_Database();
+                        // ulož otevřený soubor do paměti
+                        opened_file = dlg.FileName;
+
+                        List<String> lists = new List<String>();
+                        xlsDB.read_excel_lists(opened_file, lists);
+
+                        //zobrazí dialogové okno pro vybrání listu tabulky Excel
+                        projectRun.dialog_excel_addlist list_dialog = new projectRun.dialog_excel_addlist("Do kterého listu si přeješ zapsat data?", lists);
+                        list_dialog.ShowDialog();
+                        if (list_dialog.DialogResult == true)
                         {
-                            // ulož otevřený soubor do paměti
-                            opened_file = dlg.FileName;
+                            Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
 
-                            //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                            list_dialog.ShowDialog();
-                            if (list_dialog.DialogResult == true)
+                            // vyčkávací kurzor (zdlouhavá operace)
+                            using (new WaitCursor())
                             {
-                                Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                // vyčkávací kurzor (zdlouhavá operace)
-                                using (new WaitCursor())
-                                {
-                                    // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                    //xlsDB.AddData2Excel(database_P, opened_file, 1);
-                                    xlsDB.write_to_excel_2(database_P, opened_file, cislo_listu);
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {   // opened_file existuje, již byl soubor načten
-                        MessageBoxResult res = MessageBox.Show("Tabulka Excel je otevřena.\n\n ANO - data budou uložena do stávájící tabulky\nNE - data budou uložena do jiné existující tabulky", "Uložit/Uložit jako?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (res == MessageBoxResult.Yes)
-                        {
-                            //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                            list_dialog.ShowDialog();
-                            if (list_dialog.DialogResult == true)
-                            {
-                                Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                // vyčkávací kurzor, zdlouhavá operace
-                                using (new WaitCursor())
-                                {
-                                    // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                    xlsDB.write_to_excel_2(database_P, opened_file, cislo_listu);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // inicializace dialogového okna pro otevření souboru
-                            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-                            // aplikace globálního filtru pro Excel soubory
-                            dlg.Filter = Konstanty.fileFilterXLS;
-                            // pokud je načteno
-                            if ((bool)dlg.ShowDialog(this))
-                            {
-                                //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                                list_dialog.ShowDialog();
-                                if (list_dialog.DialogResult == true)
-                                {
-                                    Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                    // vyčkávací kurzor, zdlouhavá operace
-                                    using (new WaitCursor())
-                                    {
-                                        // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                        xlsDB.write_to_excel_2(database_P, dlg.FileName, cislo_listu);
-                                    }
-                                }
+                                // zapiš data do excelu, na pozici opened_file, do zvoleného listu
+                                xlsDB.Write_to_excel(database_P, opened_file, cislo_listu, "ROZPIS_2");
                             }
                         }
                     }
@@ -328,7 +277,6 @@ namespace projectRun
             }
             catch (Exception ex)
             {
-                // TODO řešit výjimky !!!
                 MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -342,85 +290,36 @@ namespace projectRun
         {
             try
             {
-                // instance Excel databáze
-                this.xlsDB = new EXCEL_Database();
-
                 // pokud databáze existuje
                 if (database_P != null)
                 {
-                    // pokud nebyl otevřen ještě žádný Excel, vytvoř dialogové okno a načti soubor
-                    if (opened_file == null)
+                    // inicializace dialogového okna pro otevření souboru
+                    Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                    // aplikace globálního filtru pro Excel soubory
+                    dlg.Filter = Konstanty.fileFilterXLS;
+                    // pokud je načteno
+                    if ((bool)dlg.ShowDialog(this))
                     {
-                        // inicializace dialogového okna pro otevření souboru
-                        Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-                        // aplikace globálního filtru pro Excel soubory
-                        dlg.Filter = Konstanty.fileFilterXLS;
-                        // pokud je načteno
-                        if ((bool)dlg.ShowDialog(this))
+                        // instance Excel databáze
+                        this.xlsDB = new EXCEL_Database();
+                        // ulož otevřený soubor do paměti
+                        opened_file = dlg.FileName;
+
+                        List<String> lists = new List<String>();
+                        xlsDB.read_excel_lists(opened_file, lists);
+
+                        //zobrazí dialogové okno pro vybrání listu tabulky Excel
+                        projectRun.dialog_excel_addlist list_dialog = new projectRun.dialog_excel_addlist("Do kterého listu si přeješ zapsat data?", lists);
+                        list_dialog.ShowDialog();
+                        if (list_dialog.DialogResult == true)
                         {
-                            // ulož otevřený soubor do paměti
-                            opened_file = dlg.FileName;
+                            Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
 
-                            //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                            list_dialog.ShowDialog();
-                            if (list_dialog.DialogResult == true)
+                            // vyčkávací kurzor (zdlouhavá operace)
+                            using (new WaitCursor())
                             {
-                                Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                // vyčkávací kurzor (zdlouhavá operace)
-                                using (new WaitCursor())
-                                {
-                                    // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                    //xlsDB.AddData2Excel(database_P, opened_file, 1);
-                                    xlsDB.write_to_excel_rozhodci(database_P, opened_file, cislo_listu);
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {   // opened_file existuje, již byl soubor načten
-                        MessageBoxResult res = MessageBox.Show("Tabulka Excel je otevřena.\n\n ANO - data budou uložena do stávájící tabulky\nNE - data budou uložena do jiné existující tabulky", "Uložit/Uložit jako?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (res == MessageBoxResult.Yes)
-                        {
-                            //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                            list_dialog.ShowDialog();
-                            if (list_dialog.DialogResult == true)
-                            {
-                                Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                // vyčkávací kurzor, zdlouhavá operace
-                                using (new WaitCursor())
-                                {
-                                    // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                    xlsDB.write_to_excel_rozhodci(database_P, opened_file, cislo_listu);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // inicializace dialogového okna pro otevření souboru
-                            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-                            // aplikace globálního filtru pro Excel soubory
-                            dlg.Filter = Konstanty.fileFilterXLS;
-                            // pokud je načteno
-                            if ((bool)dlg.ShowDialog(this))
-                            {
-                                //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                                list_dialog.ShowDialog();
-                                if (list_dialog.DialogResult == true)
-                                {
-                                    Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                    // vyčkávací kurzor, zdlouhavá operace
-                                    using (new WaitCursor())
-                                    {
-                                        // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                        xlsDB.write_to_excel_rozhodci(database_P, dlg.FileName, cislo_listu);
-                                    }
-                                }
+                                // zapiš data do excelu, na pozici opened_file, do zvoleného listu
+                                xlsDB.Write_to_excel(database_P, opened_file, cislo_listu, "TABULKY");
                             }
                         }
                     }
@@ -428,7 +327,6 @@ namespace projectRun
             }
             catch (Exception ex)
             {
-                // TODO řešit výjimky !!!
                 MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -442,85 +340,36 @@ namespace projectRun
         {
             try
             {
-                // instance Excel databáze
-                this.xlsDB = new EXCEL_Database();
-
                 // pokud databáze existuje
                 if (database_P != null)
                 {
-                    // pokud nebyl otevřen ještě žádný Excel, vytvoř dialogové okno a načti soubor
-                    if (opened_file == null)
+                    // inicializace dialogového okna pro otevření souboru
+                    Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                    // aplikace globálního filtru pro Excel soubory
+                    dlg.Filter = Konstanty.fileFilterXLS;
+                    // pokud je načteno
+                    if ((bool)dlg.ShowDialog(this))
                     {
-                        // inicializace dialogového okna pro otevření souboru
-                        Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-                        // aplikace globálního filtru pro Excel soubory
-                        dlg.Filter = Konstanty.fileFilterXLS;
-                        // pokud je načteno
-                        if ((bool)dlg.ShowDialog(this))
+                        // instance Excel databáze
+                        this.xlsDB = new EXCEL_Database();
+                        // ulož otevřený soubor do paměti
+                        opened_file = dlg.FileName;
+
+                        List<String> lists = new List<String>();
+                        xlsDB.read_excel_lists(opened_file, lists);
+
+                        //zobrazí dialogové okno pro vybrání listu tabulky Excel
+                        projectRun.dialog_excel_addlist list_dialog = new projectRun.dialog_excel_addlist("Do kterého listu si přeješ zapsat data?", lists);
+                        list_dialog.ShowDialog();
+                        if (list_dialog.DialogResult == true)
                         {
-                            // ulož otevřený soubor do paměti
-                            opened_file = dlg.FileName;
+                            Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
 
-                            //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                            list_dialog.ShowDialog();
-                            if (list_dialog.DialogResult == true)
+                            // vyčkávací kurzor (zdlouhavá operace)
+                            using (new WaitCursor())
                             {
-                                Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                // vyčkávací kurzor (zdlouhavá operace)
-                                using (new WaitCursor())
-                                {
-                                    // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                    //xlsDB.AddData2Excel(database_P, opened_file, 1);
-                                    xlsDB.write_to_excel_rozhodci_2(database_P, opened_file, cislo_listu);
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {   // opened_file existuje, již byl soubor načten
-                        MessageBoxResult res = MessageBox.Show("Tabulka Excel je otevřena.\n\n ANO - data budou uložena do stávájící tabulky\nNE - data budou uložena do jiné existující tabulky", "Uložit/Uložit jako?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (res == MessageBoxResult.Yes)
-                        {
-                            //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                            list_dialog.ShowDialog();
-                            if (list_dialog.DialogResult == true)
-                            {
-                                Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                // vyčkávací kurzor, zdlouhavá operace
-                                using (new WaitCursor())
-                                {
-                                    // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                    xlsDB.write_to_excel_rozhodci_2(database_P, opened_file, cislo_listu);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // inicializace dialogového okna pro otevření souboru
-                            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-                            // aplikace globálního filtru pro Excel soubory
-                            dlg.Filter = Konstanty.fileFilterXLS;
-                            // pokud je načteno
-                            if ((bool)dlg.ShowDialog(this))
-                            {
-                                //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                                list_dialog.ShowDialog();
-                                if (list_dialog.DialogResult == true)
-                                {
-                                    Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                    // vyčkávací kurzor, zdlouhavá operace
-                                    using (new WaitCursor())
-                                    {
-                                        // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                        xlsDB.write_to_excel_rozhodci_2(database_P, dlg.FileName, cislo_listu);
-                                    }
-                                }
+                                // zapiš data do excelu, na pozici opened_file, do zvoleného listu
+                                xlsDB.Write_to_excel(database_P, opened_file, cislo_listu, "TABULKY_2");
                             }
                         }
                     }
@@ -528,7 +377,6 @@ namespace projectRun
             }
             catch (Exception ex)
             {
-                // TODO řešit výjimky !!!
                 MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -542,85 +390,36 @@ namespace projectRun
         {
             try
             {
-                // instance Excel databáze
-                this.xlsDB = new EXCEL_Database();
-
                 // pokud databáze existuje
                 if (database_P != null)
                 {
-                    // pokud nebyl otevřen ještě žádný Excel, vytvoř dialogové okno a načti soubor
-                    if (opened_file == null)
+                    // inicializace dialogového okna pro otevření souboru
+                    Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                    // aplikace globálního filtru pro Excel soubory
+                    dlg.Filter = Konstanty.fileFilterXLS;
+                    // pokud je načteno
+                    if ((bool)dlg.ShowDialog(this))
                     {
-                        // inicializace dialogového okna pro otevření souboru
-                        Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-                        // aplikace globálního filtru pro Excel soubory
-                        dlg.Filter = Konstanty.fileFilterXLS;
-                        // pokud je načteno
-                        if ((bool)dlg.ShowDialog(this))
+                        // instance Excel databáze
+                        this.xlsDB = new EXCEL_Database();
+                        // ulož otevřený soubor do paměti
+                        opened_file = dlg.FileName;
+
+                        List<String> lists = new List<String>();
+                        xlsDB.read_excel_lists(opened_file, lists);
+
+                        //zobrazí dialogové okno pro vybrání listu tabulky Excel
+                        projectRun.dialog_excel_addlist list_dialog = new projectRun.dialog_excel_addlist("Do kterého listu si přeješ zapsat data?", lists);
+                        list_dialog.ShowDialog();
+                        if (list_dialog.DialogResult == true)
                         {
-                            // ulož otevřený soubor do paměti
-                            opened_file = dlg.FileName;
+                            Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
 
-                            //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                            list_dialog.ShowDialog();
-                            if (list_dialog.DialogResult == true)
+                            // vyčkávací kurzor (zdlouhavá operace)
+                            using (new WaitCursor())
                             {
-                                Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                // vyčkávací kurzor (zdlouhavá operace)
-                                using (new WaitCursor())
-                                {
-                                    // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                    //xlsDB.AddData2Excel(database_P, opened_file, 1);
-                                    xlsDB.write_to_excel_vysledky(database_P, opened_file, cislo_listu);
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {   // opened_file existuje, již byl soubor načten
-                        MessageBoxResult res = MessageBox.Show("Tabulka Excel je otevřena.\n\n ANO - data budou uložena do stávájící tabulky\nNE - data budou uložena do jiné existující tabulky", "Uložit/Uložit jako?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (res == MessageBoxResult.Yes)
-                        {
-                            //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                            list_dialog.ShowDialog();
-                            if (list_dialog.DialogResult == true)
-                            {
-                                Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                // vyčkávací kurzor, zdlouhavá operace
-                                using (new WaitCursor())
-                                {
-                                    // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                    xlsDB.write_to_excel_vysledky(database_P, opened_file, cislo_listu);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // inicializace dialogového okna pro otevření souboru
-                            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-                            // aplikace globálního filtru pro Excel soubory
-                            dlg.Filter = Konstanty.fileFilterXLS;
-                            // pokud je načteno
-                            if ((bool)dlg.ShowDialog(this))
-                            {
-                                //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                                list_dialog.ShowDialog();
-                                if (list_dialog.DialogResult == true)
-                                {
-                                    Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                    // vyčkávací kurzor, zdlouhavá operace
-                                    using (new WaitCursor())
-                                    {
-                                        // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                        xlsDB.write_to_excel_vysledky(database_P, dlg.FileName, cislo_listu);
-                                    }
-                                }
+                                // zapiš data do excelu, na pozici opened_file, do zvoleného listu
+                                xlsDB.Write_to_excel(database_P, opened_file, cislo_listu, "VYSLEDKY");
                             }
                         }
                     }
@@ -628,7 +427,6 @@ namespace projectRun
             }
             catch (Exception ex)
             {
-                // TODO řešit výjimky !!!
                 MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -642,85 +440,36 @@ namespace projectRun
         {
             try
             {
-                // instance Excel databáze
-                this.xlsDB = new EXCEL_Database();
-
                 // pokud databáze existuje
                 if (database_P != null)
                 {
-                    // pokud nebyl otevřen ještě žádný Excel, vytvoř dialogové okno a načti soubor
-                    if (opened_file == null)
+                    // inicializace dialogového okna pro otevření souboru
+                    Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                    // aplikace globálního filtru pro Excel soubory
+                    dlg.Filter = Konstanty.fileFilterXLS;
+                    // pokud je načteno
+                    if ((bool)dlg.ShowDialog(this))
                     {
-                        // inicializace dialogového okna pro otevření souboru
-                        Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-                        // aplikace globálního filtru pro Excel soubory
-                        dlg.Filter = Konstanty.fileFilterXLS;
-                        // pokud je načteno
-                        if ((bool)dlg.ShowDialog(this))
+                        // instance Excel databáze
+                        this.xlsDB = new EXCEL_Database();
+                        // ulož otevřený soubor do paměti
+                        opened_file = dlg.FileName;
+
+                        List<String> lists = new List<String>();
+                        xlsDB.read_excel_lists(opened_file, lists);
+
+                        //zobrazí dialogové okno pro vybrání listu tabulky Excel
+                        projectRun.dialog_excel_addlist list_dialog = new projectRun.dialog_excel_addlist("Do kterého listu si přeješ zapsat data?", lists);
+                        list_dialog.ShowDialog();
+                        if (list_dialog.DialogResult == true)
                         {
-                            // ulož otevřený soubor do paměti
-                            opened_file = dlg.FileName;
+                            Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
 
-                            //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                            list_dialog.ShowDialog();
-                            if (list_dialog.DialogResult == true)
+                            // vyčkávací kurzor (zdlouhavá operace)
+                            using (new WaitCursor())
                             {
-                                Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                // vyčkávací kurzor (zdlouhavá operace)
-                                using (new WaitCursor())
-                                {
-                                    // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                    //xlsDB.AddData2Excel(database_P, opened_file, 1);
-                                    xlsDB.write_to_excel_vysledky_2(database_P, opened_file, cislo_listu);
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {   // opened_file existuje, již byl soubor načten
-                        MessageBoxResult res = MessageBox.Show("Tabulka Excel je otevřena.\n\n ANO - data budou uložena do stávájící tabulky\nNE - data budou uložena do jiné existující tabulky", "Uložit/Uložit jako?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (res == MessageBoxResult.Yes)
-                        {
-                            //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                            projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                            list_dialog.ShowDialog();
-                            if (list_dialog.DialogResult == true)
-                            {
-                                Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                // vyčkávací kurzor, zdlouhavá operace
-                                using (new WaitCursor())
-                                {
-                                    // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                    xlsDB.write_to_excel_vysledky_2(database_P, opened_file, cislo_listu);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // inicializace dialogového okna pro otevření souboru
-                            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-                            // aplikace globálního filtru pro Excel soubory
-                            dlg.Filter = Konstanty.fileFilterXLS;
-                            // pokud je načteno
-                            if ((bool)dlg.ShowDialog(this))
-                            {
-                                //zobrazí dialogové okno pro vybrání listu tabulky Excel
-                                projectRun.Window1 list_dialog = new projectRun.Window1("Do kterého listu si přeješ zapsat data?", new List<String>());
-                                list_dialog.ShowDialog();
-                                if (list_dialog.DialogResult == true)
-                                {
-                                    Int32 cislo_listu = list_dialog.list_no.SelectedIndex + 1;
-
-                                    // vyčkávací kurzor, zdlouhavá operace
-                                    using (new WaitCursor())
-                                    {
-                                        // zapiš data do excelu, na pozici opened_file, do zvoleného listu
-                                        xlsDB.write_to_excel_vysledky_2(database_P, dlg.FileName, cislo_listu);
-                                    }
-                                }
+                                // zapiš data do excelu, na pozici opened_file, do zvoleného listu
+                                xlsDB.Write_to_excel(database_P, opened_file, cislo_listu, "VYSLEDKY_2");
                             }
                         }
                     }
@@ -728,7 +477,6 @@ namespace projectRun
             }
             catch (Exception ex)
             {
-                // TODO řešit výjimky !!!
                 MessageBox.Show(ex.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
