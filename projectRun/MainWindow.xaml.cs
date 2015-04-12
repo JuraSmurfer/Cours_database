@@ -2518,7 +2518,8 @@ namespace projectRun
             var comboBox = sender as ComboBox;
             foreach (String str in Resource1.String1.Split('\n'))
             {
-                comboBox.Items.Add(str.Remove(str.Length - 1));
+                //comboBox.Items.Add(str.Remove(str.Length - 1));
+                comboBox.Items.Add(str);
             }
         }
 
@@ -2527,7 +2528,7 @@ namespace projectRun
             var comboBox = sender as ComboBox;
             foreach (String str in Resource1.String2.Split('\n'))
             {
-                comboBox.Items.Add(str.Remove(str.Length - 1));
+                comboBox.Items.Add(str);
             }
         }
 

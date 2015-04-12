@@ -87,10 +87,12 @@ namespace projectModel
 
                 temp_pes.poznamka = SetTempFromExcel(range, row, 5); // excel sloupec poznamka ZAVODNI SKUPINA !!!!
 
-                temp_pes.pohlavi = SetTempFromExcel(range, row, 6); // excel sloupec pohlavi
+                temp_pes.pohlavi = SetTempFromExcel(range, row, 6).ToLower(); // excel sloupec pohlavi
 
+                temp_pes.platba = SetTempIntFromExcel(range, row, 8); // excel sloupec platba
+/*
                 temp = (range.Cells[row, 8] as Excel.Range).Value2.ToString();
-                if (temp != null) // excel sloupec platba
+                if (temp != null)
                 {
                     int platba;
                     //temp_pes.platba = Convert.ToInt32(temp);
@@ -101,7 +103,7 @@ namespace projectModel
                         temp_pes.platba = 0;
                 }
                 else
-                    temp_pes.platba = 0;
+                    temp_pes.platba = 0;*/
 
                 temp_pes.licence = SetTempFromExcel(range, row, 11); // excel sloupec licence
 
@@ -187,6 +189,14 @@ namespace projectModel
         private String SetTempFromExcel(Excel.Range range, Int32 row, Int32 col)
         {
             return range.Cells[row, col].Value2 != null ? range.Cells[row, col].Value2.ToString() : String.Empty;
+        }
+
+        private Int32 SetTempIntFromExcel(Excel.Range range, Int32 row, Int32 col)
+        {
+            Int32 outint = 0;
+            if (range.Cells[row, col].Value2 != null)
+                Int32.TryParse(range.Cells[row, col].Value2.ToString(), out outint);
+            return range.Cells[row, col].Value2 != null ? outint : 0;
         }
 
         public void Write_to_excel(Psi dataP, string sourceFile, Int32 list, String type) // type "ROZPIS"/"ROZPIS_2"/...atd

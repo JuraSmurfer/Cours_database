@@ -86,7 +86,8 @@ namespace projectModel {
         ///Appenzellský salašnický pes
         ///Ardenský bouvier
         ///Argentinská doga
-        ///Arié [rest of string was truncated]&quot;;.
+        ///Ariégois
+        ///Ariegský ohař krátko [rest of string was truncated]&quot;;.
         /// </summary>
         public static string String1 {
             get {
