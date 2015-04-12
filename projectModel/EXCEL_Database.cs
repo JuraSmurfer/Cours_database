@@ -208,44 +208,37 @@ namespace projectModel
             workbook = excelApp.Workbooks.Open(sourceFile);
             Pes temp;
             String pomoc_cislo;
-            Int32 pocet_psu;
             List<int> dvojice = new List<int>();
-            int i = 0;
+            Int32 i = 0;
             Int32 n = 0;
+
+            if (list <= workbook.Sheets.Count)
+            {
+                worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(list);
+
+                if (worksheet.Name != type)
+                {
+                    workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
+                    worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
+                    worksheet.Name = type + Convert.ToString(list);
+                }
+                else
+                {
+                    worksheet.Cells.Clear();
+                }
+            }
+            else
+            {
+                workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
+                worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
+                worksheet.Name = type + Convert.ToString(list);
+            }
+
+            range = worksheet.UsedRange;
 
             switch (type)
             {
                 case "ROZPIS":
-                    if (list <= workbook.Sheets.Count)
-                    {
-                        worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(list);
-
-                        if (worksheet.Name != "ROZPIS")
-                        {
-                            workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
-                            worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                            worksheet.Name = "ROZPIS";
-                            //TODO vyřešit názvy listů a zápis do správných listů (zobrazení názvů při výběru který list se má použít)!
-                        }
-                        else
-                        {
-                            worksheet.Cells.Clear();
-                        }
-                    }
-                    else
-                    {
-                        // MessageBox.Show("Nepodařilo se načíst databázový soubor!", "Chyba!", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                        workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
-                        worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                        worksheet.Name = "ROZPIS" + Convert.ToString(list);
-                    }
-
-                    range = worksheet.UsedRange;
-
-                    //Pes temp2;
-                    pocet_psu = dataP.Length();
-
                     (range.Cells[1, 1] as Excel.Range).Value2 = "Č.běhu";
                     (range.Cells[1, 1] as Excel.Range).BorderAround2();
                     (range.Cells[1, 2] as Excel.Range).Value2 = "Plemeno";
@@ -258,18 +251,18 @@ namespace projectModel
                     (range.Cells[1, 5] as Excel.Range).BorderAround2();
 
                     dvojice = dataP.GetAllDvojice();
-                    int j = 1;
+                    i = 1;
                     foreach (int x in dvojice)
                     {
                         temp = dataP.GetPesByDvojice(x, "červená");
                         if (temp == null)
                             continue;
-                        (range.Cells[j + 1, 1] as Excel.Range).Value2 = temp.dvojice0;
-                        (range.Cells[j + 1, 1] as Excel.Range).BorderAround2();
-                        (range.Cells[j + 1, 2] as Excel.Range).Value2 = temp.plemeno;
-                        (range.Cells[j + 1, 2] as Excel.Range).BorderAround2();
-                        (range.Cells[j + 1, 3] as Excel.Range).Value2 = temp.barva0;
-                        (range.Cells[j + 1, 3] as Excel.Range).BorderAround2();
+                        (range.Cells[i + 1, 1] as Excel.Range).Value2 = temp.dvojice0;
+                        (range.Cells[i + 1, 1] as Excel.Range).BorderAround2();
+                        (range.Cells[i + 1, 2] as Excel.Range).Value2 = temp.plemeno;
+                        (range.Cells[i + 1, 2] as Excel.Range).BorderAround2();
+                        (range.Cells[i + 1, 3] as Excel.Range).Value2 = temp.barva0;
+                        (range.Cells[i + 1, 3] as Excel.Range).BorderAround2();
                         if (temp.zavod_licence == "Licence")
                         {
                             pomoc_cislo = "L " + Convert.ToString(temp.start_beh1);
@@ -278,22 +271,22 @@ namespace projectModel
                         {
                             pomoc_cislo = Convert.ToString(temp.start_beh1);
                         }
-                        (range.Cells[j + 1, 4] as Excel.Range).Value2 = pomoc_cislo;
-                        (range.Cells[j + 1, 4] as Excel.Range).BorderAround2();
-                        (range.Cells[j + 1, 5] as Excel.Range).Value2 = temp.jmeno;
-                        (range.Cells[j + 1, 5] as Excel.Range).BorderAround2();
+                        (range.Cells[i + 1, 4] as Excel.Range).Value2 = pomoc_cislo;
+                        (range.Cells[i + 1, 4] as Excel.Range).BorderAround2();
+                        (range.Cells[i + 1, 5] as Excel.Range).Value2 = temp.jmeno;
+                        (range.Cells[i + 1, 5] as Excel.Range).BorderAround2();
 
-                        ++j;
+                        ++i;
 
                         temp = dataP.GetPesByDvojice(x, "bílá");
                         if (temp == null)
                             continue;
-                        (range.Cells[j + 1, 1] as Excel.Range).Value2 = temp.dvojice0;
-                        (range.Cells[j + 1, 1] as Excel.Range).BorderAround2();
-                        (range.Cells[j + 1, 2] as Excel.Range).Value2 = temp.plemeno;
-                        (range.Cells[j + 1, 2] as Excel.Range).BorderAround2();
-                        (range.Cells[j + 1, 3] as Excel.Range).Value2 = temp.barva0;
-                        (range.Cells[j + 1, 3] as Excel.Range).BorderAround2();
+                        (range.Cells[i + 1, 1] as Excel.Range).Value2 = temp.dvojice0;
+                        (range.Cells[i + 1, 1] as Excel.Range).BorderAround2();
+                        (range.Cells[i + 1, 2] as Excel.Range).Value2 = temp.plemeno;
+                        (range.Cells[i + 1, 2] as Excel.Range).BorderAround2();
+                        (range.Cells[i + 1, 3] as Excel.Range).Value2 = temp.barva0;
+                        (range.Cells[i + 1, 3] as Excel.Range).BorderAround2();
                         if (temp.zavod_licence == "Licence")
                         {
                             pomoc_cislo = "L " + Convert.ToString(temp.start_beh1);
@@ -302,47 +295,17 @@ namespace projectModel
                         {
                             pomoc_cislo = Convert.ToString(temp.start_beh1);
                         }
-                        (range.Cells[j + 1, 4] as Excel.Range).Value2 = pomoc_cislo;
-                        (range.Cells[j + 1, 4] as Excel.Range).BorderAround2();
-                        (range.Cells[j + 1, 5] as Excel.Range).Value2 = temp.jmeno;
-                        (range.Cells[j + 1, 5] as Excel.Range).BorderAround2();
+                        (range.Cells[i + 1, 4] as Excel.Range).Value2 = pomoc_cislo;
+                        (range.Cells[i + 1, 4] as Excel.Range).BorderAround2();
+                        (range.Cells[i + 1, 5] as Excel.Range).Value2 = temp.jmeno;
+                        (range.Cells[i + 1, 5] as Excel.Range).BorderAround2();
 
-                        ++j;
+                        ++i;
                     }
                     worksheet.Columns.AutoFit();
                     break;
 
                 case "ROZPIS_2":
-                    if (list <= workbook.Sheets.Count)
-                    {
-                        worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(list);
-
-                        if (worksheet.Name != "ROZPIS_2")
-                        {
-                            workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
-                            worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                            worksheet.Name = "ROZPIS_2";
-                        }
-                        else
-                        {
-                            worksheet.Cells.Clear();
-                        }
-                    }
-                    else
-                    {
-                        // MessageBox.Show("Nepodařilo se načíst databázový soubor!", "Chyba!", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                        workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
-                        worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                        worksheet.Name = "ROZPIS_2";
-                    }
-
-                    range = worksheet.UsedRange;
-
-                    //Pes temp;
-                    //String pomoc_cislo;
-                    pocet_psu = dataP.Length();
-
                     (range.Cells[1, 1] as Excel.Range).Value2 = "Č.běhu";
                     (range.Cells[1, 1] as Excel.Range).BorderAround2();
                     (range.Cells[1, 2] as Excel.Range).Value2 = "Plemeno";
@@ -406,33 +369,6 @@ namespace projectModel
                     }
                     break;
                 case "TABULKY":
-                    if (list <= workbook.Sheets.Count)
-                    {
-                        worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(list);
-
-                        if (worksheet.Name != "TABULKY")
-                        {
-                            workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
-                            worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                            worksheet.Name = "TABULKY";
-                        }
-                        else
-                        {
-                            worksheet.Cells.Clear();
-                        }
-                    }
-                    else
-                    {
-                        // MessageBox.Show("Nepodařilo se načíst databázový soubor!", "Chyba!", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                        workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
-                        worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                        worksheet.Name = "TABULKY";
-                    }
-
-                    range = worksheet.UsedRange;
-
-                    pocet_psu = dataP.Length();
                     n = 1;
 
                     (range.Cells[1, 1] as Excel.Range).Value2 = "Č.běhu";
@@ -533,33 +469,6 @@ namespace projectModel
                     }
                     break;
                 case "TABULKY_2":
-                    if (list <= workbook.Sheets.Count)
-                    {
-                        worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(list);
-
-                        if (worksheet.Name != "TABULKY_2")
-                        {
-                            workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
-                            worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                            worksheet.Name = "TABULKY_2";
-                        }
-                        else
-                        {
-                            worksheet.Cells.Clear();
-                        }
-                    }
-                    else
-                    {
-                        // MessageBox.Show("Nepodařilo se načíst databázový soubor!", "Chyba!", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                        workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
-                        worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                        worksheet.Name = "TABULKY_2";
-                    }
-
-                    range = worksheet.UsedRange;
-
-                    pocet_psu = dataP.Length();
                     n = 1;
 
                     (range.Cells[1, 1] as Excel.Range).Value2 = "Č.běhu";
@@ -660,33 +569,6 @@ namespace projectModel
                     }
                     break;
                 case "VYSLEDKY":
-                    if (list <= workbook.Sheets.Count)
-                    {
-                        worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(list);
-
-                        if (worksheet.Name != "VYSLEDKY")
-                        {
-                            workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
-                            worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                            worksheet.Name = "VYSLEDKY";
-                        }
-                        else
-                        {
-                            worksheet.Cells.Clear();
-                        }
-                    }
-                    else
-                    {
-                        // MessageBox.Show("Nepodařilo se načíst databázový soubor!", "Chyba!", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                        workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
-                        worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                        worksheet.Name = "VYSLEDKY";
-                    }
-
-                    range = worksheet.UsedRange;
-
-                    pocet_psu = dataP.Length();
                     n = 1;
 
                     (range.Cells[1, 1] as Excel.Range).Value2 = "Č.psa";
@@ -791,33 +673,6 @@ namespace projectModel
                     }
                     break;
                 case "VYSLEDKY_2":
-                    if (list <= workbook.Sheets.Count)
-                    {
-                        worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(list);
-
-                        if (worksheet.Name != "VYSLEDKY_2")
-                        {
-                            workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
-                            worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                            worksheet.Name = "TABULKY_2";
-                        }
-                        else
-                        {
-                            worksheet.Cells.Clear();
-                        }
-                    }
-                    else
-                    {
-                        // MessageBox.Show("Nepodařilo se načíst databázový soubor!", "Chyba!", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                        workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], Type.Missing, Type.Missing);
-                        worksheet = (Excel.Worksheet)workbook.Sheets.get_Item(workbook.Sheets.Count);
-                        worksheet.Name = "VYSLEDKY_2";
-                    }
-
-                    range = worksheet.UsedRange;
-
-                    pocet_psu = dataP.Length();
                     n = 1;
 
                     (range.Cells[1, 1] as Excel.Range).Value2 = "Č.psa";
