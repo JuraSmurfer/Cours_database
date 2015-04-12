@@ -54,7 +54,7 @@ namespace projectModel
             range = worksheet.UsedRange;
             DataTable dt = new DataTable();
 
-            dynamic temp = null;
+            String temp = null;
 
             for (row = 2; row <= range.Rows.Count; row++)
             {
@@ -63,7 +63,7 @@ namespace projectModel
                 temp = (range.Cells[row, 1] as Excel.Range).Value2;
                 if (temp != null) // excel sloupec clenstvi
                 {
-                    string tempStr = Convert.ToString(temp);
+                    string tempStr = temp.ToString();
                     if (tempStr[0] == 'N')
                     {
                         temp_majitel.clen = "ne"; // neni clenem klubu
@@ -78,107 +78,48 @@ namespace projectModel
                     temp_majitel.clen = "ano"; // policko by melo byt prazdne - mozna NULL ?!
                 }
 
-                temp = (range.Cells[row, 2] as Excel.Range).Value2;
-                if (temp != null) // excel sloupec zavod-licence-trening
+                //temp = (range.Cells[row, 2] as Excel.Range).Value2;
+                temp_pes.zavod_licence = SetTempFromExcel(range, row, 2); // excel sloupec zavod-licence-trening
+
+                temp_pes.jmeno = SetTempFromExcel(range, row, 3); // excel sloupec jmeno psa
+
+                temp_pes.plemeno = SetTempFromExcel(range, row, 4); // excel sloupec plemeno
+
+                temp_pes.poznamka = SetTempFromExcel(range, row, 5); // excel sloupec poznamka ZAVODNI SKUPINA !!!!
+
+                temp_pes.pohlavi = SetTempFromExcel(range, row, 6); // excel sloupec pohlavi
+
+                temp = (range.Cells[row, 8] as Excel.Range).Value2.ToString();
+                if (temp != null) // excel sloupec platba
                 {
-                    temp_pes.zavod_licence = Convert.ToString(temp);
+                    int platba;
+                    //temp_pes.platba = Convert.ToInt32(temp);
+                    //ERROR !!!!! debilní TryParse !!!!!
+                    if (int.TryParse(temp, out platba))
+                        temp_pes.platba = platba;
+                    else
+                        temp_pes.platba = 0;
                 }
                 else
-                    temp_pes.zavod_licence = "";
+                    temp_pes.platba = 0;
 
-                temp = (range.Cells[row, 3] as Excel.Range).Value2;
-                if (temp != null) // excel sloupec jmeno psa
-                {
-                    temp_pes.jmeno = Convert.ToString(temp);
-                }
-                else
-                    temp_pes.jmeno = "";
+                temp_pes.licence = SetTempFromExcel(range, row, 11); // excel sloupec licence
 
-                temp = (range.Cells[row, 4] as Excel.Range).Value2;
-                if (temp != null) // excel sloupec plemeno
-                {
-                    temp_pes.plemeno = Convert.ToString(temp);
-                }
-                else
-                    temp_pes.plemeno = "";
-
-                temp = (range.Cells[row, 5] as Excel.Range).Value2;
-                if (temp != null) // excel sloupec poznamka ZAVODNI SKUPINA !!!!
-                {
-                    temp_pes.poznamka = Convert.ToString(temp);
-                }
-                else
-                    temp_pes.poznamka = "";
-
-                temp = (range.Cells[row, 6] as Excel.Range).Value2;
-                if (temp != null) // excel sloupec pohlavi
-                {
-                    temp_pes.pohlavi = temp.ToLower();
-                }
-                else
-                    temp_pes.pohlavi = "";
-
-                //temp = (range.Cells[row, 8] as Excel.Range).Value2;
-                //if (temp != null) // excel sloupec platba
-                //{
-                //    //int platba;
-                //    temp_pes.platba = Convert.ToInt32(temp);
-                //    //ERROR !!!!! debilní TryParse !!!!!
-                //    /*if (int.TryParse(temp, out platba))
-                //        temp_pes.platba = platba;
-                //    else
-                //        temp_pes.platba = 0;*/
-                //}
-                //else
-                //    temp_pes.platba = 0;
-
-                temp = (range.Cells[row, 11] as Excel.Range).Value2;
-                if (temp != null) // excel sloupec licence
-                {
-                    temp_pes.licence = Convert.ToString(temp);
-                }
-                else
-                    temp_pes.licence = "0";
-
-                temp = (range.Cells[row, 14] as Excel.Range).Value;
+                temp = (range.Cells[row, 14] as Excel.Range).Value.ToShortDateString();
                 if (temp != null) // excel sloupec datum narozeni
                 {
-                    temp_pes.datum = DateTime.ParseExact(temp.ToShortDateString(), "d. M. yyyy", null);
+                    temp_pes.datum = DateTime.ParseExact(temp, "d. M. yyyy", null);
                 }
                 else
                     temp_pes.datum = DateTime.ParseExact("1. 1. 1914", "d. M. yyyy", null);
 
-                temp = (range.Cells[row, 15] as Excel.Range).Value2;
-                if (temp != null) // excel sloupec jmeno
-                {
-                    temp_majitel.firstName = Convert.ToString(temp);
-                }
-                else
-                    temp_majitel.firstName = "";
+                temp_majitel.firstName = SetTempFromExcel(range, row, 15); // excel sloupec jmeno
 
-                temp = (range.Cells[row, 17] as Excel.Range).Value2;
-                if (temp != null) // excel sloupec národnost
-                {
-                    temp_majitel.narodnost = Convert.ToString(temp);
-                }
-                else
-                    temp_majitel.narodnost = "";
+                temp_majitel.narodnost = SetTempFromExcel(range, row, 17); // excel sloupec národnost
 
-                temp = (range.Cells[row, 18] as Excel.Range).Value2;
-                if (temp != null) // excel sloupec telefon
-                {
-                    temp_majitel.telefon = Convert.ToString(temp);
-                }
-                else
-                    temp_majitel.telefon = "";
+                temp_majitel.telefon = SetTempFromExcel(range, row, 18); // excel sloupec telefon
 
-                temp = (range.Cells[row, 19] as Excel.Range).Value2;
-                if (temp != null) // excel sloupec email
-                {
-                    temp_majitel.email = Convert.ToString(temp);
-                }
-                else
-                    temp_majitel.email = "";
+                temp_majitel.email = SetTempFromExcel(range, row, 19); // excel sloupec email
 
                 temp_pes.doplatit = 0;
 
@@ -241,6 +182,11 @@ namespace projectModel
             workbook.Close(true, Missing.Value, Missing.Value);
             excelApp.Quit();
 
+        }
+        
+        private String SetTempFromExcel(Excel.Range range, Int32 row, Int32 col)
+        {
+            return range.Cells[row, col].Value2 != null ? range.Cells[row, col].Value2.ToString() : String.Empty;
         }
 
         public void Write_to_excel(Psi dataP, string sourceFile, Int32 list, String type) // type "ROZPIS"/"ROZPIS_2"/...atd
