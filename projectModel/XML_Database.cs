@@ -169,101 +169,101 @@ namespace projectModel
 
                     parentNode = doc.CreateElement("Pes");
                     childNodes[0] = doc.CreateElement("Id");
-                    childNodes[0].InnerText = Convert.ToString(currentPes.id);
+                    childNodes[0].InnerText = Convert.ToString(currentPes.Id);
                     childNodes[1] = doc.CreateElement("Jmeno");
-                    childNodes[1].InnerText = currentPes.jmeno;
+                    childNodes[1].InnerText = currentPes.Jmeno;
                     childNodes[2] = doc.CreateElement("Plemeno");
-                    childNodes[2].InnerText = currentPes.plemeno;
+                    childNodes[2].InnerText = currentPes.Plemeno;
                     childNodes[3] = doc.CreateElement("Pohlavi");
-                    childNodes[3].InnerText = currentPes.pohlavi;
+                    childNodes[3].InnerText = currentPes.Pohlavi;
                     childNodes[4] = doc.CreateElement("FCI");
-                    childNodes[4].InnerText = currentPes.fci;
+                    childNodes[4].InnerText = currentPes.Fci;
                     childNodes[5] = doc.CreateElement("Datum");
-                    childNodes[5].InnerText = currentPes.datum.ToString("d. M. yyyy");
+                    childNodes[5].InnerText = currentPes.Datum.ToString("d. M. yyyy");
                     childNodes[6] = doc.CreateElement("Licence");
-                    childNodes[6].InnerText = currentPes.licence;
+                    childNodes[6].InnerText = currentPes.Licence;
                     childNodes[7] = doc.CreateElement("Majitel");
-                    childNodes[7].InnerText = Convert.ToString(currentPes.majitel);
+                    childNodes[7].InnerText = Convert.ToString(currentPes.Majitel);
                     childNodes[8] = doc.CreateElement("MajitelJmeno");
-                    childNodes[8].InnerText = Convert.ToString(currentPes.majitel_jmeno);
+                    childNodes[8].InnerText = Convert.ToString(currentPes.MajitelJmeno);
                     childNodes[9] = doc.CreateElement("Skupina");
-                    childNodes[9].InnerText = Convert.ToString(currentPes.skupina);
+                    childNodes[9].InnerText = Convert.ToString(currentPes.Skupina);
                     childNodes[10] = doc.CreateElement("Start_beh1");
-                    childNodes[10].InnerText = Convert.ToString(currentPes.start_beh1);
+                    childNodes[10].InnerText = Convert.ToString(currentPes.StartBeh1);
                     childNodes[11] = doc.CreateElement("Start_beh2");
-                    childNodes[11].InnerText = Convert.ToString(currentPes.start_beh2);
+                    childNodes[11].InnerText = Convert.ToString(currentPes.StartBeh2);
 
                     childNodes[12] = doc.CreateElement("Zavod");
-                    childNodes[12].InnerText = currentPes.zavod_licence;
+                    childNodes[12].InnerText = currentPes.ZavodLicence;
                     childNodes[13] = doc.CreateElement("Platba");
-                    childNodes[13].InnerText = Convert.ToString(currentPes.platba);
+                    childNodes[13].InnerText = Convert.ToString(currentPes.Platba);
                     childNodes[14] = doc.CreateElement("Doplatit");
-                    childNodes[14].InnerText = Convert.ToString(currentPes.doplatit);
+                    childNodes[14].InnerText = Convert.ToString(currentPes.Doplatit);
                     childNodes[15] = doc.CreateElement("Pozn");
-                    childNodes[15].InnerText = currentPes.poznamka;
+                    childNodes[15].InnerText = currentPes.Poznamka;
 
                     childNodes[16] = doc.CreateElement("Diskvalifikace");
-                    childNodes[16].InnerText = currentPes.diskval;
+                    childNodes[16].InnerText = currentPes.Diskval;
 
                     //body první běh -->
                     childNodes[17] = doc.CreateElement("Agility0");
-                    childNodes[17].InnerText = Convert.ToString(currentPes.agility_A0);
+                    childNodes[17].InnerText = Convert.ToString(currentPes.AgilityA0);
                     childNodes[18] = doc.CreateElement("Speed0");
-                    childNodes[18].InnerText = Convert.ToString(currentPes.speed_A0);
+                    childNodes[18].InnerText = Convert.ToString(currentPes.SpeedA0);
                     childNodes[19] = doc.CreateElement("Endurance0");
-                    childNodes[19].InnerText = Convert.ToString(currentPes.endurance_A0);
+                    childNodes[19].InnerText = Convert.ToString(currentPes.EnduranceA0);
                     childNodes[20] = doc.CreateElement("Enthusiasm0");
-                    childNodes[20].InnerText = Convert.ToString(currentPes.enthusiasm_A0);
+                    childNodes[20].InnerText = Convert.ToString(currentPes.EnthusiasmA0);
                     childNodes[21] = doc.CreateElement("Intelligence0");
-                    childNodes[21].InnerText = Convert.ToString(currentPes.intelligence_A0);
+                    childNodes[21].InnerText = Convert.ToString(currentPes.IntelligenceA0);
 
                     childNodes[22] = doc.CreateElement("Agility1");
-                    childNodes[22].InnerText = Convert.ToString(currentPes.agility_A1);
+                    childNodes[22].InnerText = Convert.ToString(currentPes.AgilityA1);
                     childNodes[23] = doc.CreateElement("Speed1");
-                    childNodes[23].InnerText = Convert.ToString(currentPes.speed_A1);
+                    childNodes[23].InnerText = Convert.ToString(currentPes.SpeedA1);
                     childNodes[24] = doc.CreateElement("Endurance1");
-                    childNodes[24].InnerText = Convert.ToString(currentPes.endurance_A1);
+                    childNodes[24].InnerText = Convert.ToString(currentPes.EnduranceA1);
                     childNodes[25] = doc.CreateElement("Enthusiasm1");
-                    childNodes[25].InnerText = Convert.ToString(currentPes.enthusiasm_A1);
+                    childNodes[25].InnerText = Convert.ToString(currentPes.EnthusiasmA1);
                     childNodes[26] = doc.CreateElement("Intelligence1");
-                    childNodes[26].InnerText = Convert.ToString(currentPes.intelligence_A1);
+                    childNodes[26].InnerText = Convert.ToString(currentPes.IntelligenceA1);
                     childNodes[27] = doc.CreateElement("Body1celekm");
-                    childNodes[27].InnerText = Convert.ToString(currentPes.body1); //<-- body1
+                    childNodes[27].InnerText = Convert.ToString(currentPes.Body1); //<-- body1
 
                     //body druhý běh -->
                     childNodes[28] = doc.CreateElement("Agility0_2kolo");
-                    childNodes[28].InnerText = Convert.ToString(currentPes.agility_B0);
+                    childNodes[28].InnerText = Convert.ToString(currentPes.AgilityB0);
                     childNodes[29] = doc.CreateElement("Speed0_2kolo");
-                    childNodes[29].InnerText = Convert.ToString(currentPes.speed_B0);
+                    childNodes[29].InnerText = Convert.ToString(currentPes.SpeedB0);
                     childNodes[30] = doc.CreateElement("Endurance0_2kolo");
-                    childNodes[30].InnerText = Convert.ToString(currentPes.endurance_B0);
+                    childNodes[30].InnerText = Convert.ToString(currentPes.EnduranceB0);
                     childNodes[31] = doc.CreateElement("Enthusiasm0_2kolo");
-                    childNodes[31].InnerText = Convert.ToString(currentPes.enthusiasm_B0);
+                    childNodes[31].InnerText = Convert.ToString(currentPes.EnthusiasmB0);
                     childNodes[32] = doc.CreateElement("Intelligence0_2kolo");
-                    childNodes[32].InnerText = Convert.ToString(currentPes.intelligence_B0);
+                    childNodes[32].InnerText = Convert.ToString(currentPes.IntelligenceB0);
 
                     childNodes[33] = doc.CreateElement("Agility1_2kolo");
-                    childNodes[33].InnerText = Convert.ToString(currentPes.agility_B1);
+                    childNodes[33].InnerText = Convert.ToString(currentPes.AgilityB1);
                     childNodes[34] = doc.CreateElement("Speed1_2kolo");
-                    childNodes[34].InnerText = Convert.ToString(currentPes.speed_B1);
+                    childNodes[34].InnerText = Convert.ToString(currentPes.SpeedB1);
                     childNodes[35] = doc.CreateElement("Endurance1_2kolo");
-                    childNodes[35].InnerText = Convert.ToString(currentPes.endurance_B1);
+                    childNodes[35].InnerText = Convert.ToString(currentPes.EnduranceB1);
                     childNodes[36] = doc.CreateElement("Enthusiasm1_2kolo");
-                    childNodes[36].InnerText = Convert.ToString(currentPes.enthusiasm_B1);
+                    childNodes[36].InnerText = Convert.ToString(currentPes.EnthusiasmB1);
                     childNodes[37] = doc.CreateElement("Intelligence1_2kolo");
-                    childNodes[37].InnerText = Convert.ToString(currentPes.intelligence_B1);
+                    childNodes[37].InnerText = Convert.ToString(currentPes.IntelligenceB1);
                     childNodes[38] = doc.CreateElement("Body2celekm");
-                    childNodes[38].InnerText = Convert.ToString(currentPes.body2); //<-- body2
+                    childNodes[38].InnerText = Convert.ToString(currentPes.Body2); //<-- body2
 
                     childNodes[39] = doc.CreateElement("Dvojice_kolo1");
-                    childNodes[39].InnerText = Convert.ToString(currentPes.dvojice0);
+                    childNodes[39].InnerText = Convert.ToString(currentPes.Dvojice0);
                     childNodes[40] = doc.CreateElement("Dvojice_kolo2");
-                    childNodes[40].InnerText = Convert.ToString(currentPes.dvojice1);
+                    childNodes[40].InnerText = Convert.ToString(currentPes.Dvojice1);
 
                     childNodes[41] = doc.CreateElement("Barva_kolo1");
-                    childNodes[41].InnerText = Convert.ToString(currentPes.barva0);
+                    childNodes[41].InnerText = Convert.ToString(currentPes.Barva0);
                     childNodes[42] = doc.CreateElement("Barva_kolo2");
-                    childNodes[42].InnerText = Convert.ToString(currentPes.barva1);
+                    childNodes[42].InnerText = Convert.ToString(currentPes.Barva1);
 
                     doc.DocumentElement.AppendChild(parentNode);
 

@@ -10,15 +10,15 @@ namespace projectModel
     {
         public Skupina(Pes iPes1, Pes iPes2, Pes iPes3)
         {
-            this.id = iPes1.id; // WTF?! proč ID prvniho psa ?!
+            this.id = iPes1.Id; // WTF?! proč ID prvniho psa ?!
 
-            this.pes1name = iPes1.jmeno;
-            this.pes2name = iPes2.jmeno;
-            this.pes3name = iPes3.jmeno;
+            this.pes1name = iPes1.Jmeno;
+            this.pes2name = iPes2.Jmeno;
+            this.pes3name = iPes3.Jmeno;
 
-            this.pes1plemeno = iPes1.plemeno;
-            this.pes2plemeno = iPes2.plemeno;
-            this.pes3plemeno = iPes3.plemeno;
+            this.pes1plemeno = iPes1.Plemeno;
+            this.pes2plemeno = iPes2.Plemeno;
+            this.pes3plemeno = iPes3.Plemeno;
 
             this.pes1barva = "červená";
             this.pes2barva = "bílá";
@@ -27,13 +27,13 @@ namespace projectModel
 
         public Skupina(Pes iPes1, Pes iPes2)
         {
-            this.id = iPes1.id;
+            this.id = iPes1.Id;
 
-            this.pes1name = iPes1.jmeno;
-            this.pes2name = iPes2.jmeno;
+            this.pes1name = iPes1.Jmeno;
+            this.pes2name = iPes2.Jmeno;
 
-            this.pes1plemeno = iPes1.plemeno;
-            this.pes2plemeno = iPes2.plemeno;
+            this.pes1plemeno = iPes1.Plemeno;
+            this.pes2plemeno = iPes2.Plemeno;
 
             this.pes1barva = "červená";
             this.pes2barva = "bílá";

@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
     <Compile Include="EXCEL_Database.cs" />
     <Compile Include="Majitel.cs" />
     <Compile Include="Majitele.cs" />
@@ -55,6 +56,7 @@
     </Compile>
     <Compile Include="Skupina.cs" />
     <Compile Include="Skupiny.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="XML_Database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

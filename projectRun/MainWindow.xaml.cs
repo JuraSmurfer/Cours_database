@@ -707,31 +707,31 @@ namespace projectRun
 
                     this.divNewPes.Visibility = System.Windows.Visibility.Visible;
 
-                    this.boxId_P.Text = Convert.ToString(((Pes)DGV_P.SelectedItem).id);
+                    this.boxId_P.Text = Convert.ToString(((Pes)DGV_P.SelectedItem).Id);
 
                     // rychlo oprava...
-                    this.boxstart_P.Text = Convert.ToString(((Pes)DGV_P.SelectedItem).start_beh1);
+                    this.boxstart_P.Text = Convert.ToString(((Pes)DGV_P.SelectedItem).StartBeh1);
                     this.boxstart_P.Focus();
                     this.boxstart_P.SelectAll();
-                    this.boxBeh.Text = Convert.ToString(((Pes)DGV_P.SelectedItem).dvojice0);
+                    this.boxBeh.Text = Convert.ToString(((Pes)DGV_P.SelectedItem).Dvojice0);
 
-                    this.boxFirstName_P.Text = ((Pes)DGV_P.SelectedItem).jmeno;
-                    this.comboPlemeno.Text = ((Pes)DGV_P.SelectedItem).plemeno;
-                    this.fciCombo.Text = ((Pes)DGV_P.SelectedItem).fci;
-                    this.boxLicence.Text = ((Pes)DGV_P.SelectedItem).licence;
-                    this.pohlaviCB.Text = ((Pes)DGV_P.SelectedItem).pohlavi;
-                    this.datumPicker.SelectedDate = ((Pes)DGV_P.SelectedItem).datum;
-                    this.boxMajitel.Text = Convert.ToString(((Pes)DGV_P.SelectedItem).majitel);
-                    if (((Pes)DGV_P.SelectedItem).zavod_licence == "Závod")
+                    this.boxFirstName_P.Text = ((Pes)DGV_P.SelectedItem).Jmeno;
+                    this.comboPlemeno.Text = ((Pes)DGV_P.SelectedItem).Plemeno;
+                    this.fciCombo.Text = ((Pes)DGV_P.SelectedItem).Fci;
+                    this.boxLicence.Text = ((Pes)DGV_P.SelectedItem).Licence;
+                    this.pohlaviCB.Text = ((Pes)DGV_P.SelectedItem).Pohlavi;
+                    this.datumPicker.SelectedDate = ((Pes)DGV_P.SelectedItem).Datum;
+                    this.boxMajitel.Text = Convert.ToString(((Pes)DGV_P.SelectedItem).Majitel);
+                    if (((Pes)DGV_P.SelectedItem).ZavodLicence == "Závod")
                         this.zavodCB.SelectedIndex = 0;
-                    else if (((Pes)DGV_P.SelectedItem).zavod_licence == "Licence")
+                    else if (((Pes)DGV_P.SelectedItem).ZavodLicence == "Licence")
                         this.zavodCB.SelectedIndex = 1;
                     else
                         this.zavodCB.SelectedIndex = 2;
 
-                    this.boxPlat.Text = Convert.ToString(((Pes)DGV_P.SelectedItem).platba);
-                    this.boxDoplat.Text = Convert.ToString(((Pes)DGV_P.SelectedItem).doplatit);
-                    this.boxPozn.Text = ((Pes)DGV_P.SelectedItem).poznamka;
+                    this.boxPlat.Text = Convert.ToString(((Pes)DGV_P.SelectedItem).Platba);
+                    this.boxDoplat.Text = Convert.ToString(((Pes)DGV_P.SelectedItem).Doplatit);
+                    this.boxPozn.Text = ((Pes)DGV_P.SelectedItem).Poznamka;
                 }
                 else
                     MessageBox.Show("Není vybrán žádný pes.\nPsa vyberete kliknutím na položku v seznamu.", "Chyba!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -753,13 +753,13 @@ namespace projectRun
 
                     this.diveditprehled.Visibility = System.Windows.Visibility.Visible;
 
-                    this.boxbeh1.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).dvojice0);
-                    this.boxstart1.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).start_beh1);
-                    this.decka1CB.Text = ((Pes)skupinGrid.SelectedItem).barva0;
+                    this.boxbeh1.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).Dvojice0);
+                    this.boxstart1.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).StartBeh1);
+                    this.decka1CB.Text = ((Pes)skupinGrid.SelectedItem).Barva0;
 
-                    this.boxbeh2.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).dvojice1);
-                    this.boxstart2.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).start_beh2);
-                    this.decka2CB.Text = ((Pes)skupinGrid.SelectedItem).barva1;
+                    this.boxbeh2.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).Dvojice1);
+                    this.boxstart2.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).StartBeh2);
+                    this.decka2CB.Text = ((Pes)skupinGrid.SelectedItem).Barva1;
 
                     //this.hlavniGrid(sender, e);
 
@@ -806,25 +806,25 @@ namespace projectRun
             {
                 if (DGV_P.SelectedIndex != -1)
                 {
-                    if (((Pes)DGV_P.SelectedItem).start_beh1 == 0)
+                    if (((Pes)DGV_P.SelectedItem).StartBeh1 == 0)
                     {
-                        Pes editpes_c = database_P.GetPesById(((Pes)DGV_P.SelectedItem).id);
+                        Pes editpes_c = database_P.GetPesById(((Pes)DGV_P.SelectedItem).Id);
                         int temp_start_c = 0;
                         int temp_skup_c = 0;
                         int new_dvojice = 0;
                         String new_barva = "červená";
-                        List<Pes> skupina_psu = database_P.GetPesByGroup(Int32.Parse(((Pes)DGV_P.SelectedItem).poznamka), null);
+                        List<Pes> skupina_psu = database_P.GetPesByGroup(Int32.Parse(((Pes)DGV_P.SelectedItem).Poznamka), null);
                         foreach(Pes temp in skupina_psu)
                         {
-                            if (temp.start_beh1 > temp_start_c)
+                            if (temp.StartBeh1 > temp_start_c)
                             {
-                                temp_start_c = temp.start_beh1;
-                                temp_skup_c = temp.dvojice0;
+                                temp_start_c = temp.StartBeh1;
+                                temp_skup_c = temp.Dvojice0;
                             }
                         }
                         foreach(Pes temp in skupina_psu)
                         {
-                            if ((temp.dvojice0 == temp_skup_c) && (temp.start_beh1 != temp_start_c))
+                            if ((temp.Dvojice0 == temp_skup_c) && (temp.StartBeh1 != temp_start_c))
                             {
                                 new_dvojice = temp_skup_c + 1;
                                 break;
@@ -839,15 +839,15 @@ namespace projectRun
                         if (new_dvojice == temp_skup_c)
                         {
                             // poslední dvojice má jen jednoho člena, nový se přídá, zbylí psi se posunou pouze o startovní číslo
-                            editpes_c.dvojice0 = new_dvojice;
+                            editpes_c.Dvojice0 = new_dvojice;
                             for (int x = 0; x < database_P.Length(); x++)
                             {
                                 Pes editpes = database_P.GetPesByStartNo(x);
                                 if (editpes == null)
                                     continue;
-                                if (editpes.dvojice0 > new_dvojice)
+                                if (editpes.Dvojice0 > new_dvojice)
                                 {
-                                    editpes.start_beh1 += 1;
+                                    editpes.StartBeh1 += 1;
                                     new_barva = "bílá";
                                 }
                                 else
@@ -855,22 +855,22 @@ namespace projectRun
                                     continue;
                                 }
                             }
-                            editpes_c.start_beh1 = temp_start_c + 1;
-                            editpes_c.barva0 = new_barva;
+                            editpes_c.StartBeh1 = temp_start_c + 1;
+                            editpes_c.Barva0 = new_barva;
                         }
                         else
                         {
                             // poslední dvojice je plná, nový pes tak vytvoří novou dvojici, zbylí psi se posunou o startovní číslo i o číslo dvojice
-                            editpes_c.dvojice0 = new_dvojice;
+                            editpes_c.Dvojice0 = new_dvojice;
                             for (int x = 0; x < database_P.Length(); x++)
                             {
                                 Pes editpes = database_P.GetPesByStartNo(x);
                                 if (editpes == null)
                                     continue;
-                                if (editpes.dvojice0 > new_dvojice)
+                                if (editpes.Dvojice0 > new_dvojice)
                                 {
-                                    editpes.start_beh1 += 1;
-                                    editpes.dvojice0 += 1;
+                                    editpes.StartBeh1 += 1;
+                                    editpes.Dvojice0 += 1;
                                     new_barva = "červená";
                                 }
                                 else
@@ -878,8 +878,8 @@ namespace projectRun
                                     continue;
                                 }
                             }
-                            editpes_c.start_beh1 = temp_start_c + 1;
-                            editpes_c.barva0 = new_barva;
+                            editpes_c.StartBeh1 = temp_start_c + 1;
+                            editpes_c.Barva0 = new_barva;
                         }
                         ReloadPesData();
                     }
@@ -910,20 +910,20 @@ namespace projectRun
                         Pes tmppes1 = (Pes)(skupinGrid.SelectedItems[0]);
                         Pes tmppes2 = (Pes)(skupinGrid.SelectedItems[1]);
 
-                        temp_dvojice = tmppes1.dvojice0;
-                        tmppes1.dvojice0 = tmppes2.dvojice0;
-                        tmppes2.dvojice0 = temp_dvojice;
+                        temp_dvojice = tmppes1.Dvojice0;
+                        tmppes1.Dvojice0 = tmppes2.Dvojice0;
+                        tmppes2.Dvojice0 = temp_dvojice;
 
-                        temp_start = tmppes1.start_beh1;
-                        tmppes1.start_beh1 = tmppes2.start_beh1;
-                        tmppes2.start_beh1 = temp_start;
+                        temp_start = tmppes1.StartBeh1;
+                        tmppes1.StartBeh1 = tmppes2.StartBeh1;
+                        tmppes2.StartBeh1 = temp_start;
 
-                        temp_barva = tmppes1.barva0;
-                        tmppes1.barva0 = tmppes2.barva0;
-                        tmppes2.barva0 = temp_barva;
+                        temp_barva = tmppes1.Barva0;
+                        tmppes1.Barva0 = tmppes2.Barva0;
+                        tmppes2.Barva0 = temp_barva;
 
-                        database_P.Edit(tmppes1.id, tmppes1);
-                        database_P.Edit(tmppes2.id, tmppes2);
+                        database_P.Edit(tmppes1.Id, tmppes1);
+                        database_P.Edit(tmppes2.Id, tmppes2);
                     }
                     else
                     {
@@ -964,20 +964,20 @@ namespace projectRun
                         Pes tmppes1 = (Pes)(skupinGrid.SelectedItems[0]);
                         Pes tmppes2 = (Pes)(skupinGrid.SelectedItems[1]);
 
-                        temp_dvojice = tmppes1.dvojice1;
-                        tmppes1.dvojice1 = tmppes2.dvojice1;
-                        tmppes2.dvojice1 = temp_dvojice;
+                        temp_dvojice = tmppes1.Dvojice1;
+                        tmppes1.Dvojice1 = tmppes2.Dvojice1;
+                        tmppes2.Dvojice1 = temp_dvojice;
 
-                        temp_start = tmppes1.start_beh2;
-                        tmppes1.start_beh2 = tmppes2.start_beh2;
-                        tmppes2.start_beh2 = temp_start;
+                        temp_start = tmppes1.StartBeh2;
+                        tmppes1.StartBeh2 = tmppes2.StartBeh2;
+                        tmppes2.StartBeh2 = temp_start;
 
-                        temp_barva = tmppes1.barva1;
-                        tmppes1.barva1 = tmppes2.barva1;
-                        tmppes2.barva1 = temp_barva;
+                        temp_barva = tmppes1.Barva1;
+                        tmppes1.Barva1 = tmppes2.Barva1;
+                        tmppes2.Barva1 = temp_barva;
 
-                        database_P.Edit(tmppes1.id, tmppes1);
-                        database_P.Edit(tmppes2.id, tmppes2);
+                        database_P.Edit(tmppes1.Id, tmppes1);
+                        database_P.Edit(tmppes2.Id, tmppes2);
                     }
                     else
                     {
@@ -1023,12 +1023,12 @@ namespace projectRun
                 // cyklus pro nalezení diskvalifikovaných psů
                 for (j = 0; j < pocet_psu; j++)
                 {
-                    if (temppes[j].diskval != "---")
+                    if (temppes[j].Diskval != "---")
                     {
                         --max;
-                        temppes[j].start_beh1 = 999;
-                        temppes[j].barva0 = "";
-                        temppes[j].dvojice0 = 999;
+                        temppes[j].StartBeh1 = 999;
+                        temppes[j].Barva0 = "";
+                        temppes[j].Dvojice0 = 999;
                     }
                 }
 
@@ -1038,9 +1038,9 @@ namespace projectRun
                 //cyklus pro přidělení psů
                 for (j = 0; j < pocet_psu; j++)
                 {
-                    if (temppes[j].diskval == "---")
+                    if (temppes[j].Diskval == "---")
                     {
-                        temppes[j].start_beh1 = cisla[index_cisel++];
+                        temppes[j].StartBeh1 = cisla[index_cisel++];
                     }
                 }
                 temppes.Clear();
@@ -1057,7 +1057,7 @@ namespace projectRun
                     temp1 = database_P.GetPesByStartNo(++i);
                     ++diskvalifikovani;
                 }
-                temp1.start_beh1 = i - diskvalifikovani;
+                temp1.StartBeh1 = i - diskvalifikovani;
             }
 
             int pocitadlo = 1;
@@ -1066,15 +1066,15 @@ namespace projectRun
                 Pes tmp1 = database_P.GetPesByStartNo(i);
                 Pes tmp2 = database_P.GetPesByStartNo(i + 1);
 
-                tmp1.dvojice0 = pocitadlo;
-                tmp1.barva0 = "červená";
+                tmp1.Dvojice0 = pocitadlo;
+                tmp1.Barva0 = "červená";
 
                 if (tmp2 != null)
                 {
-                    if (tmp1.poznamka == tmp2.poznamka)
+                    if (tmp1.Poznamka == tmp2.Poznamka)
                     {
-                        tmp2.dvojice0 = pocitadlo++;
-                        tmp2.barva0 = "bílá";
+                        tmp2.Dvojice0 = pocitadlo++;
+                        tmp2.Barva0 = "bílá";
                     }
                     else
                     {
@@ -1118,41 +1118,41 @@ namespace projectRun
 
                     for (j = 0; j < pocet_psu; j++)
                     {
-                        if (temppes[j].diskval != "---") // pokud je pes diskvalifikován přeskočit jej při řazení
+                        if (temppes[j].Diskval != "---") // pokud je pes diskvalifikován přeskočit jej při řazení
                         {
-                            temppes[j].start_beh2 = 999; // psovi se přiřadí startovní číslo 999, bude tedy na konci/vyřaze ze závodu
-                            temppes[j].dvojice1 = 999;
-                            temppes[j].barva1 = "";
+                            temppes[j].StartBeh2 = 999; // psovi se přiřadí startovní číslo 999, bude tedy na konci/vyřaze ze závodu
+                            temppes[j].Dvojice1 = 999;
+                            temppes[j].Barva1 = "";
                         }
                         else
                         {
                             temp = 1;
                             for (k = 0; k < pocet_psu; k++)
                             {
-                                if ((j == k) || (temppes[k].diskval != "---"))
+                                if ((j == k) || (temppes[k].Diskval != "---"))
                                     continue;
 
-                                if (temppes[j].body1 < temppes[k].body1)
+                                if (temppes[j].Body1 < temppes[k].Body1)
                                     temp++;
-                                else if (temppes[j].body1 == temppes[k].body1)
+                                else if (temppes[j].Body1 == temppes[k].Body1)
                                 {
-                                    if ((temppes[j].agility_A0 + temppes[j].agility_A1) < (temppes[k].agility_A0 + temppes[k].agility_A1))
+                                    if ((temppes[j].AgilityA0 + temppes[j].AgilityA1) < (temppes[k].AgilityA0 + temppes[k].AgilityA1))
                                         temp++;
-                                    else if ((temppes[j].agility_A0 + temppes[j].agility_A1) == (temppes[k].agility_A0 + temppes[k].agility_A1))
+                                    else if ((temppes[j].AgilityA0 + temppes[j].AgilityA1) == (temppes[k].AgilityA0 + temppes[k].AgilityA1))
                                     {
-                                        if ((temppes[j].speed_A0 + temppes[j].speed_A1) < (temppes[k].speed_A0 + temppes[k].speed_A1))
+                                        if ((temppes[j].SpeedA0 + temppes[j].SpeedA1) < (temppes[k].SpeedA0 + temppes[k].SpeedA1))
                                             temp++;
-                                        else if ((temppes[j].speed_A0 + temppes[j].speed_A1) == (temppes[k].speed_A0 + temppes[k].speed_A1))
+                                        else if ((temppes[j].SpeedA0 + temppes[j].SpeedA1) == (temppes[k].SpeedA0 + temppes[k].SpeedA1))
                                         {
-                                            if ((temppes[j].endurance_A0 + temppes[j].endurance_A1) < (temppes[k].endurance_A0 + temppes[k].endurance_A1))
+                                            if ((temppes[j].EnduranceA0 + temppes[j].EnduranceA1) < (temppes[k].EnduranceA0 + temppes[k].EnduranceA1))
                                                 temp++;
-                                            else if ((temppes[j].endurance_A0 + temppes[j].endurance_A1) == (temppes[k].endurance_A0 + temppes[k].endurance_A1))
+                                            else if ((temppes[j].EnduranceA0 + temppes[j].EnduranceA1) == (temppes[k].EnduranceA0 + temppes[k].EnduranceA1))
                                             {
-                                                if ((temppes[j].enthusiasm_A0 + temppes[j].enthusiasm_A1) < (temppes[k].enthusiasm_A0 + temppes[k].enthusiasm_A1))
+                                                if ((temppes[j].EnthusiasmA0 + temppes[j].EnthusiasmA1) < (temppes[k].EnthusiasmA0 + temppes[k].EnthusiasmA1))
                                                     temp++;
-                                                else if ((temppes[j].enthusiasm_A0 + temppes[j].enthusiasm_A1) == (temppes[k].enthusiasm_A0 + temppes[k].enthusiasm_A1))
+                                                else if ((temppes[j].EnthusiasmA0 + temppes[j].EnthusiasmA1) == (temppes[k].EnthusiasmA0 + temppes[k].EnthusiasmA1))
                                                 {
-                                                    if ((temppes[j].intelligence_A0 + temppes[j].intelligence_A1) < (temppes[k].intelligence_A0 + temppes[k].intelligence_A1))
+                                                    if ((temppes[j].IntelligenceA0 + temppes[j].IntelligenceA1) < (temppes[k].IntelligenceA0 + temppes[k].IntelligenceA1))
                                                         temp++;
                                                   //  else 
                                                   //      temp++; // pokud mají absolutně stejný výsledek, ignoruj,mohla by následovat chyba při vyhodnocování, např pšichni psi nulové body...
@@ -1162,9 +1162,9 @@ namespace projectRun
                                     }
                                 }
                             }
-                            temppes[j].start_beh2 = temp + min - 1;
+                            temppes[j].StartBeh2 = temp + min - 1;
                         }
-                        database_P.Edit(temppes[j].id, new Pes(temppes[j]));
+                        database_P.Edit(temppes[j].Id, new Pes(temppes[j]));
                     }
                     temppes.Clear();
                 }
@@ -1185,7 +1185,7 @@ namespace projectRun
                     }
 
                     if (temp1 != null)
-                        temp1.start_beh2 = i - diskvalifikovani;
+                        temp1.StartBeh2 = i - diskvalifikovani;
                 }
 
                 int pocitadlo = 1;
@@ -1194,15 +1194,15 @@ namespace projectRun
                     Pes tmp1 = database_P.GetPesByStartNo_1(i);
                     Pes tmp2 = database_P.GetPesByStartNo_1(i + 1);
 
-                    tmp1.dvojice1 = pocitadlo;
-                    tmp1.barva1 = "červená";
+                    tmp1.Dvojice1 = pocitadlo;
+                    tmp1.Barva1 = "červená";
 
                     if (tmp2 != null)
                     {
-                        if (tmp1.poznamka == tmp2.poznamka)
+                        if (tmp1.Poznamka == tmp2.Poznamka)
                         {
-                            tmp2.dvojice1 = pocitadlo++;
-                            tmp2.barva1 = "bílá";
+                            tmp2.Dvojice1 = pocitadlo++;
+                            tmp2.Barva1 = "bílá";
                         }
                         else
                         {
@@ -1270,14 +1270,14 @@ namespace projectRun
                      *v dalším kroku vybírat dvojici podle psa na druhém místě
                      *pokud se nenajde pes do dvojice (lichý počet psů) přeskočit tento cyklus
                      */
-                    IDA1 = temppes[j].id;
+                    IDA1 = temppes[j].Id;
                     IDA2 = 0;
 
                     for (x = 0; x < pocet_psu; x++)
                     {
-                        if ((temppes[x].dvojice1 == temppes[j].dvojice1) && (x != j))
+                        if ((temppes[x].Dvojice1 == temppes[j].Dvojice1) && (x != j))
                         {
-                            IDA2 = temppes[x].id;
+                            IDA2 = temppes[x].Id;
                             break;
                         }
                     }
@@ -1287,7 +1287,7 @@ namespace projectRun
                         continue;
                     }
 
-                    if (temppes[j].start_beh2 > temppes[x].start_beh2)
+                    if (temppes[j].StartBeh2 > temppes[x].StartBeh2)
                     {
                         // pokud běží IDA2 jako první prohodit aby byl jako IDA1
                         pomocInt = IDA1;
@@ -1302,17 +1302,17 @@ namespace projectRun
                     {
                         if (IDB1 == 0)
                         {
-                            if (temppes[k].dvojice1 == (temppes[j].dvojice1 + 1))
+                            if (temppes[k].Dvojice1 == (temppes[j].Dvojice1 + 1))
                             {
-                                IDB1 = temppes[k].id;
+                                IDB1 = temppes[k].Id;
                                 y = k;
                             }
                         }
                         else
                         {
-                            if (temppes[k].dvojice1 == (temppes[j].dvojice1 + 1))
+                            if (temppes[k].Dvojice1 == (temppes[j].Dvojice1 + 1))
                             {
-                                IDB2 = temppes[k].id;
+                                IDB2 = temppes[k].Id;
                                 break;
                             }
                         }
@@ -1323,7 +1323,7 @@ namespace projectRun
                         continue;
                     }
 
-                    if (temppes[y].start_beh2 > temppes[k].start_beh2)
+                    if (temppes[y].StartBeh2 > temppes[k].StartBeh2)
                     {
                         // pokud běží IDB2 jako první prohodit aby byl jako IDB1
                         pomocInt = IDB1;
@@ -1339,24 +1339,24 @@ namespace projectRun
                         Pes A1 = database_P.GetPesById(IDA1);
                         Pes B1 = database_P.GetPesById(IDB1);
 
-                        pomocInt = A1.start_beh2;
-                        A1.start_beh2 = B1.start_beh2;
-                        B1.start_beh2 = pomocInt;
+                        pomocInt = A1.StartBeh2;
+                        A1.StartBeh2 = B1.StartBeh2;
+                        B1.StartBeh2 = pomocInt;
 
-                        pomocInt = A1.dvojice1;
-                        A1.dvojice1 = B1.dvojice1;
-                        B1.dvojice1 = pomocInt;
+                        pomocInt = A1.Dvojice1;
+                        A1.Dvojice1 = B1.Dvojice1;
+                        B1.Dvojice1 = pomocInt;
 
                         Pes A2 = database_P.GetPesById(IDA2);
                         Pes B2 = database_P.GetPesById(IDB2);
 
-                        pomocInt = A2.start_beh2;
-                        A2.start_beh2 = B2.start_beh2;
-                        B2.start_beh2 = pomocInt;
+                        pomocInt = A2.StartBeh2;
+                        A2.StartBeh2 = B2.StartBeh2;
+                        B2.StartBeh2 = pomocInt;
 
-                        pomocInt = A2.dvojice1;
-                        A2.dvojice1 = B2.dvojice1;
-                        B2.dvojice1 = pomocInt;
+                        pomocInt = A2.Dvojice1;
+                        A2.Dvojice1 = B2.Dvojice1;
+                        B2.Dvojice1 = pomocInt;
 
                         pocitadlo2++;
                         /*
@@ -1401,43 +1401,43 @@ namespace projectRun
 
                     for (j = 0; j < pocet_psu; j++)
                     {
-                        if (temppes[j].diskval != "---") // pokud je diskvalifikován bude vyřazen z bodování
+                        if (temppes[j].Diskval != "---") // pokud je diskvalifikován bude vyřazen z bodování
                         {
-                            temppes[j].skupina = 999; // umístění na pozici 999, vyřazení ze závodu
+                            temppes[j].Skupina = 999; // umístění na pozici 999, vyřazení ze závodu
                         }
                         else
                         {
                             temp = 1;
                             for (k = 0; k < pocet_psu; k++)
                             {
-                                if ((j == k) || (temppes[k].diskval != "---"))
+                                if ((j == k) || (temppes[k].Diskval != "---"))
                                     continue;
 
-                                if ((temppes[j].body1 + temppes[j].body2) < (temppes[k].body1 + temppes[k].body2))
+                                if ((temppes[j].Body1 + temppes[j].Body2) < (temppes[k].Body1 + temppes[k].Body2))
                                     temp++;
-                                else if ((temppes[j].body1 + temppes[j].body2) == (temppes[k].body1 + temppes[k].body2))
+                                else if ((temppes[j].Body1 + temppes[j].Body2) == (temppes[k].Body1 + temppes[k].Body2))
                                 {
-                                    if (temppes[j].body2 < temppes[k].body2)
+                                    if (temppes[j].Body2 < temppes[k].Body2)
                                         temp++;
-                                    else if (temppes[j].body2 == temppes[k].body2)
+                                    else if (temppes[j].Body2 == temppes[k].Body2)
                                     {
-                                        if ((temppes[j].agility_B0 + temppes[j].agility_B1) < (temppes[k].agility_B0 + temppes[k].agility_B1))
+                                        if ((temppes[j].AgilityB0 + temppes[j].AgilityB1) < (temppes[k].AgilityB0 + temppes[k].AgilityB1))
                                             temp++;
-                                        else if ((temppes[j].agility_B0 + temppes[j].agility_B1) == (temppes[k].agility_B0 + temppes[k].agility_B1))
+                                        else if ((temppes[j].AgilityB0 + temppes[j].AgilityB1) == (temppes[k].AgilityB0 + temppes[k].AgilityB1))
                                         {
-                                            if ((temppes[j].speed_B0 + temppes[j].speed_B1) < (temppes[k].speed_B0 + temppes[k].speed_B1))
+                                            if ((temppes[j].SpeedB0 + temppes[j].SpeedB1) < (temppes[k].SpeedB0 + temppes[k].SpeedB1))
                                                 temp++;
-                                            else if ((temppes[j].speed_B0 + temppes[j].speed_B1) == (temppes[k].speed_B0 + temppes[k].speed_B1))
+                                            else if ((temppes[j].SpeedB0 + temppes[j].SpeedB1) == (temppes[k].SpeedB0 + temppes[k].SpeedB1))
                                             {
-                                                if ((temppes[j].endurance_B0 + temppes[j].endurance_B1) < (temppes[k].endurance_B0 + temppes[k].endurance_B1))
+                                                if ((temppes[j].EnduranceB0 + temppes[j].EnduranceB1) < (temppes[k].EnduranceB0 + temppes[k].EnduranceB1))
                                                     temp++;
-                                                else if ((temppes[j].endurance_B0 + temppes[j].endurance_B1) == (temppes[k].endurance_B0 + temppes[k].endurance_B1))
+                                                else if ((temppes[j].EnduranceB0 + temppes[j].EnduranceB1) == (temppes[k].EnduranceB0 + temppes[k].EnduranceB1))
                                                 {
-                                                    if ((temppes[j].enthusiasm_B0 + temppes[j].enthusiasm_B1) < (temppes[k].enthusiasm_B0 + temppes[k].enthusiasm_B1))
+                                                    if ((temppes[j].EnthusiasmB0 + temppes[j].EnthusiasmB1) < (temppes[k].EnthusiasmB0 + temppes[k].EnthusiasmB1))
                                                         temp++;
-                                                    else if ((temppes[j].enthusiasm_B0 + temppes[j].enthusiasm_B1) == (temppes[k].enthusiasm_B0 + temppes[k].enthusiasm_B1))
+                                                    else if ((temppes[j].EnthusiasmB0 + temppes[j].EnthusiasmB1) == (temppes[k].EnthusiasmB0 + temppes[k].EnthusiasmB1))
                                                     {
-                                                        if ((temppes[j].intelligence_B0 + temppes[j].intelligence_B1) < (temppes[k].intelligence_B0 + temppes[k].intelligence_B1))
+                                                        if ((temppes[j].IntelligenceB0 + temppes[j].IntelligenceB1) < (temppes[k].IntelligenceB0 + temppes[k].IntelligenceB1))
                                                             temp++;
                                                     }
                                                 }
@@ -1446,9 +1446,9 @@ namespace projectRun
                                     }
                                 }
                             }
-                            temppes[j].skupina = temp; // TODO: přidat do třídy pes parametr umístění v cíli a titul !
+                            temppes[j].Skupina = temp; // TODO: přidat do třídy pes parametr umístění v cíli a titul !
                         }
-                        database_P.Edit(temppes[j].id, new Pes(temppes[j]));
+                        database_P.Edit(temppes[j].Id, new Pes(temppes[j]));
                     }
                     temppes.Clear();
                 }
@@ -1520,10 +1520,10 @@ namespace projectRun
                  Int32 selectedPesIndex = DGV_P.SelectedIndex;
                 if(selectedPesIndex != -1)
                 {
-                    MessageBoxResult result = MessageBox.Show("Přejete si vymazat psa " + ((Pes)DGV_P.SelectedItem).jmeno + "?", "Pozor!", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = MessageBox.Show("Přejete si vymazat psa " + ((Pes)DGV_P.SelectedItem).Jmeno + "?", "Pozor!", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes)
                     {
-                        this.database_P.Delete(((Pes)DGV_P.SelectedItem).id);
+                        this.database_P.Delete(((Pes)DGV_P.SelectedItem).Id);
                         this.ReloadPesData();
                         this.stav();
                     }
@@ -1713,31 +1713,31 @@ namespace projectRun
                     {
                         Pes temppes = new Pes();
 
-                        temppes.id = this.database_P.GetNewId();
+                        temppes.Id = this.database_P.GetNewId();
 
                         // rychlo oprava...
-                        temppes.start_beh1 = Int32.Parse(boxstart_P.Text);
-                        temppes.dvojice0 = Int32.Parse(boxBeh.Text);
+                        temppes.StartBeh1 = Int32.Parse(boxstart_P.Text);
+                        temppes.Dvojice0 = Int32.Parse(boxBeh.Text);
 
-                        temppes.jmeno = boxFirstName_P.Text;
-                        temppes.plemeno = comboPlemeno.Text;
-                        temppes.pohlavi = pohlaviCB.Text;
-                        temppes.fci = fciCombo.Text;
-                        temppes.datum = datumPicker.SelectedDate.Value.Date;
-                        temppes.licence = boxLicence.Text;
-                        temppes.majitel =  Int32.Parse(boxMajitel.Text);
+                        temppes.Jmeno = boxFirstName_P.Text;
+                        temppes.Plemeno = comboPlemeno.Text;
+                        temppes.Pohlavi = pohlaviCB.Text;
+                        temppes.Fci = fciCombo.Text;
+                        temppes.Datum = datumPicker.SelectedDate.Value.Date;
+                        temppes.Licence = boxLicence.Text;
+                        temppes.Majitel =  Int32.Parse(boxMajitel.Text);
 
-                        temppes.zavod_licence = zavodCB.Text;
+                        temppes.ZavodLicence = zavodCB.Text;
 
-                        temppes.platba =  Int32.Parse(boxPlat.Text);//platba
-                        temppes.doplatit =  Int32.Parse(boxDoplat.Text);//doplatit
-                        temppes.poznamka = boxPozn.Text;//poznamka
+                        temppes.Platba =  Int32.Parse(boxPlat.Text);//platba
+                        temppes.Doplatit =  Int32.Parse(boxDoplat.Text);//doplatit
+                        temppes.Poznamka = boxPozn.Text;//poznamka
 
                         database_P.Add(new Pes(temppes)); //TODO opravit konstruktory a práva !!!
 
-                        Majitel tempmaj = database.GetMajitelById(temppes.majitel);
+                        Majitel tempmaj = database.GetMajitelById(temppes.Majitel);
                         tempmaj.pocet_psu++;
-                        tempmaj.penize += (temppes.platba + temppes.doplatit);
+                        tempmaj.penize += (temppes.Platba + temppes.Doplatit);
 
                         ReloadMajitelData();
                     }
@@ -1745,27 +1745,27 @@ namespace projectRun
                     {
                         Pes temppes = database_P.GetPesById( Int32.Parse(boxId_P.Text));
 
-                        temppes.id = Int32.Parse(boxId_P.Text);
+                        temppes.Id = Int32.Parse(boxId_P.Text);
 
                         // rychlo oprava...
-                        temppes.start_beh1 = Int32.Parse(boxstart_P.Text);
-                        temppes.dvojice0 = Int32.Parse(boxBeh.Text);
+                        temppes.StartBeh1 = Int32.Parse(boxstart_P.Text);
+                        temppes.Dvojice0 = Int32.Parse(boxBeh.Text);
 
-                        temppes.jmeno = boxFirstName_P.Text;
-                        temppes.plemeno = comboPlemeno.Text;
-                        temppes.pohlavi = pohlaviCB.Text;
-                        temppes.fci = fciCombo.Text;
-                        temppes.datum = datumPicker.SelectedDate.Value.Date;
-                        temppes.licence = boxLicence.Text;
-                        temppes.majitel = Int32.Parse(boxMajitel.Text);
+                        temppes.Jmeno = boxFirstName_P.Text;
+                        temppes.Plemeno = comboPlemeno.Text;
+                        temppes.Pohlavi = pohlaviCB.Text;
+                        temppes.Fci = fciCombo.Text;
+                        temppes.Datum = datumPicker.SelectedDate.Value.Date;
+                        temppes.Licence = boxLicence.Text;
+                        temppes.Majitel = Int32.Parse(boxMajitel.Text);
 
-                        temppes.zavod_licence = zavodCB.Text;
+                        temppes.ZavodLicence = zavodCB.Text;
 
-                        temppes.platba = Int32.Parse(boxPlat.Text);//platba
-                        temppes.doplatit = Int32.Parse(boxDoplat.Text);//doplatit
-                        temppes.poznamka = boxPozn.Text;//poznamka
+                        temppes.Platba = Int32.Parse(boxPlat.Text);//platba
+                        temppes.Doplatit = Int32.Parse(boxDoplat.Text);//doplatit
+                        temppes.Poznamka = boxPozn.Text;//poznamka
 
-                        database_P.Edit(temppes.id, temppes);
+                        database_P.Edit(temppes.Id, temppes);
                     }
                 }
                 this.divNewPes.Visibility = System.Windows.Visibility.Collapsed;
@@ -1787,15 +1787,15 @@ namespace projectRun
                 MessageBox.Show("Všechna pole musí být vyplněna!", "Pozor!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             else
             {*/
-                Pes temppes = database_P.GetPesById(((Pes)skupinGrid.SelectedItem).id);
+                Pes temppes = database_P.GetPesById(((Pes)skupinGrid.SelectedItem).Id);
 
-                temppes.start_beh1 = Int32.Parse(boxstart1.Text);
-                temppes.dvojice0 = Int32.Parse(boxbeh1.Text);
-                temppes.barva0 = decka1CB.Text;
+                temppes.StartBeh1 = Int32.Parse(boxstart1.Text);
+                temppes.Dvojice0 = Int32.Parse(boxbeh1.Text);
+                temppes.Barva0 = decka1CB.Text;
 
-                temppes.start_beh2 = Int32.Parse(boxstart2.Text);
-                temppes.dvojice1 = Int32.Parse(boxbeh2.Text);
-                temppes.barva1 = decka2CB.Text;
+                temppes.StartBeh2 = Int32.Parse(boxstart2.Text);
+                temppes.Dvojice1 = Int32.Parse(boxbeh2.Text);
+                temppes.Barva1 = decka2CB.Text;
 
                 this.diveditprehled.Visibility = System.Windows.Visibility.Collapsed;
                 this.EditPesClearFields();
@@ -2073,7 +2073,7 @@ namespace projectRun
             int[] IDs = database_P.GetAllIds(); // seznam ID psů v nové databázi
             foreach(int index in IDs)
             {
-                if (database_P.GetPesById(IDs[index-1]).body1 != 0) // pokud nejsou nulové body byl pes již ohodnocen a jeho index je zapsán do listu ohodnocených psů
+                if (database_P.GetPesById(IDs[index-1]).Body1 != 0) // pokud nejsou nulové body byl pes již ohodnocen a jeho index je zapsán do listu ohodnocených psů
                     ListHodnocenychPsu.Add(IDs[index-1]);
             }
             stavHodnoceni();
@@ -2092,38 +2092,38 @@ namespace projectRun
 
             if (hod_kolo.SelectedIndex == 0)
             {   // hodnocení obou rozhodčích
-                pes.agility_A0 = Convert.ToInt32(hod_agil_A.Text);
-                pes.agility_A1 = Convert.ToInt32(hod_agil_B.Text);
-                pes.speed_A0 = Convert.ToInt32(hod_speed_A.Text);
-                pes.speed_A1 = Convert.ToInt32(hod_speed_B.Text);
-                pes.endurance_A0 = Convert.ToInt32(hod_endur_A.Text);
-                pes.endurance_A1 = Convert.ToInt32(hod_endur_B.Text);
-                pes.enthusiasm_A0 = Convert.ToInt32(hod_enthu_A.Text);
-                pes.enthusiasm_A1 = Convert.ToInt32(hod_enthu_B.Text);
-                pes.intelligence_A0 = Convert.ToInt32(hod_intel_A.Text);
-                pes.intelligence_A1 = Convert.ToInt32(hod_intel_B.Text);
+                pes.AgilityA0 = Convert.ToInt32(hod_agil_A.Text);
+                pes.AgilityA1 = Convert.ToInt32(hod_agil_B.Text);
+                pes.SpeedA0 = Convert.ToInt32(hod_speed_A.Text);
+                pes.SpeedA1 = Convert.ToInt32(hod_speed_B.Text);
+                pes.EnduranceA0 = Convert.ToInt32(hod_endur_A.Text);
+                pes.EnduranceA1 = Convert.ToInt32(hod_endur_B.Text);
+                pes.EnthusiasmA0 = Convert.ToInt32(hod_enthu_A.Text);
+                pes.EnthusiasmA1 = Convert.ToInt32(hod_enthu_B.Text);
+                pes.IntelligenceA0 = Convert.ToInt32(hod_intel_A.Text);
+                pes.IntelligenceA1 = Convert.ToInt32(hod_intel_B.Text);
 
-                pes.body1 = Convert.ToInt32(hod_sum_TOTAL.Text);
+                pes.Body1 = Convert.ToInt32(hod_sum_TOTAL.Text);
             }
             else
             {   // hodnocení obou rozhodčích
-                pes.agility_B0 = Convert.ToInt32(hod_agil_A.Text);
-                pes.agility_B1 = Convert.ToInt32(hod_agil_B.Text);
-                pes.speed_B0 = Convert.ToInt32(hod_speed_A.Text);
-                pes.speed_B1 = Convert.ToInt32(hod_speed_B.Text);
-                pes.endurance_B0 = Convert.ToInt32(hod_endur_A.Text);
-                pes.endurance_B1 = Convert.ToInt32(hod_endur_B.Text);
-                pes.enthusiasm_B0 = Convert.ToInt32(hod_enthu_A.Text);
-                pes.enthusiasm_B1 = Convert.ToInt32(hod_enthu_B.Text);
-                pes.intelligence_B0 = Convert.ToInt32(hod_intel_A.Text);
-                pes.intelligence_B1 = Convert.ToInt32(hod_intel_B.Text);
+                pes.AgilityB0 = Convert.ToInt32(hod_agil_A.Text);
+                pes.AgilityB1 = Convert.ToInt32(hod_agil_B.Text);
+                pes.SpeedB0 = Convert.ToInt32(hod_speed_A.Text);
+                pes.SpeedB1 = Convert.ToInt32(hod_speed_B.Text);
+                pes.EnduranceB0 = Convert.ToInt32(hod_endur_A.Text);
+                pes.EnduranceB1 = Convert.ToInt32(hod_endur_B.Text);
+                pes.EnthusiasmB0 = Convert.ToInt32(hod_enthu_A.Text);
+                pes.EnthusiasmB1 = Convert.ToInt32(hod_enthu_B.Text);
+                pes.IntelligenceB0 = Convert.ToInt32(hod_intel_A.Text);
+                pes.IntelligenceB1 = Convert.ToInt32(hod_intel_B.Text);
 
-                pes.body2 = Convert.ToInt32(hod_sum_TOTAL.Text);
+                pes.Body2 = Convert.ToInt32(hod_sum_TOTAL.Text);
             }
 
-            pes.diskval = hod_dis.Text;
+            pes.Diskval = hod_dis.Text;
 
-            this.database_P.Edit(pes.id, new Pes(pes));
+            this.database_P.Edit(pes.Id, new Pes(pes));
             ReloadPesData();
             clear_hodnoceni();
         }
@@ -2193,21 +2193,21 @@ namespace projectRun
 
                     hod_kolo.SelectedIndex = 0;
 
-                    this.hod_id.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).start_beh1);
+                    this.hod_id.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).StartBeh1);
 
-                    this.hod_agil_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).agility_A0);
-                    this.hod_speed_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).speed_A0);
-                    this.hod_endur_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).endurance_A0);
-                    this.hod_enthu_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).enthusiasm_A0);
-                    this.hod_intel_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).intelligence_A0);
+                    this.hod_agil_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).AgilityA0);
+                    this.hod_speed_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).SpeedA0);
+                    this.hod_endur_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).EnduranceA0);
+                    this.hod_enthu_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).EnthusiasmA0);
+                    this.hod_intel_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).IntelligenceA0);
 
-                    this.hod_agil_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).agility_A1);
-                    this.hod_speed_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).speed_A1);
-                    this.hod_endur_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).endurance_A1);
-                    this.hod_enthu_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).enthusiasm_A1);
-                    this.hod_intel_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).intelligence_A1);
+                    this.hod_agil_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).AgilityA1);
+                    this.hod_speed_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).SpeedA1);
+                    this.hod_endur_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).EnduranceA1);
+                    this.hod_enthu_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).EnthusiasmA1);
+                    this.hod_intel_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).IntelligenceA1);
 
-                    this.hod_dis.Text = ((Pes)skupinGrid.SelectedItem).diskval;
+                    this.hod_dis.Text = ((Pes)skupinGrid.SelectedItem).Diskval;
                 }
                 else
                     MessageBox.Show("Není vybrán žádný pes.\nPsa vyberete kliknutím na položku v seznamu.", "Chyba!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -2227,21 +2227,21 @@ namespace projectRun
 
                     hod_kolo.SelectedIndex = 1;
                     
-                    this.hod_id.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).start_beh1);
+                    this.hod_id.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).StartBeh1);
 
-                    this.hod_agil_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).agility_B0);
-                    this.hod_speed_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).speed_B0);
-                    this.hod_endur_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).endurance_B0);
-                    this.hod_enthu_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).enthusiasm_B0);
-                    this.hod_intel_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).intelligence_B0);
+                    this.hod_agil_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).AgilityB0);
+                    this.hod_speed_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).SpeedB0);
+                    this.hod_endur_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).EnduranceB0);
+                    this.hod_enthu_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).EnthusiasmB0);
+                    this.hod_intel_A.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).IntelligenceB0);
 
-                    this.hod_agil_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).agility_B1);
-                    this.hod_speed_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).speed_B1);
-                    this.hod_endur_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).endurance_B1);
-                    this.hod_enthu_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).enthusiasm_B1);
-                    this.hod_intel_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).intelligence_B1);
+                    this.hod_agil_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).AgilityB1);
+                    this.hod_speed_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).SpeedB1);
+                    this.hod_endur_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).EnduranceB1);
+                    this.hod_enthu_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).EnthusiasmB1);
+                    this.hod_intel_B.Text = Convert.ToString(((Pes)skupinGrid.SelectedItem).IntelligenceB1);
 
-                    this.hod_dis.Text = ((Pes)skupinGrid.SelectedItem).diskval;
+                    this.hod_dis.Text = ((Pes)skupinGrid.SelectedItem).Diskval;
                 }
                 else
                     MessageBox.Show("Není vybrán žádný pes.\nPsa vyberete kliknutím na položku v seznamu.", "Chyba!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -2260,34 +2260,34 @@ namespace projectRun
                     {
                         if (hod_kolo.SelectedIndex == 0)
                         {
-                            this.hod_agil_A.Text = Convert.ToString(temppes.agility_A0);
-                            this.hod_speed_A.Text = Convert.ToString(temppes.speed_A0);
-                            this.hod_endur_A.Text = Convert.ToString(temppes.endurance_A0);
-                            this.hod_enthu_A.Text = Convert.ToString(temppes.enthusiasm_A0);
-                            this.hod_intel_A.Text = Convert.ToString(temppes.intelligence_A0);
+                            this.hod_agil_A.Text = Convert.ToString(temppes.AgilityA0);
+                            this.hod_speed_A.Text = Convert.ToString(temppes.SpeedA0);
+                            this.hod_endur_A.Text = Convert.ToString(temppes.EnduranceA0);
+                            this.hod_enthu_A.Text = Convert.ToString(temppes.EnthusiasmA0);
+                            this.hod_intel_A.Text = Convert.ToString(temppes.IntelligenceA0);
 
-                            this.hod_agil_B.Text = Convert.ToString(temppes.agility_A1);
-                            this.hod_speed_B.Text = Convert.ToString(temppes.speed_A1);
-                            this.hod_endur_B.Text = Convert.ToString(temppes.endurance_A1);
-                            this.hod_enthu_B.Text = Convert.ToString(temppes.enthusiasm_A1);
-                            this.hod_intel_B.Text = Convert.ToString(temppes.intelligence_A1);
+                            this.hod_agil_B.Text = Convert.ToString(temppes.AgilityA1);
+                            this.hod_speed_B.Text = Convert.ToString(temppes.SpeedA1);
+                            this.hod_endur_B.Text = Convert.ToString(temppes.EnduranceA1);
+                            this.hod_enthu_B.Text = Convert.ToString(temppes.EnthusiasmA1);
+                            this.hod_intel_B.Text = Convert.ToString(temppes.IntelligenceA1);
                         }
                         else
                         {
-                            this.hod_agil_A.Text = Convert.ToString(temppes.agility_B0);
-                            this.hod_speed_A.Text = Convert.ToString(temppes.speed_B0);
-                            this.hod_endur_A.Text = Convert.ToString(temppes.endurance_B0);
-                            this.hod_enthu_A.Text = Convert.ToString(temppes.enthusiasm_B0);
-                            this.hod_intel_A.Text = Convert.ToString(temppes.intelligence_B0);
+                            this.hod_agil_A.Text = Convert.ToString(temppes.AgilityB0);
+                            this.hod_speed_A.Text = Convert.ToString(temppes.SpeedB0);
+                            this.hod_endur_A.Text = Convert.ToString(temppes.EnduranceB0);
+                            this.hod_enthu_A.Text = Convert.ToString(temppes.EnthusiasmB0);
+                            this.hod_intel_A.Text = Convert.ToString(temppes.IntelligenceB0);
 
-                            this.hod_agil_B.Text = Convert.ToString(temppes.agility_B1);
-                            this.hod_speed_B.Text = Convert.ToString(temppes.speed_B1);
-                            this.hod_endur_B.Text = Convert.ToString(temppes.endurance_B1);
-                            this.hod_enthu_B.Text = Convert.ToString(temppes.enthusiasm_B1);
-                            this.hod_intel_B.Text = Convert.ToString(temppes.intelligence_B1);
+                            this.hod_agil_B.Text = Convert.ToString(temppes.AgilityB1);
+                            this.hod_speed_B.Text = Convert.ToString(temppes.SpeedB1);
+                            this.hod_endur_B.Text = Convert.ToString(temppes.EnduranceB1);
+                            this.hod_enthu_B.Text = Convert.ToString(temppes.EnthusiasmB1);
+                            this.hod_intel_B.Text = Convert.ToString(temppes.IntelligenceB1);
                         }
 
-                        this.hod_dis.Text = temppes.diskval;
+                        this.hod_dis.Text = temppes.Diskval;
                     }
                     else
                     {
@@ -2365,38 +2365,38 @@ namespace projectRun
             {
                 Pes pes = new Pes(database_P.GetPesByStartNo(pesId));
 
-                if (pes.zavod_licence == "Závod")
+                if (pes.ZavodLicence == "Závod")
                 {
-                    total += pes.agility_A0 = rnd.Next(13, 20);
-                    total += pes.speed_A0 = rnd.Next(13, 20);
-                    total += pes.endurance_A0 = rnd.Next(13, 20);
-                    total += pes.enthusiasm_A0 = rnd.Next(13, 20);
-                    total += pes.intelligence_A0 = rnd.Next(13, 20);
+                    total += pes.AgilityA0 = rnd.Next(13, 20);
+                    total += pes.SpeedA0 = rnd.Next(13, 20);
+                    total += pes.EnduranceA0 = rnd.Next(13, 20);
+                    total += pes.EnthusiasmA0 = rnd.Next(13, 20);
+                    total += pes.IntelligenceA0 = rnd.Next(13, 20);
 
-                    total += pes.agility_A1 = rnd.Next(13, 20);
-                    total += pes.speed_A1 = rnd.Next(13, 20);
-                    total += pes.endurance_A1 = rnd.Next(13, 20);
-                    total += pes.enthusiasm_A1 = rnd.Next(13, 20);
-                    total += pes.intelligence_A1 = rnd.Next(13, 20);
-                    pes.body1 = total;
+                    total += pes.AgilityA1 = rnd.Next(13, 20);
+                    total += pes.SpeedA1 = rnd.Next(13, 20);
+                    total += pes.EnduranceA1 = rnd.Next(13, 20);
+                    total += pes.EnthusiasmA1 = rnd.Next(13, 20);
+                    total += pes.IntelligenceA1 = rnd.Next(13, 20);
+                    pes.Body1 = total;
                     total = 0;
                 }
                 else
                 {
-                    pes.agility_A0 = 0;
-                    pes.speed_A0 = 0;
-                    pes.endurance_A0 = 0;
-                    pes.enthusiasm_A0 = 0;
-                    pes.intelligence_A0 = 0;
+                    pes.AgilityA0 = 0;
+                    pes.SpeedA0 = 0;
+                    pes.EnduranceA0 = 0;
+                    pes.EnthusiasmA0 = 0;
+                    pes.IntelligenceA0 = 0;
 
-                    pes.agility_A1 = 0;
-                    pes.speed_A1 = 0;
-                    pes.endurance_A1 = 0;
-                    pes.enthusiasm_A1 = 0;
-                    pes.intelligence_A1 = 0;
+                    pes.AgilityA1 = 0;
+                    pes.SpeedA1 = 0;
+                    pes.EnduranceA1 = 0;
+                    pes.EnthusiasmA1 = 0;
+                    pes.IntelligenceA1 = 0;
                 }
 
-                database_P.Edit(pes.id, new Pes(pes));
+                database_P.Edit(pes.Id, new Pes(pes));
             }
 
             skupinGridPesData();
@@ -2418,38 +2418,38 @@ namespace projectRun
             {
                 Pes pes = database_P.GetPesByStartNo(pesId);
 
-                if (pes.zavod_licence == "Závod")
+                if (pes.ZavodLicence == "Závod")
                 {
-                    total += pes.agility_B0 = rnd.Next(13, 20);
-                    total += pes.speed_B0 = rnd.Next(13, 20);
-                    total += pes.endurance_B0 = rnd.Next(13, 20);
-                    total += pes.enthusiasm_B0 = rnd.Next(13, 20);
-                    total += pes.intelligence_B0 = rnd.Next(13, 20);
+                    total += pes.AgilityB0 = rnd.Next(13, 20);
+                    total += pes.SpeedB0 = rnd.Next(13, 20);
+                    total += pes.EnduranceB0 = rnd.Next(13, 20);
+                    total += pes.EnthusiasmB0 = rnd.Next(13, 20);
+                    total += pes.IntelligenceB0 = rnd.Next(13, 20);
 
-                    total += pes.agility_B1 = rnd.Next(13, 20);
-                    total += pes.speed_B1 = rnd.Next(13, 20);
-                    total += pes.endurance_B1 = rnd.Next(13, 20);
-                    total += pes.enthusiasm_B1 = rnd.Next(13, 20);
-                    total += pes.intelligence_B1 = rnd.Next(13, 20);
-                    pes.body2 = total;
+                    total += pes.AgilityB1 = rnd.Next(13, 20);
+                    total += pes.SpeedB1 = rnd.Next(13, 20);
+                    total += pes.EnduranceB1 = rnd.Next(13, 20);
+                    total += pes.EnthusiasmB1 = rnd.Next(13, 20);
+                    total += pes.IntelligenceB1 = rnd.Next(13, 20);
+                    pes.Body2 = total;
                     total = 0;
                 }
                 else
                 {
-                    pes.agility_B0 = 0;
-                    pes.speed_B0 = 0;
-                    pes.endurance_B0 = 0;
-                    pes.enthusiasm_B0 = 0;
-                    pes.intelligence_B0 = 0;
+                    pes.AgilityB0 = 0;
+                    pes.SpeedB0 = 0;
+                    pes.EnduranceB0 = 0;
+                    pes.EnthusiasmB0 = 0;
+                    pes.IntelligenceB0 = 0;
 
-                    pes.agility_B1 = 0;
-                    pes.speed_B1 = 0;
-                    pes.endurance_B1 = 0;
-                    pes.enthusiasm_B1 = 0;
-                    pes.intelligence_B1 = 0;
+                    pes.AgilityB1 = 0;
+                    pes.SpeedB1 = 0;
+                    pes.EnduranceB1 = 0;
+                    pes.EnthusiasmB1 = 0;
+                    pes.IntelligenceB1 = 0;
                 }
 
-                database_P.Edit(pes.id, new Pes(pes));
+                database_P.Edit(pes.Id, new Pes(pes));
             }
 
             skupinGridPesData();
