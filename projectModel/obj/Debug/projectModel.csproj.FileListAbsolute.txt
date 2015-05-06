@@ -41,3 +41,4 @@ C:\Users\Ragua\Documents\GitHub\Cours_database1\projectModel\bin\Debug\projectMo
 C:\Users\Ragua\Documents\GitHub\Cours_database1\projectModel\bin\Debug\projectModel.pdb
 C:\Users\Ragua\Documents\GitHub\Cours_database1\projectModel\obj\Debug\projectModel.dll
 C:\Users\Ragua\Documents\GitHub\Cours_database1\projectModel\obj\Debug\projectModel.pdb
+D:\CPP_projekty\Cours_database\projectModel\obj\Debug\projectModel.csprojResolveAssemblyReference.cache

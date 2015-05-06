@@ -240,15 +240,10 @@ namespace projectModel
             {
                 case "ROZPIS":
                     (range.Cells[1, 1] as Excel.Range).Value2 = "Č.běhu";
-                    (range.Cells[1, 1] as Excel.Range).BorderAround2();
                     (range.Cells[1, 2] as Excel.Range).Value2 = "Plemeno";
-                    (range.Cells[1, 2] as Excel.Range).BorderAround2();
                     (range.Cells[1, 3] as Excel.Range).Value2 = "Dečka";
-                    (range.Cells[1, 3] as Excel.Range).BorderAround2();
                     (range.Cells[1, 4] as Excel.Range).Value2 = "Číslo psa";
-                    (range.Cells[1, 4] as Excel.Range).BorderAround2();
                     (range.Cells[1, 5] as Excel.Range).Value2 = "Jméno psa";
-                    (range.Cells[1, 5] as Excel.Range).BorderAround2();
 
                     dvojice = dataP.GetAllDvojice();
                     i = 1;
@@ -258,11 +253,8 @@ namespace projectModel
                         if (temp == null)
                             continue;
                         (range.Cells[i + 1, 1] as Excel.Range).Value2 = temp.Dvojice0;
-                        (range.Cells[i + 1, 1] as Excel.Range).BorderAround2();
                         (range.Cells[i + 1, 2] as Excel.Range).Value2 = temp.Plemeno;
-                        (range.Cells[i + 1, 2] as Excel.Range).BorderAround2();
                         (range.Cells[i + 1, 3] as Excel.Range).Value2 = temp.Barva0;
-                        (range.Cells[i + 1, 3] as Excel.Range).BorderAround2();
                         if (temp.ZavodLicence == "Licence")
                         {
                             pomoc_cislo = "L " + Convert.ToString(temp.StartBeh1);
@@ -272,9 +264,7 @@ namespace projectModel
                             pomoc_cislo = Convert.ToString(temp.StartBeh1);
                         }
                         (range.Cells[i + 1, 4] as Excel.Range).Value2 = pomoc_cislo;
-                        (range.Cells[i + 1, 4] as Excel.Range).BorderAround2();
                         (range.Cells[i + 1, 5] as Excel.Range).Value2 = temp.Jmeno;
-                        (range.Cells[i + 1, 5] as Excel.Range).BorderAround2();
 
                         ++i;
 
@@ -282,11 +272,8 @@ namespace projectModel
                         if (temp == null)
                             continue;
                         (range.Cells[i + 1, 1] as Excel.Range).Value2 = temp.Dvojice0;
-                        (range.Cells[i + 1, 1] as Excel.Range).BorderAround2();
                         (range.Cells[i + 1, 2] as Excel.Range).Value2 = temp.Plemeno;
-                        (range.Cells[i + 1, 2] as Excel.Range).BorderAround2();
                         (range.Cells[i + 1, 3] as Excel.Range).Value2 = temp.Barva0;
-                        (range.Cells[i + 1, 3] as Excel.Range).BorderAround2();
                         if (temp.ZavodLicence == "Licence")
                         {
                             pomoc_cislo = "L " + Convert.ToString(temp.StartBeh1);
@@ -296,26 +283,23 @@ namespace projectModel
                             pomoc_cislo = Convert.ToString(temp.StartBeh1);
                         }
                         (range.Cells[i + 1, 4] as Excel.Range).Value2 = pomoc_cislo;
-                        (range.Cells[i + 1, 4] as Excel.Range).BorderAround2();
                         (range.Cells[i + 1, 5] as Excel.Range).Value2 = temp.Jmeno;
-                        (range.Cells[i + 1, 5] as Excel.Range).BorderAround2();
 
                         ++i;
                     }
+                    for (int z = 1; z < i + 1; z++)
+                        for (int y = 1; y < 6; y++)
+                            (range.Cells[z, y] as Excel.Range).BorderAround2();
+
                     worksheet.Columns.AutoFit();
                     break;
 
                 case "ROZPIS_2":
                     (range.Cells[1, 1] as Excel.Range).Value2 = "Č.běhu";
-                    (range.Cells[1, 1] as Excel.Range).BorderAround2();
                     (range.Cells[1, 2] as Excel.Range).Value2 = "Plemeno";
-                    (range.Cells[1, 2] as Excel.Range).BorderAround2();
                     (range.Cells[1, 3] as Excel.Range).Value2 = "Dečka";
-                    (range.Cells[1, 3] as Excel.Range).BorderAround2();
                     (range.Cells[1, 4] as Excel.Range).Value2 = "Číslo psa";
-                    (range.Cells[1, 4] as Excel.Range).BorderAround2();
                     (range.Cells[1, 5] as Excel.Range).Value2 = "Jméno psa";
-                    (range.Cells[1, 5] as Excel.Range).BorderAround2();
             
                     dvojice = dataP.GetAllDvojice_1();
                     i = 1;
@@ -325,11 +309,8 @@ namespace projectModel
                         if (temp == null)
                             continue;
                         (range.Cells[i + 1, 1] as Excel.Range).Value2 = temp.Dvojice1;
-                        (range.Cells[i + 1, 1] as Excel.Range).BorderAround2();
                         (range.Cells[i + 1, 2] as Excel.Range).Value2 = temp.Plemeno;
-                        (range.Cells[i + 1, 2] as Excel.Range).BorderAround2();
                         (range.Cells[i + 1, 3] as Excel.Range).Value2 = temp.Barva1;
-                        (range.Cells[i + 1, 3] as Excel.Range).BorderAround2();
                         if (temp.ZavodLicence == "Licence")
                         {
                             pomoc_cislo = "L " + Convert.ToString(temp.StartBeh1);
@@ -339,19 +320,14 @@ namespace projectModel
                             pomoc_cislo = Convert.ToString(temp.StartBeh1);
                         }
                         (range.Cells[i + 1, 4] as Excel.Range).Value2 = pomoc_cislo;
-                        (range.Cells[i + 1, 4] as Excel.Range).BorderAround2();
                         (range.Cells[i + 1, 5] as Excel.Range).Value2 = temp.Jmeno;
-                        (range.Cells[i + 1, 5] as Excel.Range).BorderAround2();
                         ++i;
                         temp = dataP.GetPesByDvojice_1(x, "bílá");
                         if (temp == null)
                             continue;
                         (range.Cells[i + 1, 1] as Excel.Range).Value2 = temp.Dvojice1;
-                        (range.Cells[i + 1, 1] as Excel.Range).BorderAround2();
                         (range.Cells[i + 1, 2] as Excel.Range).Value2 = temp.Plemeno;
-                        (range.Cells[i + 1, 2] as Excel.Range).BorderAround2();
                         (range.Cells[i + 1, 3] as Excel.Range).Value2 = temp.Barva1;
-                        (range.Cells[i + 1, 3] as Excel.Range).BorderAround2();
                         if (temp.ZavodLicence == "Licence")
                         {
                             pomoc_cislo = "L " + Convert.ToString(temp.StartBeh1);
@@ -361,46 +337,32 @@ namespace projectModel
                             pomoc_cislo = Convert.ToString(temp.StartBeh1);
                         }
                         (range.Cells[i + 1, 4] as Excel.Range).Value2 = pomoc_cislo;
-                        (range.Cells[i + 1, 4] as Excel.Range).BorderAround2();
                         (range.Cells[i + 1, 5] as Excel.Range).Value2 = temp.Jmeno;
-                        (range.Cells[i + 1, 5] as Excel.Range).BorderAround2();
                         ++i;
+                        for (int z = 1; z < i + 1; z++)
+                            for (int y = 1; y < 6; y++)
+                                (range.Cells[z, y] as Excel.Range).BorderAround2();
 
+                        worksheet.Columns.AutoFit();
                     }
                     break;
                 case "TABULKY":
                     n = 1;
 
                     (range.Cells[1, 1] as Excel.Range).Value2 = "Č.běhu";
-                    (range.Cells[1, 1] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 2] as Excel.Range).Value2 = "Dečka";
-                    (range.Cells[1, 2] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 3] as Excel.Range).Value2 = "Plemeno";
-                    (range.Cells[1, 3] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 4] as Excel.Range).Value2 = "Číslo psa";
-                    (range.Cells[1, 4] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 5] as Excel.Range).Value2 = "Obratnost";
-                    (range.Cells[1, 5] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 6] as Excel.Range).Value2 = "Rychlost";
-                    (range.Cells[1, 6] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 7] as Excel.Range).Value2 = "Vytrvalost";
-                    (range.Cells[1, 7] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 8] as Excel.Range).Value2 = "Úsilí";
-                    (range.Cells[1, 8] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 9] as Excel.Range).Value2 = "Inteligence";
-                    (range.Cells[1, 9] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 10] as Excel.Range).Value2 = "Součet";
-                    (range.Cells[1, 10] as Excel.Range).BorderAround2();
-            
+
+                    for (int y = 1; y < 11; y++)
+                        (range.Cells[1, y] as Excel.Range).BorderAround2();
+
                     dvojice = dataP.GetAllDvojice();
                     i = 1;
                     foreach (int x in dvojice)
@@ -410,11 +372,8 @@ namespace projectModel
                             continue;
 
                         (range.Cells[i + n, 1] as Excel.Range).Value2 = temp.Dvojice0;
-                        (range.Cells[i + n, 1] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 2] as Excel.Range).Value2 = temp.Barva0;
-                        (range.Cells[i + n, 2] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 3] as Excel.Range).Value2 = temp.Plemeno;
-                        (range.Cells[i + n, 3] as Excel.Range).BorderAround2();
                         if (temp.ZavodLicence == "Licence")
                         {
                             pomoc_cislo = "L " + Convert.ToString(temp.StartBeh1);
@@ -424,14 +383,10 @@ namespace projectModel
                             pomoc_cislo = Convert.ToString(temp.StartBeh1);
                         }
                         (range.Cells[i + n, 4] as Excel.Range).Value2 = pomoc_cislo;
-                        (range.Cells[i + n, 4] as Excel.Range).BorderAround2();
 
-                        (range.Cells[i + n, 5] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 6] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 7] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 8] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 9] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 10] as Excel.Range).BorderAround2();
+                        for (int y = 1; y < 11; y++)
+                            (range.Cells[i + n, y] as Excel.Range).BorderAround2();
+
                         ++i;
 
                         temp = dataP.GetPesByDvojice(x, "bílá");
@@ -442,11 +397,8 @@ namespace projectModel
                         }
 
                         (range.Cells[i + n, 1] as Excel.Range).Value2 = temp.Dvojice0;
-                        (range.Cells[i + n, 1] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 2] as Excel.Range).Value2 = temp.Barva0;
-                        (range.Cells[i + n, 2] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 3] as Excel.Range).Value2 = temp.Plemeno;
-                        (range.Cells[i + n, 3] as Excel.Range).BorderAround2();
                         if (temp.ZavodLicence == "Licence")
                         {
                             pomoc_cislo = "L " + Convert.ToString(temp.StartBeh1);
@@ -456,14 +408,10 @@ namespace projectModel
                             pomoc_cislo = Convert.ToString(temp.StartBeh1);
                         }
                         (range.Cells[i + n, 4] as Excel.Range).Value2 = pomoc_cislo;
-                        (range.Cells[i + n, 4] as Excel.Range).BorderAround2();
 
-                        (range.Cells[i + n, 5] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 6] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 7] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 8] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 9] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 10] as Excel.Range).BorderAround2();
+                        for (int y = 1; y < 11; y++)
+                            (range.Cells[i + n, y] as Excel.Range).BorderAround2();
+
                         ++i;
                         ++n;
                     }
@@ -472,34 +420,18 @@ namespace projectModel
                     n = 1;
 
                     (range.Cells[1, 1] as Excel.Range).Value2 = "Č.běhu";
-                    (range.Cells[1, 1] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 2] as Excel.Range).Value2 = "Dečka";
-                    (range.Cells[1, 2] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 3] as Excel.Range).Value2 = "Plemeno";
-                    (range.Cells[1, 3] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 4] as Excel.Range).Value2 = "Číslo psa";
-                    (range.Cells[1, 4] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 5] as Excel.Range).Value2 = "Obratnost";
-                    (range.Cells[1, 5] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 6] as Excel.Range).Value2 = "Rychlost";
-                    (range.Cells[1, 6] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 7] as Excel.Range).Value2 = "Vytrvalost";
-                    (range.Cells[1, 7] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 8] as Excel.Range).Value2 = "Úsilí";
-                    (range.Cells[1, 8] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 9] as Excel.Range).Value2 = "Inteligence";
-                    (range.Cells[1, 9] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 10] as Excel.Range).Value2 = "Součet";
-                    (range.Cells[1, 10] as Excel.Range).BorderAround2();
+
+                    for (int y = 1; y < 11; y++)
+                        (range.Cells[1, y] as Excel.Range).BorderAround2();
 
                     dvojice = dataP.GetAllDvojice_1();
                     i = 1;
@@ -510,11 +442,8 @@ namespace projectModel
                             continue;
 
                         (range.Cells[i + n, 1] as Excel.Range).Value2 = temp.Dvojice1;
-                        (range.Cells[i + n, 1] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 2] as Excel.Range).Value2 = temp.Barva1;
-                        (range.Cells[i + n, 2] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 3] as Excel.Range).Value2 = temp.Plemeno;
-                        (range.Cells[i + n, 3] as Excel.Range).BorderAround2();
                         if (temp.ZavodLicence == "Licence")
                         {
                             pomoc_cislo = "L " + Convert.ToString(temp.StartBeh1);
@@ -524,14 +453,10 @@ namespace projectModel
                             pomoc_cislo = Convert.ToString(temp.StartBeh1);
                         }
                         (range.Cells[i + n, 4] as Excel.Range).Value2 = pomoc_cislo;
-                        (range.Cells[i + n, 4] as Excel.Range).BorderAround2();
 
-                        (range.Cells[i + n, 5] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 6] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 7] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 8] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 9] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 10] as Excel.Range).BorderAround2();
+                        for (int y = 1; y < 11; y++)
+                            (range.Cells[i + n, y] as Excel.Range).BorderAround2();
+
                         ++i;
 
                         temp = dataP.GetPesByDvojice_1(x, "bílá");
@@ -542,11 +467,8 @@ namespace projectModel
                         }
 
                         (range.Cells[i + n, 1] as Excel.Range).Value2 = temp.Dvojice1;
-                        (range.Cells[i + n, 1] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 2] as Excel.Range).Value2 = temp.Barva1;
-                        (range.Cells[i + n, 2] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 3] as Excel.Range).Value2 = temp.Plemeno;
-                        (range.Cells[i + n, 3] as Excel.Range).BorderAround2();
                         if (temp.ZavodLicence == "Licence")
                         {
                             pomoc_cislo = "L " + Convert.ToString(temp.StartBeh1);
@@ -556,14 +478,10 @@ namespace projectModel
                             pomoc_cislo = Convert.ToString(temp.StartBeh1);
                         }
                         (range.Cells[i + n, 4] as Excel.Range).Value2 = pomoc_cislo;
-                        (range.Cells[i + n, 4] as Excel.Range).BorderAround2();
 
-                        (range.Cells[i + n, 5] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 6] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 7] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 8] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 9] as Excel.Range).BorderAround2();
-                        (range.Cells[i + n, 10] as Excel.Range).BorderAround2();
+                        for (int y = 1; y < 11; y++)
+                            (range.Cells[i + n, y] as Excel.Range).BorderAround2();
+
                         ++i;
                         ++n;
                     }
@@ -572,53 +490,29 @@ namespace projectModel
                     n = 1;
 
                     (range.Cells[1, 1] as Excel.Range).Value2 = "Č.psa";
-                    (range.Cells[1, 1] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 2] as Excel.Range).Value2 = "Jméno psa";
-                    (range.Cells[1, 2] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 3] as Excel.Range).Value2 = "Plemeno";
-                    (range.Cells[1, 3] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 4] as Excel.Range).Value2 = "Pohlaví";
-                    (range.Cells[1, 4] as Excel.Range).BorderAround2();
 
                     // první rozhodčí
 
                     (range.Cells[1, 5] as Excel.Range).Value2 = "Obratnost";
-                    (range.Cells[1, 5] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 6] as Excel.Range).Value2 = "Rychlost";
-                    (range.Cells[1, 6] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 7] as Excel.Range).Value2 = "Vytrvalost";
-                    (range.Cells[1, 7] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 8] as Excel.Range).Value2 = "Úsilí";
-                    (range.Cells[1, 8] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 9] as Excel.Range).Value2 = "Inteligence";
-                    (range.Cells[1, 9] as Excel.Range).BorderAround2();
 
                     // druhý rozhodčí
 
                     (range.Cells[1, 10] as Excel.Range).Value2 = "Obratnost";
-                    (range.Cells[1, 10] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 11] as Excel.Range).Value2 = "Rychlost";
-                    (range.Cells[1, 11] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 12] as Excel.Range).Value2 = "Vytrvalost";
-                    (range.Cells[1, 12] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 13] as Excel.Range).Value2 = "Úsilí";
-                    (range.Cells[1, 13] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 14] as Excel.Range).Value2 = "Inteligence";
-                    (range.Cells[1, 14] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 15] as Excel.Range).Value2 = "Součet";
-                    (range.Cells[1, 15] as Excel.Range).BorderAround2();
+
+                    for (int y = 1; y < 16; y++)
+                        (range.Cells[1, y] as Excel.Range).BorderAround2();
 
                     dvojice = dataP.GetAllStartList();
                     i = 1;
@@ -637,38 +531,27 @@ namespace projectModel
                             pomoc_cislo = Convert.ToString(temp.StartBeh1);
                         }
                         (range.Cells[i + n, 1] as Excel.Range).Value2 = pomoc_cislo;
-                        (range.Cells[i + n, 1] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 2] as Excel.Range).Value2 = temp.Jmeno;
-                        (range.Cells[i + n, 2] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 3] as Excel.Range).Value2 = temp.Plemeno;
-                        (range.Cells[i + n, 3] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 4] as Excel.Range).Value2 = temp.Pohlavi;
-                        (range.Cells[i + n, 4] as Excel.Range).BorderAround2();
 
                         (range.Cells[i + n, 5] as Excel.Range).Value2 = temp.AgilityA0;
-                        (range.Cells[i + n, 5] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 6] as Excel.Range).Value2 = temp.SpeedA0;
-                        (range.Cells[i + n, 6] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 7] as Excel.Range).Value2 = temp.EnduranceA0;
-                        (range.Cells[i + n, 7] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 8] as Excel.Range).Value2 = temp.EnthusiasmA0;
-                        (range.Cells[i + n, 8] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 9] as Excel.Range).Value2 = temp.IntelligenceA0;
-                        (range.Cells[i + n, 9] as Excel.Range).BorderAround2();
 
                         (range.Cells[i + n, 10] as Excel.Range).Value2 = temp.AgilityA1;
-                        (range.Cells[i + n, 10] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 11] as Excel.Range).Value2 = temp.SpeedA1;
-                        (range.Cells[i + n, 11] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 12] as Excel.Range).Value2 = temp.EnduranceA1;
-                        (range.Cells[i + n, 12] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 13] as Excel.Range).Value2 = temp.EnthusiasmA1;
-                        (range.Cells[i + n, 13] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 14] as Excel.Range).Value2 = temp.IntelligenceA1;
-                        (range.Cells[i + n, 14] as Excel.Range).BorderAround2();
 
                         (range.Cells[i + n, 15] as Excel.Range).Value2 = temp.Body1;
-                        (range.Cells[i + n, 15] as Excel.Range).BorderAround2();
+
+                        for (int y = 1; y < 16; y++)
+                            (range.Cells[i + n, y] as Excel.Range).BorderAround2();
+
                         ++i;
                     }
                     break;
@@ -676,59 +559,31 @@ namespace projectModel
                     n = 1;
 
                     (range.Cells[1, 1] as Excel.Range).Value2 = "Č.psa";
-                    (range.Cells[1, 1] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 2] as Excel.Range).Value2 = "Jméno psa";
-                    (range.Cells[1, 2] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 3] as Excel.Range).Value2 = "Plemeno";
-                    (range.Cells[1, 3] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 4] as Excel.Range).Value2 = "Pohlaví";
-                    (range.Cells[1, 4] as Excel.Range).BorderAround2();
 
                     // první rozhodčí
 
                     (range.Cells[1, 5] as Excel.Range).Value2 = "Obratnost";
-                    (range.Cells[1, 5] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 6] as Excel.Range).Value2 = "Rychlost";
-                    (range.Cells[1, 6] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 7] as Excel.Range).Value2 = "Vytrvalost";
-                    (range.Cells[1, 7] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 8] as Excel.Range).Value2 = "Úsilí";
-                    (range.Cells[1, 8] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 9] as Excel.Range).Value2 = "Inteligence";
-                    (range.Cells[1, 9] as Excel.Range).BorderAround2();
 
                     // druhý rozhodčí
 
                     (range.Cells[1, 10] as Excel.Range).Value2 = "Obratnost";
-                    (range.Cells[1, 10] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 11] as Excel.Range).Value2 = "Rychlost";
-                    (range.Cells[1, 11] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 12] as Excel.Range).Value2 = "Vytrvalost";
-                    (range.Cells[1, 12] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 13] as Excel.Range).Value2 = "Úsilí";
-                    (range.Cells[1, 13] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 14] as Excel.Range).Value2 = "Inteligence";
-                    (range.Cells[1, 14] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 15] as Excel.Range).Value2 = "Součet";
-                    (range.Cells[1, 15] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 16] as Excel.Range).Value2 = "Celkový součet";
-                    (range.Cells[1, 16] as Excel.Range).BorderAround2();
-
                     (range.Cells[1, 17] as Excel.Range).Value2 = "Umístění ve skupině";
-                    (range.Cells[1, 17] as Excel.Range).BorderAround2();
+
+                    for (int y = 1; y < 18; y++)
+                        (range.Cells[1, y] as Excel.Range).BorderAround2();
 
                     dvojice = dataP.GetAllStartList();
                     i = 1;
@@ -747,44 +602,31 @@ namespace projectModel
                             pomoc_cislo = Convert.ToString(temp.StartBeh1);
                         }
                         (range.Cells[i + n, 1] as Excel.Range).Value2 = pomoc_cislo;
-                        (range.Cells[i + n, 1] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 2] as Excel.Range).Value2 = temp.Jmeno;
-                        (range.Cells[i + n, 2] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 3] as Excel.Range).Value2 = temp.Plemeno;
-                        (range.Cells[i + n, 3] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 4] as Excel.Range).Value2 = temp.Pohlavi;
-                        (range.Cells[i + n, 4] as Excel.Range).BorderAround2();
 
                         (range.Cells[i + n, 5] as Excel.Range).Value2 = temp.AgilityB0;
-                        (range.Cells[i + n, 5] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 6] as Excel.Range).Value2 = temp.SpeedB0;
-                        (range.Cells[i + n, 6] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 7] as Excel.Range).Value2 = temp.EnduranceB0;
-                        (range.Cells[i + n, 7] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 8] as Excel.Range).Value2 = temp.EnthusiasmB0;
-                        (range.Cells[i + n, 8] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 9] as Excel.Range).Value2 = temp.IntelligenceB0;
-                        (range.Cells[i + n, 9] as Excel.Range).BorderAround2();
 
                         (range.Cells[i + n, 10] as Excel.Range).Value2 = temp.AgilityB1;
-                        (range.Cells[i + n, 10] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 11] as Excel.Range).Value2 = temp.SpeedB1;
-                        (range.Cells[i + n, 11] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 12] as Excel.Range).Value2 = temp.EnduranceB1;
-                        (range.Cells[i + n, 12] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 13] as Excel.Range).Value2 = temp.EnthusiasmB1;
-                        (range.Cells[i + n, 13] as Excel.Range).BorderAround2();
                         (range.Cells[i + n, 14] as Excel.Range).Value2 = temp.IntelligenceB1;
-                        (range.Cells[i + n, 14] as Excel.Range).BorderAround2();
 
                         (range.Cells[i + n, 15] as Excel.Range).Value2 = temp.Body2;
-                        (range.Cells[i + n, 15] as Excel.Range).BorderAround2();
 
                         (range.Cells[i + n, 16] as Excel.Range).Value2 = temp.Body1 + temp.Body2;
-                        (range.Cells[i + n, 16] as Excel.Range).BorderAround2();
 
                         (range.Cells[i + n, 17] as Excel.Range).Value2 = temp.Skupina;
-                        (range.Cells[i + n, 17] as Excel.Range).BorderAround2();
+
+                        for (int y = 1; y < 18; y++)
+                            (range.Cells[i + n, y] as Excel.Range).BorderAround2();
+
                         ++i;
                     }
                     break;
