@@ -110,11 +110,16 @@
         <!--tabulka psů-->
         <DataGrid MouseDoubleClick="editPes_OnClick" x:Name="DGV_P" Visibility="Collapsed" FontSize="12" IsReadOnly="True" Grid.Row="3" HeadersVisibility="Column" AutoGenerateColumns="False" Margin="0,20,0,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.StartBeh1)}" Header="Číslo psa"/>
+                <!--<DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.StartBeh1)}" Header="Číslo psa"/>
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Jmeno)}" Header="Jméno" MinWidth="200"/>
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Plemeno)}" Header="Plemeno" MinWidth="150"/>
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Pohlavi)}" Header="Pohlaví"/>
-                <!--<DataGridTextColumn Binding="{Binding Path=fci}" Header="FCI" MinWidth="70"/>-->
+                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Pohlavi)}" Header="Pohlaví"/>-->
+                
+                <DataGridTextColumn Binding="{Binding Path=StartBeh1}" Header="Číslo psa"/>
+                <DataGridTextColumn Binding="{Binding Path=Jmeno}" Header="Jméno" MinWidth="200"/>
+                <DataGridTextColumn Binding="{Binding Path=Plemeno}" Header="Plemeno" MinWidth="150"/>
+                <DataGridTextColumn Binding="{Binding Path=Pohlavi}" Header="Pohlaví"/>
+                
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Datum), StringFormat=d.M.yyyy}" Header="Narození"/>
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.ZavodLicence)}" Header="Z-L" MinWidth="50">
                     <DataGridTextColumn.ElementStyle>
@@ -134,11 +139,16 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Licence)}" Header="Licence"/>
+                <!--<DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Licence)}" Header="Licence"/>
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.MajitelJmeno)}" Header="Majitel"/>
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Platba)}" Header="Platba"/>
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Doplatit)}" Header="Doplatit"/>
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Poznamka)}" Header="Skupina"/>
+                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Poznamka)}" Header="Skupina"/>-->
+                <DataGridTextColumn Binding="{Binding Path=Licence}" Header="Licence"/>
+                <DataGridTextColumn Binding="{Binding Path=MajitelJmeno}" Header="Majitel"/>
+                <DataGridTextColumn Binding="{Binding Path=Platba}" Header="Platba"/>
+                <DataGridTextColumn Binding="{Binding Path=Doplatit}" Header="Doplatit"/>
+                <DataGridTextColumn Binding="{Binding Path=Poznamka}" Header="Skupina"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
@@ -169,7 +179,7 @@
         <!--přehledová tabulka psů-->
         <DataGrid MouseDoubleClick="editPesprehled" x:Name="skupinGrid" Visibility="Collapsed" HeadersVisibility="Column" FontSize="12" Canvas.Left="5" Canvas.Top="5" Grid.Row="1" Grid.RowSpan="3" ItemsSource="{Binding}" IsReadOnly="True" AutoGenerateColumns="False" Margin="0,20,0,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.StartBeh1)}" Header="Beh1" Width="30"/>
+                <!--<DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.StartBeh1)}" Header="Beh1" Width="30"/>
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Dvojice0)}" Header="Dvojice1" Width="30"/>
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Barva0)}" Header="Barva1"/>
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.StartBeh2)}" Header="Beh2" Width="30"/>
@@ -178,7 +188,17 @@
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Skupina)}" Header="Umístění" Width="30"/>
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Jmeno)}" Header="Jméno" MinWidth="200"/>
                 <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Plemeno)}" Header="Plemeno" MinWidth="150"/>
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.ZavodLicence)}" Header="Z-L" MinWidth="50">
+                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.ZavodLicence)}" Header="Z-L" MinWidth="50">-->
+                <DataGridTextColumn Binding="{Binding Path=StartBeh1}" Header="Beh1" Width="30"/>
+                <DataGridTextColumn Binding="{Binding Path=Dvojice0}" Header="Dvojice1" Width="30"/>
+                <DataGridTextColumn Binding="{Binding Path=Barva0}" Header="Barva1"/>
+                <DataGridTextColumn Binding="{Binding Path=StartBeh2}" Header="Beh2" Width="30"/>
+                <DataGridTextColumn Binding="{Binding Path=Dvojice1}" Header="Dvojice2" Width="30"/>
+                <DataGridTextColumn Binding="{Binding Path=Barva1}" Header="Barva2"/>
+                <DataGridTextColumn Binding="{Binding Path=Skupina}" Header="Umístění" Width="30"/>
+                <DataGridTextColumn Binding="{Binding Path=Jmeno}" Header="Jméno" MinWidth="200"/>
+                <DataGridTextColumn Binding="{Binding Path=Plemeno}" Header="Plemeno" MinWidth="150"/>
+                <DataGridTextColumn Binding="{Binding Path=ZavodLicence}" Header="Z-L" MinWidth="50">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Foreground" Value="Black"/>
@@ -196,7 +216,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=majitel_jmeno}" Header="Majitel" Width="150">
+                <DataGridTextColumn Binding="{Binding Path=MajitelJmeno}" Header="Majitel" Width="150">
                     <!--<DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Style.Triggers>
@@ -213,50 +233,50 @@
                 <!--<DataGridTextColumn Binding="{Binding Path=skupina}" Header="Sk."/>-->
 
                 <!--body první rozhodčí první běh-->
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.AgilityA0)}" Header="Obratnost" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.SpeedA0)}" Header="Rychlost" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.EnduranceA0)}" Header="Vytrvalost" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.EnthusiasmA0)}" Header="Nadšení" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.IntelligenceA0)}" Header="Inteligence" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=AgilityA0}" Header="Obratnost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=SpeedA0}" Header="Rychlost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=EnduranceA0}" Header="Vytrvalost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=EnthusiasmA0}" Header="Nadšení" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=IntelligenceA0}" Header="Inteligence" Width="25"/>
 
                 <DataGridTextColumn/>
 
                 <!--body druhý rozhodčí první běh-->
-                <DataGridTextColumn Binding="{Binding Path=agility_A1}" Header="Obratnost" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=speed_A1}" Header="Rychlost" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=endurance_A1}" Header="Vytrvalost" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=enthusiasm_A1}" Header="Nadšení" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=intelligence_A1}" Header="Inteligence" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=AgilityA1}" Header="Obratnost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=SpeedA1}" Header="Rychlost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=EnduranceA1}" Header="Vytrvalost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=EnthusiasmA1}" Header="Nadšení" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=IntelligenceA1}" Header="Inteligence" Width="25"/>
 
                 <DataGridTextColumn/>
 
                 <!-- součet bodů za první běh-->
-                <DataGridTextColumn Binding="{Binding Path=body1}" Header="Body1"/>
+                <DataGridTextColumn Binding="{Binding Path=Body1}" Header="Body1"/>
 
                 <DataGridTextColumn/>
 
                 <!--body první rozhodčí druhý běh-->
-                <DataGridTextColumn Binding="{Binding Path=agility_B0}" Header="Obratnost" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=speed_B0}" Header="Rychlost" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=endurance_B0}" Header="Vytrvalost" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=enthusiasm_B0}" Header="Nadšení" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=intelligence_B0}" Header="Inteligence" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=AgilityB0}" Header="Obratnost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=SpeedB0}" Header="Rychlost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=EnduranceB0}" Header="Vytrvalost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=EnthusiasmB0}" Header="Nadšení" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=IntelligenceB0}" Header="Inteligence" Width="25"/>
 
                 <DataGridTextColumn/>
 
                 <!--body druhý rozhodčí druhý běh-->
-                <DataGridTextColumn Binding="{Binding Path=agility_B1}" Header="Obratnost" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=speed_B1}" Header="Rychlost" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=endurance_B1}" Header="Vytrvalost" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=enthusiasm_B1}" Header="Nadšení" Width="25"/>
-                <DataGridTextColumn Binding="{Binding Path=intelligence_B1}" Header="Inteligence" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=AgilityB1}" Header="Obratnost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=SpeedB1}" Header="Rychlost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=EnduranceB1}" Header="Vytrvalost" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=EnthusiasmB1}" Header="Nadšení" Width="25"/>
+                <DataGridTextColumn Binding="{Binding Path=IntelligenceB1}" Header="Inteligence" Width="25"/>
 
                 <DataGridTextColumn/>
 
                 <!-- součet bodů za druhý běh-->
-                <DataGridTextColumn Binding="{Binding Path=body2}" Header="Body2"/>
+                <DataGridTextColumn Binding="{Binding Path=Body2}" Header="Body2"/>
 
-                <DataGridTextColumn Binding="{Binding Path=diskval}" Header="Diskvalifikace" Width="50">
+                <DataGridTextColumn Binding="{Binding Path=Diskval}" Header="Diskvalifikace" Width="50">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Style.Triggers>

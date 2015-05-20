@@ -1116,6 +1116,15 @@ namespace projectRun
                     temppes = database_P.GetPesByGroup(i, null);
                     pocet_psu = temppes.Count;
 
+                    //pokud jsou psi s licenci, přiřadit jim nějaké body pro odlišení, pokus č.1
+                    for (j = 0; j < pocet_psu; j++)
+                    {
+                        if (temppes[j].ZavodLicence == "Licence")
+                        {
+                            temppes[j].Body1 = j;
+                        }
+                    }
+
                     for (j = 0; j < pocet_psu; j++)
                     {
                         if (temppes[j].Diskval != "---") // pokud je pes diskvalifikován přeskočit jej při řazení
