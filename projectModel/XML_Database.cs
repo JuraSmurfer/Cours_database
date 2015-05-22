@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Globalization;
+using System.Threading;
 
 namespace projectModel
 {
@@ -179,7 +181,7 @@ namespace projectModel
                     childNodes[4] = doc.CreateElement("FCI");
                     childNodes[4].InnerText = currentPes.Fci;
                     childNodes[5] = doc.CreateElement("Datum");
-                    childNodes[5].InnerText = currentPes.Datum.ToString("d. M. yyyy");
+                    childNodes[5].InnerText = currentPes.Datum.ToString(Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern);
                     childNodes[6] = doc.CreateElement("Licence");
                     childNodes[6].InnerText = currentPes.Licence;
                     childNodes[7] = doc.CreateElement("Majitel");

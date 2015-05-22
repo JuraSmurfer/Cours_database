@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
 using System.Threading;
 using System.Text.RegularExpressions;
 using projectModel;
@@ -54,6 +55,7 @@ namespace projectRun
         // proměnná pro uchování výběru EXCEL souboru
         private String opened_file = null;
 
+
         // seznam ohodnocených psů
         private List<int> ListHodnocenychPsu = new List<int>();
 
@@ -65,6 +67,9 @@ namespace projectRun
         /// </summary>
         public MainWindow()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            //Thread.CurrentThread.CurrentUICulture = CultInfo;
+
             InitializeComponent();
 
             this.Closing += new System.ComponentModel.CancelEventHandler(MainWindow_Closing);

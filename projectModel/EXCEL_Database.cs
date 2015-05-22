@@ -12,10 +12,13 @@ using System.Data;
 using System.Text.RegularExpressions;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Xml;
+using System.Globalization;
+using System.Threading;
 
 
 namespace projectModel
 {
+
     public class EXCEL_Database
     {
         public void read_excel_lists(string sourcefile, List<String> listy)
@@ -90,31 +93,17 @@ namespace projectModel
                 temp_pes.Pohlavi = SetTempFromExcel(range, row, 6).ToLower(); // excel sloupec pohlavi
 
                 temp_pes.Platba = SetTempIntFromExcel(range, row, 8); // excel sloupec platba
-/*
-                temp = (range.Cells[row, 8] as Excel.Range).Value2.ToString();
-                if (temp != null)
-                {
-                    int platba;
-                    //temp_pes.platba = Convert.ToInt32(temp);
-                    //ERROR !!!!! debilní TryParse !!!!!
-                    if (int.TryParse(temp, out platba))
-                        temp_pes.platba = platba;
-                    else
-                        temp_pes.platba = 0;
-                }
-                else
-                    temp_pes.platba = 0;*/
 
                 temp_pes.Licence = SetTempFromExcel(range, row, 11); // excel sloupec licence
-
+                
                 temp = (range.Cells[row, 14] as Excel.Range).Value.ToShortDateString();
                 if (temp != null) // excel sloupec datum narozeni
                 {
-                    temp_pes.Datum = DateTime.ParseExact(temp, "d. M. yyyy", null);
+                    temp_pes.Datum = DateTime.ParseExact(temp, Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern, Thread.CurrentThread.CurrentCulture);
                 }
                 else
-                    temp_pes.Datum = DateTime.ParseExact("1. 1. 1914", "d. M. yyyy", null);
-
+                    temp_pes.Datum = DateTime.ParseExact(DateTime.MinValue.ToShortDateString(), Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern, Thread.CurrentThread.CurrentCulture);
+                
                 temp_majitel.firstName = SetTempFromExcel(range, row, 15); // excel sloupec jmeno
 
                 temp_majitel.narodnost = SetTempFromExcel(range, row, 17); // excel sloupec národnost

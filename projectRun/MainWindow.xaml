@@ -120,8 +120,8 @@
                 <DataGridTextColumn Binding="{Binding Path=Plemeno}" Header="Plemeno" MinWidth="150"/>
                 <DataGridTextColumn Binding="{Binding Path=Pohlavi}" Header="Pohlaví"/>
                 
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.Datum), StringFormat=d.M.yyyy}" Header="Narození"/>
-                <DataGridTextColumn Binding="{Binding Path=(projectModel:Pes.ZavodLicence)}" Header="Z-L" MinWidth="50">
+                <DataGridTextColumn Binding="{Binding Path=Datum, StringFormat=d.M.yyyy}" Header="Narození"/>
+                <DataGridTextColumn Binding="{Binding Path=ZavodLicence}" Header="Z-L" MinWidth="50">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Foreground" Value="Black"/>
@@ -385,8 +385,8 @@
             <TextBox x:Name="boxId" Visibility="Collapsed"/>
             <Label x:Name="jmenoLBL" Content="Jméno" Canvas.Top="10" Height="23" Canvas.Left="10"/>
             <TextBox x:Name="boxFirstName" Height="23" Canvas.Left="113" TextWrapping="Wrap" Canvas.Top="10" Width="300"/>
-            <Label x:Name="prijmeniLBL" Content= "Příjmení" Canvas.Top="38" Canvas.Left="10"/>
-            <TextBox x:Name="boxLastName" Height="23" Canvas.Left="113" TextWrapping="Wrap" Canvas.Top="38" Width="300"/>
+            <Label x:Name="prijmeniLBL" Content= "Příjmení" Canvas.Top="38" Canvas.Left="10" Visibility="Collapsed"/>
+            <TextBox x:Name="boxLastName" Height="23" Canvas.Left="113" TextWrapping="Wrap" Canvas.Top="38" Width="300" Visibility="Collapsed"/>
             <Label x:Name="clenLBL" Content="Členství" Canvas.Top="66" Canvas.Left="10"/>
             <CheckBox x:Name="clenCB" Canvas.Left="113" Canvas.Top="71"/>
             <Label x:Name="platbaLBL" Content="Platba" Canvas.Top="66" Canvas.Left="206"/>
@@ -418,13 +418,13 @@
             <Label x:Name="plemenoLBL_P" Content= "Plemeno" Canvas.Top="38" Canvas.Left="293"/>
             <ComboBox x:Name="comboPlemeno" Height="23" Canvas.Left="392" Canvas.Top="38" Width="150" Loaded="comboPlemeno_Loaded"/>
             <Label x:Name="pohlaviLBL_P" Content="Pohlaví" Canvas.Top="66" Canvas.Left="10"/>
-            <Label x:Name="fciLBL" Content="FCI" Canvas.Top="10" Canvas.Left="598"/>
-            <ComboBox x:Name="fciCombo" Height="23" Width="150" Canvas.Left="690" Canvas.Top="10" Loaded="fciCombo_Loaded"/>
+            <Label x:Name="fciLBL" Content="FCI" Canvas.Top="10" Canvas.Left="598" Visibility="Collapsed"/>
+            <ComboBox x:Name="fciCombo" Height="23" Width="150" Canvas.Left="690" Canvas.Top="10" Loaded="fciCombo_Loaded" Visibility="Collapsed"/>
             <Label x:Name="datumLBL" Content="Datum narození" Canvas.Top="38" Canvas.Left="598"/>
             <!--<TextBox x:Name="boxDatum" Height="23" Canvas.Left="113" TextWrapping="Wrap" Canvas.Top="66" Width="150" Visibility="Visible"/>-->
             <Label Content="Licence" Canvas.Top="66" Canvas.Left="293"/>
             <TextBox x:Name="boxLicence" Height="23" Canvas.Left="392" TextWrapping="Wrap" Canvas.Top="66" Width="150"/>
-            <DatePicker x:Name="datumPicker" Canvas.Left="690" Canvas.Top="38" Width="150" FirstDayOfWeek="Monday"/>
+            <DatePicker x:Name="datumPicker" Canvas.Left="690" Canvas.Top="38" Width="150" FirstDayOfWeek="Monday" SelectedDateFormat="Short"/>
             <ComboBox x:Name="pohlaviCB" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Canvas.Left="80" Canvas.Top="66" SelectedIndex="0" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Height="23">
                 <ComboBoxItem Content="pes" Background="#FF00B9FF"/>
                 <ComboBoxItem Content="fena" Background="#FFFF6A6A"/>
