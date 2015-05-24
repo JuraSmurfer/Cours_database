@@ -23,6 +23,7 @@ using projectModel;
         // LUT - tabulka plemen a jejich rozdělení - hrubé roztřídění podle plemen a pohlaví?!?
         // určit rozdělení do dvojic a/nebo trojic (lichý/sudý počet závodníků!!! pravidla-závod/licence/trening?!?)
 // TODO: rozdělit chrty a nechrty (volba na startu programu!?) parametr v hlavičce XML souboru !!!
+// TODO: uložit do XML informaci o seřazení! (neseřazeno, seřazeno 1. kolo, seřazeno 2. kolo, finish)!
 
 namespace projectRun
 {
@@ -1256,9 +1257,6 @@ namespace projectRun
             int IDB1 = 0;
             int IDB2 = 0;
 
-            int pocitadlo1 = 0;
-            int pocitadlo2 = 0;
-
             int pomocInt = 0;
 
             Pes temp1 = new Pes();
@@ -1344,7 +1342,6 @@ namespace projectRun
                         IDB1 = IDB2;
                         IDB2 = pomocInt;
                     }
-                    pocitadlo1++;
 
                     Random gen = new Random();
                     int prob = gen.Next(100);
@@ -1371,15 +1368,6 @@ namespace projectRun
                         pomocInt = A2.Dvojice1;
                         A2.Dvojice1 = B2.Dvojice1;
                         B2.Dvojice1 = pomocInt;
-
-                        pocitadlo2++;
-                        /*
-                        temp1 = database_P.GetPesById(IDA1);
-                        database_P.Edit(IDA1, database_P.GetPesById(IDB1));
-                        database_P.Edit(IDB1, temp1);
-                        temp1 = database_P.GetPesById(IDA2);
-                        database_P.Edit(IDA2, database_P.GetPesById(IDB2));
-                        database_P.Edit(IDB2, temp1);*/
                     }
 
                 }
